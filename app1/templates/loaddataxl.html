@@ -1,0 +1,50 @@
+<!-- excel_data.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <title>Excel Data</title>
+</head>
+
+<body>
+        <table border="1">
+                <thead>
+                        <tr>
+                                <th>Column 1</th>
+                                <th>Column 2</th>
+                                <!-- Add more columns as needed -->
+                        </tr>
+                </thead>
+                <tbody>
+                        {% for row in data %}
+                        <tr>
+                                {% for cell in row %}
+                                <td>{{ cell }}</td>
+                                {% endfor %}
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                                <!-- Add input fields for new row data -->
+                                <td><input type="text" name="new_column1"></td>
+                                <td><input type="text" name="new_column2"></td>
+                                <!-- Add more input fields for additional columns -->
+                                <td><button id="add-row">+</button></td>
+                        </tr>
+                </tbody>
+        </table>
+        <script>// Add this script at the bottom of your HTML body or in a separate file
+                document.getElementById("add-row").addEventListener("click", function () {
+                        // Clone the last row of the table
+                        var newRow = document.querySelector("table tbody tr:last-child").cloneNode(true);
+                        // Clear input fields in the new row
+                        newRow.querySelectorAll("input[type='text']").forEach(function (input) {
+                                input.value = "";
+                        });
+                        // Append the new row to the table body
+                        document.querySelector("table tbody").appendChild(newRow);
+                });
+        </script>
+</body>
+
+</html>

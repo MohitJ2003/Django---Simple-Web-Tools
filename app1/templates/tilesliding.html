@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tile Sliding Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .game-container {
+            text-align: center;
+        }
+
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+            border: 2px solid #333;
+            width: 320px;
+            height: 320px;
+            margin: 20px auto;
+        }
+
+        .tile {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #6FB98F;
+            color: #333;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div id="game-board">
+            <!-- Tiles will be dynamically generated here -->
+        </div>
+        <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <script>
+        // Constants
+        const BOARD_SIZE = 3;
+        const EMPTY_TILE = BOARD_SIZE * BOARD_SIZE;
+
+        // Variables
+        let tiles = [];
+
+        // Initialize game
+        function startGame() {
+            tiles = Array.from({ length: BOARD_SIZE * BOARD_SIZE }, (_, index) => index + 1);
+            shuffleTiles();
+            renderTiles();
+        }
+
+        // Shuffle tiles randomly
+        function shuffleTiles() {
+            for (let i = tiles.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
+            }
+        }
+
+        // Render tiles on the game board
+        function renderTiles() {
+            const gameBoard = document.getElementById('game-board');
+            gameBoard.innerHTML = '';
+            tiles.forEach((tileValue, index) => {
+                const tile = document.createElement('div');
+                tile.className = 'tile';
+                tile.textContent = tileValue === EMPTY_TILE ? '' : tileValue;
+                tile.addEventListener('click', () => moveTile(index));
+                gameBoard.appendChild(tile);
+            });
+        }
+
+        // Move tile logic
+        function moveTile(index) {
+            const emptyIndex = tiles.indexOf(EMPTY_TILE);
+            if (isValidMove(index, emptyIndex)) {
+                // Swap tiles
+                [tiles[index], tiles[emptyIndex]] = [tiles[emptyIndex], tiles[index]];
+                renderTiles();
+                if (checkWin()) {
+                    alert('Congratulations! You solved the puzzle.');
+                }
+            }
+        }
+
+        // Check if move is valid
+        function isValidMove(index, emptyIndex) {
+            // Same row and adjacent column, or same column and adjacent row
+            return (
+                (index - 1 === emptyIndex && index % BOARD_SIZE !== 0) ||
+                (index + 1 === emptyIndex && emptyIndex % BOARD_SIZE !== 0) ||
+                (index - BOARD_SIZE === emptyIndex) ||
+                (index + BOARD_SIZE === emptyIndex)
+            );
+        }
+
+        // Check if the puzzle is solved
+        function checkWin() {
+            return tiles.every((tile, index) => tile === index + 1);
+        }
+    </script>
+</body>
+</html>

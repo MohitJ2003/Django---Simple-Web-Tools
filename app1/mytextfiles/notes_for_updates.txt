@@ -1,0 +1,7 @@
+* line in linklisttext.txt marked as done if pdf is created and will not ready by gettextfromaudio.html
+* load mp3 for each pdf in yakshini pdf tool
+* get names from pocketfm by self
+* get user want filename for pdf , audio and video files and folder (for episodes 1-99 on createfilename function is
+  only 3 digit episodes )
+* show progress bar for yakshini pdf tool
+* make login system

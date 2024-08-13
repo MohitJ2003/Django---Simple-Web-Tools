@@ -1,0 +1,60 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\dell pc> cd PycharmProjects\pythonProject1
+PS C:\Users\dell pc\PycharmProjects\pythonProject1> cd djangoProjects
+PS C:\Users\dell pc\PycharmProjects\pythonProject1\djangoProjects> mkdir mean-employee-app
+
+
+    Directory: C:\Users\dell pc\PycharmProjects\pythonProject1\djangoProjects
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         6/15/2024   6:18 PM                mean-employee-app
+
+
+PS C:\Users\dell pc\PycharmProjects\pythonProject1\djangoProjects> cd mean-employee-app
+PS C:\Users\dell pc\PycharmProjects\pythonProject1\djangoProjects\mean-employee-app> npm init -y
+Wrote to C:\Users\dell pc\PycharmProjects\pythonProject1\djangoProjects\mean-employee-app\package.json:
+
+{
+  "name": "mean-employee-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+
+
+PS C:\Users\dell pc\PycharmProjects\pythonProject1\djangoProjects\mean-employee-app> npm install express mongoose body-parser cors
+
+added 86 packages, and audited 87 packages in 9s
+
+13 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS C:\Users\dell pc\PycharmProjects\pythonProject1\djangoProjects\mean-employee-app> npm fund
+mean-employee-app@1.0.0
++-- https://opencollective.com/mongoose
+|   `-- mongoose@8.4.1
++-- https://github.com/sponsors/ljharb
+|   `-- qs@6.11.0, side-channel@1.0.6, call-bind@1.0.7, function-bind@1.1.2, define-data-property@1.1.4, gopd@1.0.1, has-property-descriptors@1.0.2, get-intrinsic@1.2.4, has-proto@1.0.3, has-symbols@1.0.3, object-inspect@1.13.1
+`-- https://github.com/sponsors/feross
+    `-- safe-buffer@5.2.1
+
+PS C:\Users\dell pc\PycharmProjects\pythonProject1\djangoProjects\mean-employee-app> npm install -g @angular/cli
+
+added 223 packages in 25s
+
+41 packages are looking for funding
+  run `npm fund` for details
+PS C:\Users\dell pc\PycharmProjects\pythonProject1\djangoProjects\mean-employee-app>

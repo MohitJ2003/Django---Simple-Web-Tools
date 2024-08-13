@@ -1,0 +1,82 @@
+<h1>Welcome to Your Department</h1>
+    <p>Your department description goes here.</p>
+    <h2>HTML5 Input Elements</h2>
+    <p>Here are some HTML5 input elements:</p>
+
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date"><br><br>
+
+    <label for="number">Number:</label>
+    <input type="number" id="number" name="number"><br><br>
+
+    <label for="range">Range:</label>
+    <input type="range" id="range" name="range" min="0" max="100"><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email"><br><br>
+
+    <label for="search">Search:</label>
+    <input type="search" id="search" name="search"><br><br>
+
+    <label for="datalist">Datalist:</label>
+    <input list="datalist" name="datalist">
+    <datalist id="datalist">
+        <option value="Option 1">
+        <option value="Option 2">
+        <option value="Option 3">
+        <option value="Option 4">
+    </datalist><br><br><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authentication</title>
+    <link rel="stylesheet" href="">
+    <style>
+        /* Define styles for the container */
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Define styles for the individual iframes */
+        iframe {
+            border: none;
+            height: 100vh;
+            width: 20%; /* 20% for the left and right iframes */
+        }
+
+        #center-iframe {
+            width: 60%; /* 60% for the center iframe */
+        }
+
+        /* Add additional styling as needed */
+    </style>
+
+
+</head>
+<body>
+
+<div>
+    <h1>Authentication</h1>
+    <div>
+    <div><button type = 'submit' ><a href="authentication\signup.html">Sign-Up</a></button></div>
+    <div><button type = 'submit' ><a href="authentication\signin.html">Sign-In</a></button></div>
+    <div><button type = 'submit' ><a href="authentication\signout.html">Sign-Out</a></button></div>
+    </div>
+    <div class="container">
+        <iframe src="left.html" name="contents-frame"></iframe>
+
+        <!-- Center iframe for the body of the page -->
+        <iframe src="center.html" name="body-frame" id="center-iframe"></iframe>
+
+        <iframe src="right.html" name="remarks-frame"></iframe>
+    </div>
+
+    <!--
+Use frames such that page is divided into 3 frames 20% on left to show contents of pages, 60% in center to show body of page, remaining on right to show remark
+Design a HTML5 document that implement of date, number, range, email, search and data list.
+Create a webpage with HTML describing your department use paragraph and list tags
+-->
+    
+</body>
+</html>

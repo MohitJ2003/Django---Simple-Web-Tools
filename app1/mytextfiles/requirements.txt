@@ -1,0 +1,9 @@
+tqdm
+moviepy
+reportlab
+reportlab
+assemblyai
+pytube
+pydub
+aspose
+speech_recognition

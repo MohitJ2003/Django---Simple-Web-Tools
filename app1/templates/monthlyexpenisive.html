@@ -1,0 +1,1031 @@
+{% load static %}
+
+<html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Monthly Expensive</title>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+
+    <!--For calender-->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <script>
+        function formatDate(input) {
+            var date = new Date(input.value);
+            if (!isNaN(date.getTime())) {
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear();
+
+                if (day < 10) {
+                    day = '0' + day;
+                }
+                if (month < 10) {
+                    month = '0' + month;
+                }
+
+                input.value = day + '-' + month + '-' + year;
+            }
+        }
+
+
+
+    </script>
+
+
+
+    <style>
+        .center-table,
+        .center-table_2 {
+            margin: 0 auto;
+            /* Set left and right margins to "auto" */
+            border: solid 5px rgb(255, 255, 255);
+            border-collapse: collapse;
+        }
+
+        .center_me {
+            text-align: center;
+        }
+
+        #myTable,
+        #myTable_2 {
+            border: 3px solid black;
+            border-collapse: collapse;
+            background-image: url("{% static '/images/dark.jpeg' %}");
+            background-size: cover;
+            font-size: large;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background-repeat: repeat;
+            background-position: center;
+            background-color: rgb(255, 255, 255);
+            color: rgb(255, 255, 255);
+            width: 400px;
+            text-shadow: 0 0 10px #000000, 0 0 20px #000000, 0 0 30px #e0f900;
+        }
+
+        select,
+        input,
+        #createfilebtn,
+        #addrecord {
+            background-repeat: no-repeat;
+            width: 60%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            margin: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+        }
+
+        /*
+        a {
+            background-color: black;
+            color: aliceblue;
+            padding: 4px 4px 4px 4px;
+            text-decoration: none;
+        }
+
+        a:hover {
+            background-color: rgb(116, 19, 19);
+            color: rgb(255, 255, 255);
+        }
+        */
+
+        input[type='submit'],
+        #createfilebtn,
+        #addrecord {
+            width: 80%;
+        }
+
+        .home {
+            padding: 4px 4px 4px 4px;
+        }
+
+        /*
+        .home:hover {
+            
+        }
+        */
+        .center_divblock {
+            background-image: "gf";
+            margin: 5px 5px 5px 5px;
+        }
+
+        #createfilebtn {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .error-message {
+            color: red;
+            font: weight 500px;
+            display: none;
+            margin: 12px 20px 12px 40px;
+            font-size: large;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-shadow: white;
+        }
+
+        #message,
+        #message_2 {
+            color: rgb(255, 255, 255);
+            font: weight 500px;
+            margin: 12px 20px 12px 40px;
+            font-size: large;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-shadow: none;
+            width: 80%;
+        }
+
+        #createfilebtn:disabled:hover+.error-message {
+            display: block;
+        }
+
+        .datepickerBtn {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            padding: 0;
+            background: none;
+        }
+
+
+        .datepickerBtn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #excelDataTable input[type='text'] {
+            width: 100%;
+            margin: 0px 0px 0px 0px;
+        }
+
+        .center-table_2,
+        #excelDataTable td,
+        th {
+            border: 3px solid rgb(255, 255, 255);
+            padding: 5px 5px 5px 5px;
+            background-color: rgb(244, 244, 244);
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+            font-size: 15px;
+            font-weight: bold;
+
+            font: hsl(0, 0%, 0%);
+
+        }
+
+        .center-table_2,
+        #excelDataTable th {
+            background-color: rgb(0, 124, 25);
+            font-family: sans-serif;
+            font-size: medium;
+            font-weight: bold;
+            color: #ffffff;
+            width: 100px;
+        }
+
+        #excelDataTable img,
+        #popupMessage img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .trtbl2:hover {
+            border: 5px solid rgb(255, 255, 255);
+            padding: 5px 5px 5px 5px;
+            background-color: rgb(238, 238, 238);
+            color: rgb(0, 124, 25);
+
+        }
+
+        .logo-image {
+            height: 40px;
+            width: 70px;
+            margin: 10px 10px 10px 10px;
+        }
+
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+
+        .popup-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        #popupMessage {
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            color: red;
+            text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #e0f900;
+        }
+
+        #popupMessage2 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #e0f900;
+        }
+
+        .popupbtn {
+            font-weight: bold;
+            font-size: medium;
+            margin-left: 10px;
+            margin-right: 10px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        .saveButton {
+            background-image: url("{% static '\images\savelogobtn.png' %}");
+            background-size: cover;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .hidden-column {
+            display: none;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .edit-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .edit-container input {
+            margin-right: 5px;
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <a class="home" href="http://127.0.0.1:8000/project1/">
+        <img class="logo-image" src="{% static '/images/homegif.gif' %}">
+    </a>
+    <h1 class="center_me" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+     text-shadow: 5px 5px 5px rgb(255, 190, 24);">Monthly Bill Tool</h1>
+
+    <div class="center_divblock">
+        <!--
+            <table id="myTable_2" class="center-table" style="background-color: rgb(255, 255, 255);">
+                <tr>
+                    <td>Bill For :<input type="text" name="totalprice" width="59%"></td>
+                </tr>
+                <tr>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: center;">OR</td>
+                </tr>
+                <tr>
+                    <td colspan="3" >
+                        <select placeholder="Filename...." name="category">
+                            <option>November2023.xlsv</option>
+                            <option>Decemeber2023.xlsv</option>
+                            <option>Janurary2023.xlsv</option>
+                        </select>
+                    </td>
+                <tr>
+            </table>-->
+        <div id="myTable_2" class="center-table">
+            {% csrf_token %}
+
+            <div><input type="text" placeholder="Enter Bill Price" id="billprice2"></div>
+
+            <div>
+                <select name="billmonth" id="month">
+                    <option>{{ current_month }}</option>
+                    {% for month_1 in months %}
+                    <option>{{ month_1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <select name="year" id="year">
+                    <option>{{ current_year }}</option>
+                    {% for year in yearslist %}
+                    <option>{{ year }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <p class="center_me">OR</p>
+
+            <div><input type="text" placeholder="Give your Own bill name" id="customname" name="customname"></div>
+
+            <button id="createfilebtn" value="Create fileCreate file" disabled style="background-color: rgb(84, 60, 0) ;
+                 color : rgb(255, 255, 255); font-size: 16px; font-family:'Lucida Sans',
+                'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva,
+                Verdana, sans-serif">Create file</button>
+
+            <p class="error-message" id="errorMessage">One of the fields need to be filled either Bill Price Or
+                Custom Bill Name</p>
+
+            <div id="message"></div>
+
+        </div>
+    </div>
+
+    <div class="center_divblock">
+        <table id="myTable" class="center-table" style="background-color: rgb(255, 255, 255);">
+            <tr>
+
+                <td>
+                    <label style="padding: 12px 10px 12px 40px; color: rgb(255, 255, 255);">Serach For Files here
+                        :</label>
+                    <input type="text" id="searchInput"><br>
+                    <label style="padding: 12px 10px 12px 40px; color: rgb(255, 255, 255);">Search file that match Your
+                        Search.</label>
+                    <select name="" id="file"></select>
+                </td>
+            </tr>
+            <!--
+            <tr>
+                <td>
+                    <label style="padding: 12px 10px 12px 40px; color: rgb(255, 255, 255);">Choose file
+                        :</label>
+                    <select id="file">
+                        <option></option>
+                        {% for filename in getlistofexlfiles %}
+                        <option>{{ filename }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>-->
+            <tr>
+                <td><input type="text" placeholder="Enter Commodity name" name="commnm" id="commnm"></td>
+            </tr>
+            <tr>
+                <td><input type="text" placeholder="Enter Price." name="price" id="comdprice"></td>
+            </tr>
+            <tr>
+                <!--
+                <td>
+                    <label style="padding: 12px 10px 12px 40px; color: rgb(255, 255, 255);">Enter date of
+                        payment:</label>
+                    <input type="date" placeholder="Enter date of payment" name="dateofpymnt" id="dateofpymnt">
+                    <input type="date" id="calendar" name="calendar" onchange="formatDate(this)">
+                </td>-->
+                <td>
+                    <label style="padding: 12px 10px 12px 40px; color: rgb(255, 255, 255); ">Enter date of
+                        payment:</label>
+                    <input type="text" class="datepicker" id="dateofpymnt" placeholder="Enter date of payment" readonly>
+                    <button class="datepickerBtn"><img
+                            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="text" placeholder="PLace Of traansaction." name="plcoftranopt" id="plcoftranopt"></td>
+            </tr>
+            <tr>
+                <td>
+                    <label style="padding: 12px 10px 12px 40px; color: rgb(255, 255, 255);">Choose Commodity
+                        Category:</label><br>
+                    <select placeholder="Choose Category" name="category" id="category">
+                        <option></option>
+                        <option>House Holds</option>
+                        <option>Kitchen Holds</option>
+                        <option>Vegetables</option>
+                        <option>Bathroom</option>
+                        <option>Ocassions</option>
+                        <option>Food from outside</option>
+                        <option>Friday Market</option>
+                        <option>Telecom.</option>
+                        <option>Travel</option>
+                        <option>Other's</option>
+                    </select>
+                    <button class="addbtn"><img width="25px" height="25px"
+                            src="https://w7.pngwing.com/pngs/415/49/png-transparent-grass-area-symbol-brand-sign-add-logo-grass-desktop-wallpaper.png"></button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="addrecord" style="background-color: rgb(0, 136, 120) ;
+                            color : rgb(255, 255, 255); font-size: 16px;
+                            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+                            'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                            font-weight: bold;;
+                            ">Save this record & show Records</button>
+                </td>
+            <tr>
+                <td>
+                    <div id="message_2"></div>
+                </td>
+            </tr>
+
+
+        </table>
+    </div>
+
+    <div class="center_divblock">
+        <div id="tabledata"></div>
+        <table id="excelDataTable" class="center-table">
+            <!-- Table body will be populated dynamically using JavaScript -->
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="popupMessage">Are you sure you want to delete
+                <img src="{% static '\images\Delete-button.png' %}"> this Record ?
+            </p>
+            <button class="popupbtn" onclick="deleteRow()">Yes</button>
+            <button class="cancel popupbtn" onclick="closeModal()">No</button>
+        </div>
+    </div>
+
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="popupMessage2">Row deleted successfully!</p>
+            <button class="popupbtn" onclick="closeModal()">OK</button>
+        </div>
+    </div>
+
+    <p id="choice" style="display: none;">Choice</p>
+
+    <script>
+
+        // Get form and input elementss
+        const myForm = document.getElementById('createfileform');
+        const price_var = document.getElementById('billprice2');
+        const custname_var = document.getElementById('customname');
+        const createfilebtnvar = document.getElementById('createfilebtn');
+        const errorMessage = document.getElementById('errorMessage');
+
+        const year = document.getElementById('year');
+        const billmonth = document.getElementById('month');
+
+        var file = document.getElementById('file');
+        var commnm = document.getElementById('commnm');
+        var comdprice = document.getElementById('comdprice');
+        var dateofpymnt = document.getElementById('dateofpymnt');
+
+        var plcoftranopt = document.getElementById('plcoftranopt');
+        var category = document.getElementById('category');
+        var message_2 = document.getElementById('message_2');
+        var tabledata = document.getElementById('tabledata');
+
+
+        // Function to check form validity
+        function checkFormValidity() {
+            if (price_var.value && custname_var.value) {
+                // Both fields are filled
+                createfilebtnvar.disabled = true;
+                createfilebtnvar.style.backgroundColor = "rgb(212, 190, 174)";
+                errorMessage.textContent = 'Both fields cannot be filled';
+            } else if (!price_var.value && !custname_var.value) {
+                // Neither field is filled
+                createfilebtnvar.disabled = true;
+                createfilebtnvar.style.backgroundColor = "rgb(212, 190, 174)";
+                errorMessage.textContent = 'One of the fields needs to be filled';
+            } else {
+                // Form is valid
+                createfilebtnvar.style.backgroundColor = "rgb(84, 60, 0)";
+                createfilebtnvar.disabled = false;
+                errorMessage.textContent = '';
+            }
+        }
+
+        // Add event listeners to input fields
+        price_var.addEventListener('input', checkFormValidity);
+        custname_var.addEventListener('input', checkFormValidity);
+
+
+        // Prevent form submission if the button is disabled
+        document.getElementById('createfilebtn').addEventListener('click', function (event) {
+            if (createfilebtnvar.disabled) {
+                event.preventDefault();
+            }
+        });
+        /*
+        $('.btn34').click(function () {
+            alert("My Message");
+        })
+        */
+
+
+        $(document).ready(function () {
+            $('#createfilebtn').click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'GET',
+                    url: '{% url "my_function" %}',
+                    data: {
+                        'totbillprice2': price_var.value,
+                        'custname_var': custname_var.value,
+                        'year2': year.value,
+                        'billmonth2': billmonth.value,
+                    },
+                    success: function (response) {
+                        $('#message').text(response.result);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            });
+
+
+            $('#addrecord').click(function (e) {
+                e.preventDefault();
+                $.post({
+                    type: 'GET',
+                    url: '{% url "get_commodity_details" %}',
+                    data: {
+                        'file': file.value,
+                        'commnm': commnm.value,
+                        'comdprice': comdprice.value,
+                        'dateofpymnt': dateofpymnt.value,
+                        'plcoftranopt': plcoftranopt.value,
+                        'category': category.value,
+                    },
+                    success: function (response) {
+                        message_2.textContent = response.result_1;
+
+                        commnm.value = "";
+                        comdprice.value = "";
+                        dateofpymnt.value = "";
+                        plcoftranopt.value = "";
+                        category.value = "";
+
+
+                        var data = response.filedata2;
+
+                        var tableBody = $('#excelDataTable tbody');
+                        tableBody.empty();
+                        var row = $('<tr>'); // for adding table heading's tr
+                        row.append($('<th>').text('S no.'));
+                        for (var j = 0; j < data[0].length; j++) {
+                            if (j == 5) { row.append($('<th class = "hidden-column">')); }
+                            else { row.append($('<th>').text(data[0][j])); }
+                        }
+                        row.append($('<th>').text('Actions'));
+                        tableBody.append(row);
+
+                        var sum_of_price = 0;
+                        for (var i = 1; i < data.length; i++) {
+                            var row = $('<tr class = "trtbl2" id="row' + i + '">');
+                            row.append($('<td>').text(i));
+                            // alert(data[i][1]);
+                            sum_of_price += Number(data[i][1]);
+                            for (var j = 0; j < data[i].length; j++) {
+                                if (j == 2) { row.append($('<td class = "date-cell">').text(data[i][j])) }
+                                else if (j == 5) { row.append($('<td class = "hidden-column">').text(data[i][j])) }
+
+                                else { row.append($('<td>').text(data[i][j])); }
+                            }
+                            row.append($('<td>'
+                                + '<button onclick="editRow(this)" class="edit-btn" ><img class = "editbutton" src = "{% static "\images\editbtnlogo.png" %}" ></button>'
+                                + '<button class="save-btn hidden"><img src = "{% static "\images\savelogobtn.png" %}" ></button>'
+                                + '<button class = "cancel-btn hidden"><img src = "{% static "\images\Button_cancel.png" %}" ></button>'
+                                + '<button class = "delete-btn"><img src = "{% static "\images\Delete-button.png" %}" ></button>'
+                            ))
+
+                            tableBody.append(row);
+                        }
+
+                        var row = $('<tr>'); // for adding total values tr row
+                        for (var j = 0; j < data[0].length; j++) {
+                            if (j == 1) { row.append($('<th>').text('Total')); }
+                            if (j == 1) { row.append($('<td>').text(sum_of_price)); }
+                            if (j == 5) { row.append($('<td class = "hidden-column">').text('')); }
+                            else (row.append($('<td>').text('')));
+                        }
+                        // row.append($('<td>').text(''));
+                        tableBody.append(row);
+
+
+                        const tableRows2 = document.querySelectorAll("#excelDataTable .trtbl2");
+                        // alert("341")
+                        tableRows2.forEach(row => {
+                            // alert("342");
+                            const editBtn = row.querySelector(".edit-btn");
+                            const saveBtn = row.querySelector(".save-btn");
+                            const cancelBtn = row.querySelector(".cancel-btn");
+                            const deleteBtn = row.querySelector(".delete-btn");
+
+                            editBtn.addEventListener("click", () => {
+                                editBtn.classList.add("hidden");
+                                deleteBtn.classList.add("hidden");
+
+                                saveBtn.classList.remove("hidden");
+                                cancelBtn.classList.remove("hidden");
+                            });
+
+                            cancelBtn.addEventListener("click", () => {
+                                saveBtn.classList.add("hidden");
+                                cancelBtn.classList.add("hidden");
+                                editBtn.classList.remove("hidden");
+                                deleteBtn.classList.remove("hidden");
+                            });
+
+                            saveBtn.addEventListener("click", () => {
+                                saveBtn.classList.add("hidden");
+                                cancelBtn.classList.add("hidden");
+                                editBtn.classList.remove("hidden");
+                                deleteBtn.classList.remove("hidden");
+                            });
+
+                        });
+
+
+                        $('.delete-btn').click(function () {
+                            confirmationModal.style.display = 'block';
+                            confirmDelete(this);
+                        });
+
+                        function confirmDelete(button) {
+
+                            var row = button.parentElement.parentElement;
+                            confirmationModal.setAttribute('data-row', row.id);
+                            var choice = document.getElementById("choice").innerText;
+                            var hiddenData = button.parentElement.parentElement.querySelector(".hidden-column").innerText;
+                            var hidden_btn = button.parentElement.parentElement.querySelector(".delete-btn");
+
+
+
+                            if (confirm("Do you really want to Delete")) {
+                                alert("You pressed OK! Continuing execution...");
+                            } else {
+                                alert("You pressed Cancel! Stopping execution.");
+                            }
+                            alert("Record Deleted Succesfully !! ");
+
+                            $.ajax({
+                                type: 'GET',
+                                url: 'delete_record',
+                                data: {
+                                    "hiddenData": hiddenData,
+                                    "filename": file.value,
+                                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                                },
+                                success: function (response) {
+                                    alert(response.result3);
+                                },
+                                error: function (xhr, status, error) {
+                                    alert('Error sending data!');
+                                }
+                            });
+
+
+                        }
+
+                        $('.save-btn').click(function () {
+                            save_edited_record(this);
+                        });
+
+                        function save_edited_record(btn) {
+                            var row = btn.parentNode.parentNode;
+                            var rowData = [];
+                            var values = "";
+                            index = 0;
+                            var inputs = row.querySelectorAll('input');
+
+                            inputs.forEach(function (input) {
+                                var value = input.value;
+                                rowData[index] = value;
+                                values += value + ",";
+                                index += 1;
+                            });
+
+                            var uniqueID = btn.parentElement.parentElement.querySelector(".hidden-column").innerText;
+                            $.ajax({
+                                type: 'GET',
+                                url: 'save_edited_record',
+                                data: {
+                                    "uniqueId": uniqueID,
+                                    "filenamefor_ser": file.value,
+                                    "editedvalues": values,
+                                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                                },
+                                success: function (response) {
+                                    alert(response.result4);
+                                },
+                                error: function (xhr, status, error,) {
+                                    alert('Error sending data!');
+                                }
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            });
+
+            $('#searchInput').on('input', function () {
+                var search_text = $(this).val();
+                $.ajax({
+                    type: 'GET',
+                    url: '{% url "search_files" %}',
+                    data: { 'search_text': search_text },
+                    success: function (response) {
+                        $('#file').empty();
+                        response.files.forEach(function (file) {
+                            $('#file').append('<option>' + file + '</option>');
+                        });
+                    },
+                    error: function (xhr, errmsg, err) {
+                        console.log(xhr.status + ': ' + xhr.responseText);
+                        $('#file').append('<li>Error occurred, please try again.</li>');
+                    }
+                });
+            });
+
+        });
+
+        $(document).ready(function () {
+            $(".datepickerBtn").click(function () {
+                $(this).prev('.datepicker').datepicker("show"); // Show the datepicker associated with the input before this button
+            });
+
+            $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' }); // Initialize the datepicker with the desired date format
+        });
+
+        $(document).ready(function () {
+            $.datepicker.setDefaults({
+                dateFormat: 'dd-mm-yy'
+            });
+        });
+
+        function editRow(btn) {
+
+            var min_width = 15;
+            var row = btn.parentNode.parentNode;
+            var cells = row.getElementsByTagName("td");
+            var arr = [];
+
+
+            for (var i = 1; i < cells.length - 2; i++) {
+                var input = document.createElement("input");
+                input.type = "text";
+                input.value = cells[i].innerText;
+                input.style.width = cells[i].offsetWidth - min_width + "px";
+                input.style.padding = "5px 5px 5px 5px";
+                arr[i] = input.value; // for cancel values change to orginals
+
+                cells[i].innerText = '';
+                cells[i].appendChild(input);
+                min_width += 7;
+            }
+
+
+            /*
+            // commodity name
+            var input_2 = document.createElement("input");
+            input_2.type = "text";
+            input_2.value = cells[1].innerText;
+            arr[1] = input_2.value;
+            cells[1].innerText = '';
+            cells[1].appendChild(input_2);
+            input_2.style.width = cells[1].offsetWidth - cut7 + "px";
+
+            // price input
+            var input = document.createElement("input");
+            input.type = "text";
+            input.value = cells[2].innerText;
+            arr[2] = input.value;
+            cells[2].innerText = '';
+            cells[2].appendChild(input);
+
+            // date input 
+            const dateCell = row.querySelector('.date-cell');
+            const originalDate = dateCell.innerText;
+            const input2 = document.createElement('input');
+            input2.type = 'text';
+            input2.value = originalDate;
+            input2.style.width = '100px';
+            $(input2).datepicker();
+            dateCell.style.width = dateCell.offsetWidth - cut7 + "px";
+            const setDateButton = document.createElement('button');
+            setDateButton.innerText = 'Set Date';
+            setDateButton.type = 'button';
+            setDateButton.onclick = () => $(input2).datepicker('show');
+            dateCell.setAttribute('data-original-date', originalDate);
+            dateCell.innerHTML = '';
+            dateCell.appendChild(input2);
+            dateCell.appendChild(setDateButton);
+
+            // Place input
+            var place_input = document.createElement("input");
+            place_input.type = "text";
+            place_input.value = cells[3].innerText;
+            arr[3] = place_input.value;
+            cells[4].innerText = '';
+            cells[4].appendChild(place_input);
+            
+
+            // Category input
+            var select = document.createElement("select");
+            var option = document.createElement("option");
+            option.text = cells[5].innerText;
+            select.appendChild(option);
+            var option1 = document.createElement("option");
+            option1.text = "Devlopment";
+            select.appendChild(option1);
+            var option2 = document.createElement("option");
+            option2.text = "HR";
+            select.appendChild(option2);
+            var option3 = document.createElement("option");
+            option3.text = "Testing";
+            select.appendChild(option3);
+            var currentValue = cells[4].innerText;
+            arr[4] = cells[5].innerText;
+            cells[5].innerText = '';
+            cells[5].appendChild(select);
+            */
+
+            const saveBtn = row.querySelector(".save-btn");
+            saveBtn.onclick = function () { saveRow(this); };
+            // btn.parentNode.replaceChild(saveBtn, btn);
+
+            const cnclbtn = row.querySelector(".cancel-btn");
+            cnclbtn.onclick = function () { cancelbtn(this, arr); };
+            currentRow = row;
+        }
+
+
+        function saveRow(btn) {
+            var row = btn.parentNode.parentNode;
+            var cells = row.getElementsByTagName("td");
+
+
+            for (var i = 1; i < cells.length - 2; i++) {
+                cells[i].innerText = cells[i].getElementsByTagName("input")[0].value;
+            }
+            /*
+            cells[5].innerText = cells[1].getElementsByTagName("select")[0].value;
+
+            const dateCell = row.querySelector('.date-cell');
+            const input = dateCell.querySelector('input[type="text"]');
+            const newDate = input.value;
+
+            // Set the new date in dd-mm-yyyy format
+            dateCell.innerHTML = newDate;
+            */
+
+            currentRow = null;
+
+        }
+
+        function cancelbtn(btn, arr) {
+            var row = btn.parentNode.parentNode;
+            var cells = row.getElementsByTagName("td");
+
+            var datebutton = row.querySelectorAll(".date-container");
+
+            for (var i = 1; i < cells.length - 2; i++) {
+                cells[i].innerText = cells[i].getElementsByTagName("input")[0].value;
+                cells[i].innerText = arr[i];
+            }
+
+
+            /*
+            cells[1].innerText = cells[1].getElementsByTagName("select")[0].value;
+            cells[1].innerText = arr[1];
+
+            cells[2].innerText = cells[2].getElementsByTagName("input")[0].value;
+            cells[2].innerText = arr[2];
+
+            cells[4].innerText = cells[4].getElementsByTagName("select")[0].value;
+            cells[4].innerText = arr[4];
+            */
+            /*
+            cells[5].innerText = cells[5].getElementsByTagName("select")[5].value;
+            cells[5].innerText = arr[5];
+
+
+            const dateCell = row.querySelector('.date-cell');
+            const originalDate = dateCell.getAttribute('data-original-date');
+
+            // Restore the original date
+            dateCell.innerHTML = originalDate;
+            */
+            entRow = null;
+        }
+
+        function hide_deletedrow(button) {
+            var row = button.parentNode.parentNode;
+            row.style.display = 'none';
+        }
+
+
+        // Get the modal elements
+        var confirmationModal = document.getElementById('confirmationModal');
+        var successModal = document.getElementById('successModal');
+
+
+        // Open confirmation modal
+
+        // Close modal
+        function closeModal() {
+            document.getElementById("choice").innerText = "Yes";
+            confirmationModal.style.display = 'none';
+            successModal.style.display = 'none';
+        }
+
+        // Delete row and show success modal
+        function deleteRow() {
+            document.getElementById("choice").innerText = "No";
+            var rowId = confirmationModal.getAttribute('data-row');
+            var row = document.getElementById(rowId);
+            deleteRow
+            row.remove();
+            closeModal();
+            successModal.style.display = 'block';
+
+            confirmDelete(this);
+        }
+
+        // Close modals when clicking on close buttons
+        var closeButtons = document.getElementsByClassName('close');
+        for (var i = 0; i < closeButtons.length; i++) {
+            closeButtons[i].onclick = function () {
+                closeModal();
+            }
+        }
+
+        /*
+        $(document).ready(function () {
+            $("#savedatesbtn").click(function () {
+                servletCall();
+            });
+ 
+        });
+        function servletCall() {
+            $.post(
+                "./WorkOrdDrlDownFeedgetdetail",
+                { datesdata: jsonData }, //meaasge you want to send
+                function (result) {
+                    $('#somediv').html('<strong>' + result + '</strong>'); //message you want to show
+                });
+        };
+        */
+
+    </script>
+
+</body>
+
+</html>

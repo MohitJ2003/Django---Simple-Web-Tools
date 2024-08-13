@@ -1,0 +1,48 @@
+<!-- main.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJax applicaiton Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>Main Page</h1>
+    <form id="myForm" method="post">
+
+        <input type="text" name="my_field" id ="my_field">
+        <input type="submit" value="Click Me">
+    </form>
+    <div id="message"></div>
+
+    <script>
+        $(document).ready(function () {
+            var myFieldValue = $('#my_field').val();
+            $('#myForm').submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    data: {
+                        'my_field': myFieldValue,
+                        // Include additional form data here if needed
+                        // e.g., 'another_field': $('#anotherField').val()
+                    },
+                    type: 'GET',
+                    url: '{% url "my_function" %}',
+                    success: function (response) {
+                        alert("working here" + myFieldValue);
+                        $('#message').text(response.result);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,168 @@
+select,
+input[type="text"] {
+        background-repeat: no-repeat;
+        width: 500px;
+        font-size: 16px;
+        padding: 12px 20px 12px 40px;
+        margin: 12px 20px 12px 40px;
+        border: 5px solid red;
+        border-radius: 20px;
+}
+
+.submitButton,
+.submitButton_2,
+.submitButton_3 {
+        position: relative;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+}
+
+/* Style for the hidden text (initially hidden) */
+.tooltip,
+.tooltip_2,
+.tooltip_3 {
+        position: absolute;
+        display: none;
+        background-color: black;
+        color: white;
+        padding: 8px;
+        border-radius: 5px;
+        font-size: 14px;
+        white-space: nowrap;
+        transform: translate(0, -10px);
+        /* Initially, lift the tooltip up */
+        transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* When hovering over the submit button, show the tooltip with a 3D effect */
+.submitButton:hover,
+.submitButton_2:hover,
+.submitButton_3:hover {
+        transform: translate(0, -5px);
+        /* Move the button down a bit */
+}
+
+.submitButton:hover .tooltip {
+        display: block;
+        opacity: 1;
+        transform: translate(0, 0);
+        /* Move the tooltip back to its original position */
+}
+
+.submitButton_2:hover .tooltip_2 {
+        display: block;
+        opacity: 1;
+        transform: translate(0, 0);
+        /* Move the tooltip back to its original position */
+}
+
+.submitButton_3:hover .tooltip_3 {
+        display: block;
+        opacity: 1;
+        transform: translate(0, 0);
+        /* Move the tooltip back to its original position */
+}
+
+input[type="button"] {
+        background-image: "C:/Users/dell pc/PycharmProjects/pythonProject1/djangoProjects/project1/app1/images/go.jpg";
+}
+
+.preview_pane content {
+        padding: 10px 10px 10px 10px;
+}
+
+.home_a {
+        background-color: black;
+        color: aliceblue;
+        padding: 4px 4px 4px 4px;
+        text-decoration: none;
+}
+
+.home_a:hover {
+        background-color: rgb(226, 222, 229);
+        color: rgb(60, 3, 3);
+        padding: 5px 5px 5px 5px;
+}
+
+.available>a:hover {
+        color: rgb(255, 255, 255);
+}
+
+/* padding top right bottom left*/
+.available {
+        padding: 6px 10px 6px 10px;
+        background-color: rgb(0, 0, 0);
+        color: rgb(0, 0, 0);
+        font-size: 20px;
+        list-style-type: none;
+}
+
+.available>a {
+        text-decoration: none;
+        color: #E7E9EB;
+}
+
+.available:hover {
+        color: rgb(255, 255, 253);
+        background-color: #d50000;
+}
+
+
+.notavailable {
+        padding: 6px 10px 6px 10px;
+        background-color: rgb(0, 91, 94);
+        color: rgb(255, 255, 255);
+        font-size: 20px;
+        list-style-type: none;
+}
+
+.notavailable>a {
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+}
+
+.notavailable:hover {
+        color: rgb(255, 255, 253);
+        background-color: #1bca00;
+}
+
+.notavailable>a:hover {
+        color: rgb(255, 255, 255);
+}
+
+/*css from https://www.w3schools.com/html/default.asp*/
+#leftmenuinnerinner,
+#leftmenuinnerinner_2 {
+        height: 700px;
+        width: 100%;
+        background-color: #E7E9EB;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        padding-top: 20px;
+}
+
+#charactersblock_id {
+        display: none;
+}
+
+.grid-item {
+        border: 3px solid #000;
+        text-align: center;
+}
+
+.image {
+        width: 95%;
+        height: 300px;
+        margin: 5px 5px 5px 5px;
+}
+
+#charactersblock_id.hidden {
+        display: grid;
+        width: 97%;
+        grid-template-columns: repeat(5, 20%);
+        /* Define 3 columns with a width of 100px each */
+        grid-gap: 10px;
+        /* Add a gap between grid items */
+}

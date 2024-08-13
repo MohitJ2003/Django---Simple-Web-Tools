@@ -1,0 +1,12 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('C:\Users\dell pc\PycharmProjects\pythonProject1\djangoProjects\project1\app1\imagesandgifs\coding.gif');
+    background-size: cover; /* Adjusts the background size to cover the entire viewport */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+.content {
+    text-align: center; /* Center align the content on top of the background */
+    padding: 100px; /* Add padding for spacing */
+    color: #fff; /* Set text color */
+}

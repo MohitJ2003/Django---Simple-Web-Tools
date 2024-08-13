@@ -1,0 +1,58 @@
+.header{
+    margin: 10px 10px 10px 10px 10px;
+    background-image: url('white-magnolia-flowers-wallpaper-murals.jpg') ;
+    color: whitesmoke;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px 3px 30px 20px;
+    text-align: center;
+}
+
+.container {
+    margin: 5px 5px 5px 5px;
+    display: flex;
+}
+
+/* Set the width for the left and right sections */
+.left {
+    margin: 5px 5px 5px 5px;
+    flex: 1; /* Takes 25% of the available space */
+    background-color: #f0f0f0; /* Optional background color */
+    padding-left: 10px;
+}
+
+.right {
+    margin: 5px 5px 5px 5px;
+    flex: 3; /* Takes 75% of the available space */
+    background-color: #b49696; /* Optional background color */
+    padding-left: 10px;
+    
+}
+.right > .rightclasschilddiv{
+    display: inline-block;
+}
+.rightclasschilddiv > img{
+    width: 200px;
+    height: 200px;
+}
+.footer{
+    background-image: url(wp5208001.webp);
+    padding: 10px 10px 10px 10px;
+    color: white;
+}
+.navbar{
+    background-color: rgb(0, 0, 0);
+    height: 20px;
+}
+.navbar > a{
+    background-color: rgb(255, 255, 255);
+    color: black;
+    text-decoration: none;
+
+}
+
+.navbar > a:hover{
+    background-color: blueviolet;
+    color: wheat;
+}
+
+

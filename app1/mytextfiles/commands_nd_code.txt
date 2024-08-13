@@ -1,0 +1,51 @@
+ng generate service employee
+ng generate component employee-list
+ng generate component employee-form
+
+
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+Thank you for sharing pseudonymous usage data. Should you change your mind, the following
+command will disable this feature entirely:
+ng analytics disable --global
+
+
+ERROR: Ignored the following versions that require a different python version: 22.11.0 Requires-Python >=3.5,<3.11; 22.12.0 Require
+s-Python >=3.5,<3.11; 23.1.0 Requires-Python >=3.5,<3.11; 23.10.0 Requires-Python >=3.6,<3.12; 23.11.0 Requires-Python >=3.6,<3.12;
+ 23.12.0 Requires-Python >=3.7,<3.12; 23.2.0 Requires-Python >=3.5,<3.11; 23.3.0 Requires-Python >=3.5,<3.11; 23.4.0 Requires-Pytho
+n >=3.5,<3.11; 23.5.0 Requires-Python >=3.6,<3.12; 23.6.0 Requires-Python >=3.6,<3.12; 23.7.0 Requires-Python >=3.6,<3.12; 23.8.0 R
+equires-Python >=3.6,<3.12; 23.9.0 Requires-Python >=3.6,<3.12; 24.1.0 Requires-Python >=3.7,<3.12; 24.2.0 Requires-Python >=3.7,
+<3.12; 24.3.0 Requires-Python <3.12,>=3.7; 24.4.0 Requires-Python <3.12,>=3.7; 24.5.0 Requires-Python <3.12,>=3.7
+ERROR: Could not find a version that satisfies the requirement aspose-pdf (from versions: none)
+ERROR: No matching distribution found for aspose-pdf
+
+pip --version pip
+
+10:37 AM 6/12/2024
+Get package versions in a Python script: __version__
+Check package versions with pip
+List installed packages: pip list
+List installed packages: pip freeze
+Check details of installed packages: pip show
+Check package versions with conda: conda list
+
+
+py manage.py shell
+from members.models import Member
+Member.objects.all()
+
+member = Member(firstname='Emil', lastname='Refsnes')
+member.save()
+ Member.objects.all().values()
+for x in members_list:
+   x.save()
+Member.objects.all().values()
+from members.models import Member
+    x = Member.objects.all()[4]
+
+
+pip install --upgrade moviepy
+pip install --upgrade pytube
+py  manage.py runserver
+
+
+

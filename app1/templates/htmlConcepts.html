@@ -1,0 +1,3580 @@
+<!-- program to collapse -->
+<!--12:06 AM 9/7/2023
+html concepts to colspan
+<html>
+
+<head>
+    <title>
+        test
+    </title>
+    <style>
+        table,
+        th,
+        td {
+            border: 3px solid black;
+            border-collapse: collapse;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        function filterLinks() {
+            // Get input value and convert it to lowercase for case-insensitive search
+            var searchText = document.getElementById('searchInput').value.toLowerCase();
+
+            // Get the list of links
+            var links = document.getElementById('linkList').getElementsByTagName('a');
+
+            // Loop through the links and show/hide based on the search
+            for (var i = 0; i < links.length; i++) {
+                var linkText = links[i].innerText.toLowerCase();
+                var listItem = links[i].parentNode; // Get the parent li element
+
+                if (linkText.includes(searchText)) {
+                    listItem.style.display = 'list-item'; // Show the list item
+                } else {
+                    listItem.style.display = 'none'; // Hide the list item
+                }
+            }
+        }
+
+          // Function to open file explorer
+  function openFileExplorer_2() {
+    document.getElementById('imageInput').click();
+  }
+
+  // Function to preview image and remember choice
+  function previewImage_2(input) {
+    var mainImage = document.getElementById('mainImage');
+    var file = input.files[0];
+
+    if (file) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        // Update the source of the main image
+        mainImage.src = e.target.result;
+        mainImage.alt = "New Image";
+
+        // Save the selected image URL to local storage
+        localStorage.setItem('selectedImage', e.target.result);
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
+
+  // Function to retrieve the selected image URL on page load
+  window.onload = function() {
+    var selectedImage = localStorage.getItem('selectedImage');
+    if (selectedImage) {
+      // Update the source of the main image
+      document.getElementById('mainImage').src = selectedImage;
+    }
+  };
+    </script>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th rowspan="2">Sent to customer shipement date</th>
+            <th colspan="2">Customer</th>
+        </tr>
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+        </tr>
+
+        <tr>
+            <td>31/05/20022</td>
+            <td>032</td>
+            <td>Hiran</td>
+        </tr>
+        <tr>
+            <td>03/05/20022</td>
+            <td>154</td>
+            <td>Lion</td>
+        </tr>
+
+        <tr>
+            <td>31/06/20022</td>
+            <td>544</td>
+            <td>Goat</td>
+        </tr>
+
+
+    </table>
+    <table>
+        <tr>
+            <td>hi</td>
+            <td>hi</td>
+        </tr>
+        <tr>
+            <td>hi</td>
+            <td>hi</td>
+        </tr>
+        <tr>
+            <td>hi</td>
+            <td>hi</td>
+        </tr>
+    </table>
+
+    <ul id="linkList">
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+        <li><a href="https://example.org">Another Example</a></li>
+        <li><a href="https://example.net">Third Example</a></li>
+        <li><a href="https://example.com">Example Website</a></li>
+
+      Add more links as needed
+    </ul>
+
+
+<img id="mainImage" alt="Current Image">
+<input type="file" accept="image/*" id="imageInput" style="display:none" onchange="previewImage_2(this)">
+<button onclick="openFileExplorer_2()">Choose Image</button>
+<button id="characters_btnid" onclick="toggleDiv_my()">Show Characters</button>
+<div id="charactersblock_id">
+  This is the content of the div block.
+  <img src="C:/Users/dell pc/PycharmProjects/pythonProject1/djangoProjects/project1/app1/static/images/Exc_7_two-dumbbell-extensions.gif">
+</div>
+
+<script>
+  function toggleDiv_my() {
+    var div = document.getElementById('charactersblock_id');
+    var button = document.getElementById('characters_btnid');
+
+    if (div.style.display === 'none') {
+      // If the div is currently hidden, show it
+      div.style.display = 'block';
+      button.innerText = 'Hide Characters';
+    } else {
+      // If the div is currently visible, hide it
+      div.style.display = 'none';
+      button.innerText = 'Show Characters';
+    }
+  }
+</script>
+</body>
+</html>
+
+-->
+
+<!-- Program to update image -->
+<!--
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Changer</title>
+  <style>
+    img{
+      border: 5px solid red;
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+</head>
+<body>
+
+<img id="mainImage3" alt="Current Image">
+<input type="file" accept="image/*" id="imageInput3" style="display:none" onchange="chrimgprvw(this,'mainImage3')">
+<button onclick="openFileExplorer_tochoosenew_chrimg('imageInput3')">Choose Image</button> 
+  
+<img id="mainImage4" alt="Current Image">
+<input type="file" accept="image/*" id="imageInput4" style="display:none" onchange="chrimgprvw(this,'mainImage4')">
+<button onclick="openFileExplorer_tochoosenew_chrimg('imageInput4')">Choose Image</button>
+  
+<img id="mainImage2" alt="Current Image">
+<input type="file" accept="image/*" id="imageInput2" style="display:none" onchange="chrimgprvw(this,'mainImage2')">
+<button onclick="openFileExplorer_tochoosenew_chrimg('imageInput2')">Choose Image</button> 
+
+<img id="mainImage" alt="Current Image">
+<input type="file" accept="image/*" id="imageInput" style="display:none" onchange="chrimgprvw(this,'mainImage')">
+<button onclick="openFileExplorer_tochoosenew_chrimg('imageInput')">Choose Image</button>
+
+Script to Open File Explorer, Preview Image, and Remember Choice
+<script>
+    // Function to open file explorer
+    function openFileExplorer_tochoosenew_chrimg(imgid_2) {
+      document.getElementById(imgid_2).click();
+    }
+  
+    // Function to preview image and remember choice
+    function chrimgprvw(input,imgid) {
+      var mainImage = document.getElementById(imgid);
+      var file = input.files[0];
+  
+      if (file) {
+        var reader = new FileReader();
+  
+        reader.onload = function (e) {
+          // Update the source of the main image
+          mainImage.src = e.target.result;
+          mainImage.alt = "New Image";
+  
+          // Save the selected image URL to local storage
+          localStorage.setItem('selectedImage', e.target.result);
+        };
+  
+        reader.readAsDataURL(file);
+      }
+    }
+  
+    // Function to retrieve the selected image URL on page load
+    window.onload = function() {
+      var selectedImage = localStorage.getItem('selectedImage');
+      if (selectedImage) {
+        // Update the source of the main image
+        document.getElementById('mainImage').src = selectedImage;
+      }
+    };
+  </script>
+  
+  </body>
+  </html>
+-->
+
+<!-- Prgram to make a javascript function to hide div block -->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Style the button for better presentation */
+    button {
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Style the div block */
+    #myDiv {
+      display: none;
+    }
+
+    /* Hide the div block by default */
+    #myDiv.hidden {
+      display: grid;
+      /* Initial display style when visible */
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-top: 10px;
+      grid-template-columns: repeat(5, 20%);
+    }
+  </style>
+</head>
+
+<body>
+
+   Button to Show/Hide the Div 
+  <button class="go" id ="lp" onclick="toggleDiv()">Close Div Block</button>
+
+  Div Block
+  <div id="myDiv">
+    <p>This is the content inside the div block.</p>
+     Add your content here 
+    <div>
+      <p>This is the content inside the div block.</p>
+    </div>
+
+    <div>
+      <p>This is the content inside the div block.</p>
+    </div>
+
+    <div>
+      <p>This is the content inside the div block.</p>
+    </div>
+
+    <div>
+      <p>This is the content inside the div block.</p>
+    </div>
+
+    <div>
+      <p>This is the content inside the div block.</p>
+    </div>
+
+    <div>
+      <p>This is the content inside the div block.</p>
+    </div>
+
+    <div>
+      <p>This is the content inside the div block.</p>
+    </div>
+
+    <div>
+      <p>This is the content inside the div block.</p>
+    </div>
+
+    <div>
+      <p>This is the content inside the div block.</p>
+    </div>
+
+    <div>
+      <p>This is the content inside the div block.</p>
+    </div>
+
+  </div>
+
+  Script to Toggle the Visibility of the Div 
+  <script>
+    function toggleDiv() {
+      var myDiv = document.getElementById('myDiv');
+      var button = document.getElementById('lp');
+
+      // Toggle the hidden class on the div
+      myDiv.classList.toggle('hidden');
+
+      // Toggle the button text
+      button.textContent = myDiv.classList.contains('hidden') ? 'Open Div Block' : 'Close Div Block';
+    }
+  </script>
+
+</body>
+
+</html>-->
+
+<!-- program to add option in select tag  -->
+<!--<!DOCTYPE html>
+<html>
+<head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>Page Title</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+        <script src='main.js'></script>
+</head>
+<body>
+        <img src="C:/Users/dell pc/PycharmProjects/pythonProject1/djangoProjects/project1/app1/static/images/htmlconcept.png">
+</body>
+</html>
+
+-->
+
+
+<!-- javascript function to not accept null values-->
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input Validation Example</title>
+</head>
+<body>
+
+<input type="text" id="textInput" placeholder="Enter text">
+<button onclick="validateInput()">Submit</button>
+<p id="errorMessage" style="color: red;"></p>
+
+<script>
+  function validateInput() {
+    var inputValue = document.getElementById('textInput').value.trim();
+    var errorMessageElement = document.getElementById('errorMessage');
+
+    if (inputValue === "") {
+      errorMessageElement.textContent = "Please enter a non-empty value.";
+    }
+    
+    else {
+      // Clear any previous error messages
+      errorMessageElement.textContent = "";
+
+      // Continue processing or submit the form
+      // ...
+
+      // Display the input value below the input field
+
+      var resultMessage = "Input value: " + inputValue;
+      var resultMessageElement = document.createElement("p");
+      
+      resultMessageElement.textContent = resultMessage;
+      //document.body.removeChild(resultMessageElement);
+      document.body.appendChild(resultMessageElement);
+
+  }
+}
+</script>
+
+</body>
+</html>
+-->
+
+
+<!-- program to add password to open a div block on button click 7:55 PM 1/24/2024 -->
+<!--<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Protected Div Example</title>
+  <style>
+    /* Style for the password input and overlay */
+    #passwordOverlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    #passwordBox {
+      background: #fff;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+
+<button onclick="openPasswordOverlay()">Open Password-Protected Div</button>
+
+
+<div id="passwordOverlay">
+  <div id="passwordBox">
+    <label for="password">Enter Password:</label>
+    <input type="password" id="password">
+    <button onclick="checkPassword()">Submit</button>
+  </div>
+</div>
+
+<div id = 'myDiv' style="display:none">
+  <p>This content is locked and can only seen by users who knows password . okay we love all &#128512;</p>
+</div>
+
+<button id="closebtn" onclick="closediv()" style="display: none;">&#x274C;</button>
+
+<script>
+  function openPasswordOverlay() {
+    // Display the password overlay
+    document.getElementById('passwordOverlay').style.display = 'flex';
+  }
+
+  function checkPassword() {
+    // Get the entered password
+    var enteredPassword = document.getElementById('password').value;
+
+    // Replace the following line with your actual password validation logic
+    var correctPassword = "passme45";
+
+    // Check if the entered password is correct
+    if (enteredPassword === correctPassword) {
+      // Hide the password overlay
+      document.getElementById('passwordOverlay').style.display = 'none';
+      document.getElementById('myDiv').style.display='block';
+      document.getElementById('closebtn').style.display='block';
+
+      // Add code to show the protected content or perform other actions
+    } else {
+      // Display an error message or take appropriate action
+      alert("Incorrect password. Please try again.");
+    }
+  }
+
+  function closediv() {
+    document.getElementById('closebtn').style.display='none';
+    document.getElementById('myDiv').style.display='none';
+  }
+  
+</script>
+
+</body>
+</html>-->
+
+
+<!-- Play audio-->
+<!--<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <audio controls="" preload="none">
+    <source
+      src="C:/Users/dell pc/PycharmProjects/pythonProject1/testProjects/audiofiles/yakshinipktfm_945_946_947_948.mp3"
+      type="audio/mp3">
+  </audio>
+</body>
+
+</html>-->
+
+
+<!--program in html which load images and apply make them blur and on hover them will open a preview pane-->
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Blur and Preview</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .image-container {
+      position: relative;
+      overflow: hidden;
+      width: 200px;
+      height: 200px;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      filter: blur(10px);
+      transition: filter 0.3s;
+    }
+
+    .image-container:hover img {
+      filter: blur(0);
+    }
+
+    .preview-pane {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 300px;
+      height: 200px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border: 1px solid #ccc;
+      padding: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .image-container:hover .preview-pane {
+      display: block;
+    }
+
+    .preview-pane img {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<div id="gallery">
+  <div class="image-container">
+    <img src="https://user-images.githubusercontent.com/14011726/94132137-7d4fc100-fe7c-11ea-8512-69f90cb65e48.gif" alt="Image 1">
+    <div class="preview-pane">
+      <img src="https://user-images.githubusercontent.com/14011726/94132137-7d4fc100-fe7c-11ea-8512-69f90cb65e48.gif" alt="Image 1">
+    </div>
+  </div>
+  
+  <div class="image-container">
+    <img src="https://i.pinimg.com/originals/b7/34/70/b734702419d1bc661ca8403765bb69ac.gif" alt="Image 2">
+    <div class="preview-pane">
+      <img src="https://i.pinimg.com/originals/b7/34/70/b734702419d1bc661ca8403765bb69ac.gif" alt="Image 2">
+    </div>
+  </div>
+  
+
+</div>
+
+</body>
+</html>
+-->
+
+
+<!--can we make them look dim instaed of blur-->
+<!--<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dimmed Images with Hover Preview</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .image-container {
+      position: relative;
+      overflow: hidden;
+      width: 200px;
+      height: 200px;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      opacity: 0.5;
+      /* Initial opacity for dim effect */
+      transition: opacity 0.3s;
+    }
+
+    .image-container:hover img {
+      opacity: 1;
+      /* Full opacity on hover */
+    }
+
+    .preview-pane {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 300px;
+      height: 200px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border: 1px solid #ccc;
+      padding: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .image-container:hover .preview-pane {
+      display: block;
+    }
+
+    .preview-pane img {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="gallery">
+    <div class="image-container">
+      <img src="https://user-images.githubusercontent.com/14011726/94132137-7d4fc100-fe7c-11ea-8512-69f90cb65e48.gif"
+        alt="Image 1">
+      <div class="preview-pane">
+        <img src="https://user-images.githubusercontent.com/14011726/94132137-7d4fc100-fe7c-11ea-8512-69f90cb65e48.gif"
+          alt="Image 1">
+      </div>
+    </div>
+
+    <div class="image-container">
+      <img src="https://i.pinimg.com/originals/b7/34/70/b734702419d1bc661ca8403765bb69ac.gif" alt="Image 2">
+      <div class="preview-pane">
+        <img src="https://i.pinimg.com/originals/b7/34/70/b734702419d1bc661ca8403765bb69ac.gif" alt="Image 2">
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>-->
+
+
+<!--program in html which load images and apply make them blur and on hover them will open a preview pane-->
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Image Preview</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    #gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .image-container {
+      position: relative;
+      overflow: hidden;
+      width: 200px;
+      height: 200px;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .image-container:hover img {
+      transform: scale(1.2); /* Zoom effect on hover */
+    }
+
+    .preview-pane {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 70vw; /* 70% of the viewport width */
+      height: 100vh; /* 100% of the viewport height */
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+      transform: translateX(100%);
+      transition: transform 0.5s;
+      overflow: hidden;
+    }
+
+    .preview-pane img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .image-container:hover + .preview-pane,
+    .preview-pane:hover {
+      transform: translateX(0);
+    }
+  </style>
+</head>
+<body>
+
+<div id="gallery">
+  <div class="image-container">
+    <img src="https://user-images.githubusercontent.com/14011726/94132137-7d4fc100-fe7c-11ea-8512-69f90cb65e48.gif" alt="Image 1">
+  </div>
+  <div class="image-container">
+    <img src="https://i.pinimg.com/originals/b7/34/70/b734702419d1bc661ca8403765bb69ac.gif" alt="Image 2">
+  </div>
+</div>
+
+<div class="preview-pane">
+  <img src="" alt="Preview Image">
+</div>
+
+<script>
+  // Get all image containers
+  var imageContainers = document.querySelectorAll('.image-container');
+
+  // Get the preview pane
+  var previewPane = document.querySelector('.preview-pane img');
+
+  // Add event listeners for each image container
+  imageContainers.forEach(function(container) {
+    container.addEventListener('mouseover', function() {
+      // Set the source of the preview image to the hovered image
+      var imageUrl = container.querySelector('img').src;
+      previewPane.src = imageUrl;
+    });
+  });
+</script>
+
+</body>
+</html>-->
+
+
+<!--can we make them look dim instaed of blur-->
+<!--<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Hover Preview</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #imageContainer {
+      position: relative;
+      width: 300px;
+      height: 200px;
+      overflow: hidden;
+      margin: 10px 10px 10px 10px;
+    }
+
+    #smallImage {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    #largeImageContainer {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+    }
+
+    #largeImage {
+      max-width: 80vw;
+      max-height: 80vh;
+      object-fit: contain;
+    }
+
+    #imageContainer:hover #smallImage {
+      transform: scale(1.2);
+    }
+
+    #imageContainer:hover #largeImageContainer {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="imageContainer">
+    <img id="smallImage"
+      src="https://user-images.githubusercontent.com/14011726/94132137-7d4fc100-fe7c-11ea-8512-69f90cb65e48.gif"
+      alt="Small Image">
+    <div id="largeImageContainer">
+      <img id="largeImage"
+        src="https://user-images.githubusercontent.com/14011726/94132137-7d4fc100-fe7c-11ea-8512-69f90cb65e48.gif"
+        alt="Large Image">
+    </div>
+  </div>
+
+
+  <div id="imageContainer">
+    <img id="smallImage" src="https://i.pinimg.com/originals/b7/34/70/b734702419d1bc661ca8403765bb69ac.gif"
+      alt="Small Image">
+    <div id="largeImageContainer">
+      <img id="largeImage" src="https://i.pinimg.com/originals/b7/34/70/b734702419d1bc661ca8403765bb69ac.gif"
+        alt="Large Image">
+    </div>
+  </div>
+
+</body>
+
+</html>
+-->
+
+
+<!-- Program to get sum of all data in last row by applyig filter-->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #mytable,
+    tr,
+    td {
+      border: 2px solid black;
+    }
+
+    .center {
+      text-align: center;
+    }
+  </style>
+  <script>
+    function myFunction2(ind, colid) {
+
+      alert("45");
+      var table = document.getElementById('mytable');
+      var rows = table.getElementsByTagName('tr');
+      var sumT = 0;
+      var tr = table.getElementsByTagName("tr");
+      var td2, txtValue2;
+      
+      // Loop through each row and column to get and accumulate values
+      /*
+      for (var i = 1; i < rows.length - 1; i++) { // Skip header row
+        td2 = tr[i].getElementsByTagName("td")[1];
+        alert("FLAG 4");
+        alert(td2);
+        txtValue2 = td2.textContent || td2.innerText;
+        alert(td2);
+        sumT += parseInt(txtValue2);
+      }
+      */
+
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById(colid);
+      filter = input.value.toUpperCase();
+      table = document.getElementById("mytable");
+      tr = table.getElementsByTagName("tr");  // rows = table.getElementsByTagName("tr");
+      var sum = 0;
+      var sum2 = 0;
+      // alert("FLAG 2");
+
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length - 1; i++) {
+        td = tr[i].getElementsByTagName("td")[ind];  // here tr[i].get..Name("td")[j] makes a list where j is the index colum attribute 
+        td2 = tr[i].getElementsByTagName("td")[1];
+        td3 = tr[i].getElementsByTagName("td")[2];
+
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          txtValue2 = td2.textContent || td2.innerText;
+          txtValue3 = td3.textContent || td3.innerText;
+
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+            // var value = tr[i].getElementsByClassName("number").innerText;
+            sum += parseFloat(txtValue2);
+            sum2 += parseFloat(txtValue3);
+            
+            
+            /*
+            sum += parseInt(txtValue2);
+            sum2 += parseInt(txtValue3);
+            */
+          }
+          else {
+            tr[i].style.display = "none";
+          }
+        }
+        if (filter === "ALL".toUpperCase()) {
+          tr[i].style.display = "";
+          document.getElementById('result').innerText = '' + sumT;
+          document.getElementById('result1').innerText = '' + sumT;
+        }
+      }
+      document.getElementById('result').innerText = '' + sum;
+      document.getElementById('result1').innerText = '' + sum2;
+    }
+
+
+    function myFunction(ind, colid) {
+      // Declare variables
+      alert("543");
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById(colid);
+      filter = input.value.toUpperCase();
+      table = document.getElementById("salesorder");
+      tr = table.getElementsByTagName("tr");
+      rows = table.getElementsByTagName("tr");
+      var sum = 0;
+      var sum2 = 0;
+      var sum3 = 0;
+      var sum4 = 0;
+
+
+
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length - 1; i++) {
+        td = tr[i].getElementsByTagName("td")[ind];  // here tr[i].get..Name("td")[j] makes a list where j is the index colum attribute 
+        td2 = tr[i].getElementsByTagName("td")[13];
+        td3 = tr[i].getElementsByTagName("td")[14];
+        td4 = tr[i].getElementsByTagName("td")[15];
+        td5 = tr[i].getElementsByTagName("td")[16];
+
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          txtValue2 = td2.textContent || td2.innerText;
+          txtValue3 = td3.textContent || td3.innerText;
+          txtValue4 = td4.textContent || td4.innerText;
+          txtValue5 = td5.textContent || td5.innerText;
+
+          // alert("43");
+
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+            sum += parseInt(txtValue2);
+            sum2 += parseInt(txtValue3);
+            sum3 += parseInt(txtValue4);
+            sum4 += parseInt(txtValue5);
+
+          }
+          else {
+            tr[i].style.display = "none";
+          }
+        }
+        if (filter === "ALL STATUS".toUpperCase()) {
+          tr[i].style.display = "";
+        }
+        // parseFloat(number.toFixed(2));
+        document.getElementById('totsoqty').innerText = '' + sum;
+        document.getElementById('totqty').innerText = '' + sum2;
+        document.getElementById('totwt2d').innerText = '' + sum3;
+        document.getElementById('totSalesOrderLabour').innerText = '' + sum4;
+
+      }
+
+    }
+
+
+
+  </script>
+</head>
+
+<body>
+  <div class="center">
+    <table id="mytable">
+      <tr>
+        <th>dept</th>
+        <th>numbers</th>
+        <th>Number 2</th>
+      </tr>
+      <tr>
+        <th><select id='deptfilt' onchange="myFunction2(0,'deptfilt')">
+            <option>all</option>
+            <option>aiml</option>
+            <option>cse</option>
+            <option>iot</option>
+          </select></th>
+        <th><input type="text" id='number1' onkeyup="myFunction2(1,'number1')"></th>
+        <th><input type="text" id='number2' onkeyup="myFunction2(2,'number2')"></th>
+      </tr>
+
+
+      <tr>
+        <td>aiml</td>
+        <td class="number">45</td>
+        <td>43</td>
+      </tr>
+      <tr>
+        <td>cse</td>
+        <td class="number">94</td>
+        <td>23</td>
+      </tr>
+      <td>aiml</td>
+      <td class="number">76.76</td>
+      <td>43.65</td>
+      <tr>
+        <td>iot</td>
+        <td class="number">54</td>
+        <td>65</td>
+      </tr>
+      <tr>
+        <td>iot</td>
+        <td class="number">12.000000059</td>
+        <td>51.45</td>
+      </tr>
+      <tr>
+        <td>aiml</td>
+        <td class="number">9.09</td>
+        <td>65.76</td>
+      </tr>
+      <tr>
+        <td>aiml</td>
+        <td class="number">34.09</td>
+        <td>65</td>
+      </tr>
+      <tr>
+        <td>cse</td>
+        <td class="number">76.65</td>
+        <td>32.12</td>
+      </tr>
+      <tr>
+        <td>aiml</td>
+        <td class="number">34.560000056</td>
+        <td>65.76</td>
+      </tr>
+      <tr>
+        <td>cse</td>
+        <td class="number">76.09</td>
+        <td>32.000000000000087</td>
+      </tr>
+      <tr>
+        <td>Total</td>
+        <td id="result">3545</td>
+        <td id="result1">7895</td>
+      </tr>
+    </table>
+  </div>
+
+
+</body>
+
+</html>-->
+
+
+
+<!-- Mean Assignment-->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neo - The Matrix</title>
+  <style>
+    /* CSS styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    p {
+      line-height: 1.6;
+      color: #666;
+    }
+
+    img {
+      display: block;
+      margin: 20px auto;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1 style="color: #f0f0f0;">Neo - The Matrix</h1>
+  </header>
+
+  <div class="container">
+    <img
+      src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQNyT3ojtNQon8ARjSvdyugT5n_KWgPAuoIj_pyJnnRXj4U1TfK5gTEQdcLGG3nyPaEfyoWL3az_3KC0RiRJVnlXBELjMRmpwe2eSJZMg"
+      alt="Neo - The Matrix">
+
+    <h2>About Neo</h2>
+    <p>Neo, also known as Thomas Anderson, is the main protagonist of The Matrix trilogy. His character undergoes a
+      profound transformation throughout the series, evolving from a disillusioned computer programmer into a legendary
+      hero who challenges the reality of the world.</p>
+
+
+
+    <p>
+      <b><u>
+          Thomas Anderson:</u></b> At the beginning of the story, Neo is depicted as a discontented computer programmer
+      who leads a
+      mundane life working for a software company. He feels a sense of disconnection from the world around him, often
+      seeking answers to existential questions.
+    </p>
+
+    <p><b><u>Neo's Awakening:</u></b> Neo's journey begins when he encounters the mysterious hacker, Morpheus, who
+      introduces him to
+      the truth about the Matrix, a simulated reality that enslaves humanity. Neo learns that he is "the One," a
+      prophesied figure with the power to manipulate the Matrix and free humanity from its control.</p>
+
+    <p><b><u>Courage and Determination:</u></b> As Neo learns the truth about the Matrix and his role in it, he
+      demonstrates
+      unwavering courage and determination in confronting the challenges ahead. Despite facing overwhelming odds
+      and
+      powerful adversaries, Neo remains steadfast in his resolve to fulfill his destiny.</p>
+    <p>
+      <b><u>Mastery of Skills:</u></b> Throughout the trilogy, Neo undergoes intensive training to develop his abilities
+      within the
+      Matrix, including martial arts, combat tactics, and mastering the manipulation of the simulated reality. His
+      exceptional skills and quick learning ability make him a formidable opponent against the agents and other threats.
+    </p>
+</body>
+
+</html>-->
+
+
+<!--Program for sildeshow-->
+<!--<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automatic Slideshow</title>
+  <style>
+    /* Slideshow container */
+    .slideshow-container {
+      max-width: 1000px;
+      height: 900px;
+      position: relative;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    /* Full-width image */
+    .slideshow {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      transition: background-image 1.5s ease;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="slideshow-container">
+    <div class="slideshow" id = "fr">
+      <iframe name="pdfFrame" style="width: 100%; height: 100%;">
+      </iframe>
+    </div>
+  </div>
+
+  <script>
+    var slideIndex = 0;
+    var images = [
+      "C:/Users/dell pc/PycharmProjects/pythonProject1/djangoProjects/project1/app1/static/images/tammnha_bhatia.gif",
+      "C:/Users/dell pc/PycharmProjects/pythonProject1/djangoProjects/project1/app1/static/images/yamininearriver.jpeg",
+      "C:/Users/dell pc/PycharmProjects/pythonProject1/djangoProjects/project1/app1/static/images/kisnoiriverwithjugnoos.gif"
+    ];
+
+    showSlides();
+
+    function showSlides() {
+      slideIndex++;
+      if (slideIndex > images.length) { slideIndex = 1; }
+      var slideshow = document.getElementById('fr');
+      slideshow.style.backgroundImage = "url('" + images[slideIndex - 1] + "')";
+      setTimeout(showSlides, 2000); // Change image every 2 seconds
+    }
+  </script>
+
+</body>
+
+</html>
+-->
+
+
+<!--heading on border-->
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heading on Border</title>
+<style>
+  /* CSS styles */
+  .container {
+    width: 400px; /* Example container width */
+    height: 200px; /* Example container height */
+    border: 2px solid #333; /* Example border */
+    position: relative;
+  }
+
+  h1 {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 0 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Heading on Border</h1>
+</div>
+
+</body>
+</html>-->
+
+
+<!--block two inputs-->
+<!--<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+  <style>
+    /* CSS styles */
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    input[type="text"] {
+      margin-bottom: 10px;
+    }
+
+    #submitBtn {
+      margin-top: 10px;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    #submitBtn:hover {
+      background-color: #ccc;
+    }
+
+    #submitBtn[disabled] {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    #submitBtn[disabled]:hover {
+      background-color: #ccc;
+    }
+  </style>
+</head>
+
+<body>
+
+  <form id="myForm">
+    <label for="input1">Input 1:</label>
+    <input type="text" id="input1">
+
+    <label for="input2">Input 2:</label>
+    <input type="text" id="input2">
+
+    <button id="submitBtn" type="submit" onclick="showmessage()" disabled>Submit</button>
+  </form>
+
+  <script>
+
+
+    function showmessage() {
+      alert("working ");
+    }
+
+    const form = document.getElementById('myForm');
+    const input1 = document.getElementById('input1');
+    const input2 = document.getElementById('input2');
+    const submitBtn = document.getElementById('submitBtn');
+
+    function checkInputs() {
+      if (input1.value && input2.value) {
+        submitBtn.disabled = true;
+        submitBtn.title = "Both fields cannot be filled";
+      } else if (!input1.value && !input2.value) {
+        submitBtn.disabled = true;
+        submitBtn.title = "One of the fields needs to be filled";
+      }
+      else if (input1.value || input2.value) {
+        if (input1.value) {
+          submitBtn.disabled = false;
+          submitBtn.title = "Create file " + input1.value;
+        }
+        else {
+          submitBtn.disabled = false;
+          submitBtn.title = "Create file " + input2.value;
+        }
+      }
+      else {
+        submitBtn.disabled = false;
+        submitBtn.title = "";
+      }
+    }
+
+    form.addEventListener('input', checkInputs);
+  </script>
+
+</body>
+
+</html>-->
+
+
+<!--block two inputs-->
+<!--<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+  <style>
+    /* CSS styles */
+    form {
+      max-width: 300px;
+      margin: 50px auto;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .error-message {
+      color: red;
+      display: none;
+    }
+
+    /* Show error message on hover */
+    input[type="submit"]:disabled:hover+.error-message {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <form id="myForm">
+    <div><input type="text" id="input1" placeholder="Enter value for field 1"></div>
+    <input type="text" id="input2" placeholder="Enter value for field 2">
+    <input type="text" id="input6" value="default value">
+    <input type="text" id="input7" value="default value">
+    <input type="submit" value="Submit" id="submitButton" disabled onclick="showmessage()">
+    <p class="error-message" id="errorMessage">One of the fields needs to be filled</p>
+  </form>
+
+  <script>
+    // Get form and input elements
+    const myForm = document.getElementById('myForm');
+    const input1 = document.getElementById('input1');
+    const input2 = document.getElementById('input2');
+    const submitButton = document.getElementById('submitButton');
+    const errorMessage = document.getElementById('errorMessage');
+
+    function showmessage() {
+      alert("working ");
+    }
+    // Function to check form validity
+    function checkFormValidity() {
+      if (input1.value && input2.value) {
+        // Both fields are filled
+        submitButton.disabled = true;
+        errorMessage.textContent = 'Both fields cannot be filled';
+      } else if (!input1.value && !input2.value) {
+        // Neither field is filled
+        submitButton.disabled = true;
+        errorMessage.textContent = 'One of the fields needs to be filled';
+      } else {
+        // Form is valid
+        submitButton.disabled = false;
+        errorMessage.textContent = '';
+      }
+    }
+
+    // Add event listeners to input fields
+    input1.addEventListener('input', checkFormValidity);
+    input2.addEventListener('input', checkFormValidity);
+
+    // Prevent form submission if the button is disabled
+    myForm.addEventListener('submit', function (event) {
+      if (submitButton.disabled) {
+        event.preventDefault();
+      }
+    });
+    
+  </script>
+
+</body>
+
+</html>
+-->
+
+
+<!-- table to save dates -->
+<!--<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copy Value to Below Cells</title>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  <style>
+    #myTable,
+    td,
+    th {
+      border: 3px rgb(175, 56, 56) solid;
+    }
+
+    .datepickerBtn {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      background: none;
+    }
+
+    /* Style for the background image */
+    .datepickerBtn img {
+      width: 100%;
+      /* Make the image fill the entire button */
+      height: 100%;
+      /* Make the image fill the entire button */
+      object-fit: cover;
+      /* Ensure the image covers the entire button */
+    }
+
+    input[type="text"] {
+      width: 70px;
+      height: 25px;
+      font-weight: 600;
+    }
+
+    .copybtn {
+      height: 100%;
+      width: 100%;
+      padding: 5px 5px 5px 5px;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      font-weight: 600;
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <table id="myTable">
+    <tr>
+      <th>Sequence no.</th>
+      <th>Cast Start Date</th>
+      <th>Cast Finish Date</th>
+      <th>Sold Start Date</th>
+      <th>Sold Finish Date</th>
+      <th>Finsh Start Date</th>
+      <th>Finish Finish Date</th>
+      <th>Pack Start Date</th>
+      <th>Pack Finish Date</th>
+    </tr>
+    <tr>
+      <td></td>
+      <td><button class="copybtn" onclick="copyValue('Cast-Start-Date')">Copy Value</button></td>
+      <td><button class="copybtn" onclick="copyValue('Cast-Finish-Date')">Copy Value</button></td>
+      <td><button class="copybtn" onclick="copyValue('Sold-Start-Date')">Copy Value</button></td>
+      <td><button class="copybtn" onclick="copyValue('Sold-Finish-Date')">Copy Value</button></td>
+      <td><button class="copybtn" onclick="copyValue('Finsh-Start-Date')">Copy Value</button></td>
+      <td><button class="copybtn" onclick="copyValue('Finish-Finish-Date')">Copy Value</button></td>
+      <td><button class="copybtn" onclick="copyValue('Pack-Start-Date')">Copy Value</button></td>
+      <td><button class="copybtn" onclick="copyValue('Pack-Finish-Date')">Copy Value</button></td>
+    </tr>
+    <tr>
+      <td> 1.</td>
+      <td><input type="text" class="datepicker" name='Cast-Start-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Cast-Finish-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Sold-Start-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Sold-Finish-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Finsh-Start-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Finish-Finish-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Pack-Start-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Pack-Finish-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td> 2.</td>
+      <td><input type="text" class="datepicker" name='Cast-Start-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Cast-Finish-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Sold-Start-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Sold-Finish-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Finsh-Start-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Finish-Finish-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Pack-Start-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Pack-Finish-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td> 3.</td>
+      <td><input type="text" class="datepicker" name='Cast-Start-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Cast-Finish-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Sold-Start-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Sold-Finish-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Finsh-Start-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Finish-Finish-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Pack-Start-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Pack-Finish-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+    </tr>
+
+    <tr>
+      <td> 4.</td>
+      <td><input type="text" class="datepicker" name='Cast-Start-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Cast-Finish-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Sold-Start-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Sold-Finish-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Finsh-Start-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Finish-Finish-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Pack-Start-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+      <td><input type="text" class="datepicker" name='Pack-Finish-Date'>
+        <button class="datepickerBtn"><img
+            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+      </td>
+    </tr>
+  </table>
+
+  <br>
+  <button style="display: height 30px width 80px; padding: 5px 5px 5px 5px; 
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: 600;" onclick="getData()">Save these dates</button>
+
+
+
+  <script>
+    function copyToBelowCells(button) {
+      var row = button.parentNode.parentNode; // Get the parent row of the button
+      var value = row.cells[0].querySelector('input').value; // Get the value from the first cell in the row
+
+      // Loop through the rows below the current row and set their input values
+      for (var i = row.rowIndex + 1; i < row.parentNode.rows.length; i++) {
+        row.parentNode.rows[i].cells[0].querySelector('input').value = value;
+      }
+    }
+
+    $(document).ready(function () {
+      $(".datepickerBtn").click(function () {
+        $(this).prev('.datepicker').datepicker("show"); // Show the datepicker associated with the input before this button
+      });
+
+      $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' }); // Initialize the datepicker with the desired date format
+    });
+
+    function copyValue(tagname) {
+      var inputs = document.getElementsByName(tagname);
+      if (inputs.length > 0) {
+        var valueToCopy = inputs[0].value;
+        for (var i = 1; i < inputs.length; i++) {
+          inputs[i].value = valueToCopy;
+        }
+      }
+    }
+    function getData() {
+      var table = document.getElementById("myTable");
+      var data = [];
+
+      // Iterate through each row
+      for (var i = 2; i < table.rows.length; i++) { // Start from 2 to skip header row and copy value btn row
+        var row = table.rows[i];
+        var rowData = [];
+
+        // Iterate through each cell in the current row
+        for (var j = 0; j < row.cells.length; j++) {
+          var cell = row.cells[j];
+          // Check if the cell contains an input field
+          var input = cell.querySelector("input");
+          if (input) {
+            // Add the input value to the rowData array
+            rowData.push(input.value);
+          } else {
+            // Add the cell text content to the rowData array
+            rowData.push(cell.innerText);
+          }
+        }
+
+        // Add the rowData array to the data array
+        data.push(rowData);
+      }
+      alert(data);
+
+      // Display each row's data in separate arrays
+      for (var k = 0; k < data.length; k++) {
+        console.log("Row " + (k + 1) + ": " + data[k].join(", "));
+      }
+    }
+  </script>
+
+</body>
+
+</html>-->
+
+
+<!-- make a pop up alert type div block with ok button and message click  ok centerd position
+   which will appear on open div button click and   click ok will disappear-->
+<!--<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popup Alert</title>
+  <style>
+    /* Styling for the popup alert */
+    .popup-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Semi-transparent background */
+      z-index: 9999;
+      /* Ensure it appears above other content */
+    }
+
+    .popup-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <button onclick="openPopup()">Show message</button>
+  <p id="message"></p>
+
+
+  <div class="popup-container" id="popupContainer">
+    <div class="popup-content">
+      <p id='msg'>Are you Sure to delete This ?? </p>
+      <button onclick="closePopup()">No</button>
+      <button onclick="closePopup2()">Yes</button>
+    </div>
+  </div>
+
+
+  <div class="popup-container" id="popupContainer2">
+    <div class="popup-content">
+      <p>Record Deleted Succesfully</p>
+      <button onclick="closePopup3()">OK</button>
+    </div>
+  </div>
+
+  <script>
+    // Function to open the popup
+    function openPopup() {
+      var popup = document.getElementById('popupContainer');
+      popup.style.display = 'block';
+
+    }
+
+    function openPopup2() {
+      var popup = document.getElementById('popupContainer2');
+      popup.style.display = 'block';
+    }
+
+    // Function to close the popup
+    function closePopup() {
+      var popup = document.getElementById('popupContainer');
+      popup.style.display = 'none';
+    }
+    function closePopup2() {
+      var popup = document.getElementById('popupContainer');
+      popup.style.display = 'none';
+      openPopup2();
+    }
+    function closePopup3() {
+      var popup = document.getElementById('popupContainer2');
+      popup.style.display = 'none';
+    }
+
+
+  </script>
+
+</body>
+
+</html>
+-->
+
+
+<!--Text shadow style-->
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shadow Effect on Heading Text</title>
+<style>
+    h1 {
+        text-align: center;
+        text-shadow: 5px 2px 5px #ff0000; /* horizontal offset, vertical offset, blur radius, and color */
+    }
+</style>
+</head>
+<body>
+
+<h1>Heading Text with Shadow Effect</h1>
+
+</body>
+</html>-->
+
+
+<!-- POPUP box -->
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pop-up Alert</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .popup-container {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        border-radius: 5px;
+        color: white;
+        z-index: 9999;
+    }
+    .popup-message {
+        margin-bottom: 20px;
+    }
+    .popup-button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        
+    }
+</style>
+</head>
+<body>
+
+<button onclick="openPopup()">Open Div</button>
+
+<div class="popup-container" id="popupContainer">
+    <div class="popup-message" id="popupMessage">This is a pop-up alert!</div>
+    <button class="popup-button" onclick="closePopup()">OK</button>
+</div>
+
+<script>
+    function openPopup() {
+        document.getElementById("popupMessage").innerText = "New message :-) ";
+        document.getElementById("popupContainer").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popupContainer").style.display = "none";
+    }
+</script>
+
+</body>
+</html>-->
+
+
+<!-- edit cancel save delete-->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table with Buttons</title>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <style>
+    .hidden {
+      display: none;
+    }
+
+    .save-btn {
+      background-image: url("https://cdn-icons-png.flaticon.com/128/8669/8669636.png");
+      width: 30px;
+      height: 30px;
+      background-size: cover;
+      border: 0cap;
+    }
+
+    .update-btn {
+      background-image: url("https://cdn-icons-png.flaticon.com/512/84/84380.png");
+      width: 30px;
+      height: 30px;
+      background-size: cover;
+      border: 0cap;
+    }
+
+    .cancel-btn {
+      background-image: url("https://w7.pngwing.com/pngs/299/740/png-transparent-cancel-delete-cross-check-box-check-tick-icon-red-forbidden-blocked.png");
+      width: 30px;
+      height: 30px;
+      background-size: cover;
+      border: 0cap;
+    }
+
+    .delete-btn {
+      background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAnYT8iykskRnzc6nKlguNrEoDEpZ9VP1KYgi8rF3OBA&s");
+      width: 30px;
+      height: 30px;
+      background-size: cover;
+      border: 0cap;
+    }
+
+    td {
+      padding: 5px 5px 5px 5px;
+    }
+
+    .edit-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .edit-container input {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <table id="myTable" border="4">
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <th>Deptartment</th>
+        <th>Year Joined</th>
+        <th>Actions</th>
+      </tr>
+      <tr class="tblrow">
+        <td>Parul</td>
+        <td>HR</td>
+        <td class="date-cell">17-08-2024</td>
+        <td>
+          <button onclick="editRow(this)" class="update-btn"></button>
+          <button class="save-btn hidden"></button>
+          <button class="cancel-btn hidden"></button>
+          <button class="delete-btn"></button>
+        </td>
+      </tr>
+      <tr class="tblrow">
+        <td>Himati</td>
+        <td>IT</td>
+        <td class="date-cell">17-08-2024</td>
+        <td>
+          <button onclick="editRow(this)" class="update-btn"></button>
+          <button class="save-btn hidden"></button>
+          <button class="cancel-btn hidden"></button>
+          <button class="delete-btn"></button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+
+  <script>
+
+    $(document).ready(function () {
+      $.datepicker.setDefaults({
+        dateFormat: 'dd-mm-yy'
+      });
+    });
+    // Get all rows of the table
+    const tableRows = document.querySelectorAll("#myTable .tblrow");
+
+    // Loop through each row
+    tableRows.forEach(row => {
+      // Get buttons in the current row
+      const updateBtn = row.querySelector(".update-btn");
+      const saveBtn = row.querySelector(".save-btn");
+      const cancelBtn = row.querySelector(".cancel-btn");
+      const deleteBtn = row.querySelector(".delete-btn");
+
+      // Add event listeners to buttons
+      updateBtn.addEventListener("click", () => {
+        // Hide update button
+        updateBtn.classList.add("hidden");
+        deleteBtn.classList.add("hidden");
+        // Show save and cancel buttons
+        saveBtn.classList.remove("hidden");
+        cancelBtn.classList.remove("hidden");
+      });
+
+      cancelBtn.addEventListener("click", () => {
+        // Hide save and cancel buttons
+        saveBtn.classList.add("hidden");
+        cancelBtn.classList.add("hidden");
+        // Show update button
+        updateBtn.classList.remove("hidden");
+        deleteBtn.classList.remove("hidden");
+      });
+
+      saveBtn.addEventListener("click", () => {
+        // Hide save and cancel buttons
+        saveBtn.classList.add("hidden");
+        cancelBtn.classList.add("hidden");
+        // Show update button
+        updateBtn.classList.remove("hidden");
+        deleteBtn.classList.remove("hidden");
+      });
+
+      // Assuming save functionality needs to be added here
+    });
+
+
+    function editRow(btn) {
+
+      var row = btn.parentNode.parentNode;
+      var cells = row.getElementsByTagName("td");
+      var arr = [];
+      var cut7 = 18;
+
+      /*
+      for (var i = 0; i < cells.length - 1; i++) {
+        // alert(cells[i].offsetWidth);
+        var input = document.createElement("input");
+        input.type = "text";
+        input.value = cells[i].innerText;
+        input.style.width = cells[i].offsetWidth - cut7 +  "px";
+        arr[i] = input.value;
+        cells[i].innerText = '';
+        cells[i].appendChild(input);
+        cut7+=7
+      }
+      */
+      var input = document.createElement("input");
+      input.type = "text";
+      input.value = cells[0].innerText;
+      arr[0] = input.value;
+      cells[0].innerText = '';
+      cells[0].appendChild(input);
+
+
+      /*
+      var input2 = document.createElement("select");
+      input2.options = ["", "Household", "Kitchen holds"];
+      input2.value = cells[1].innerText;
+      arr[1] = input2.value;
+      cells[1].innerText = '';
+      cells[1].appendChild(input2);
+      */
+
+
+      var select = document.createElement("select");
+      var option = document.createElement("option");
+      option.text = cells[1].innerText;
+      select.appendChild(option);
+      var option1 = document.createElement("option");
+      option1.text = "Devlopment";
+      select.appendChild(option1);
+      var option2 = document.createElement("option");
+      option2.text = "HR";
+      select.appendChild(option2);
+      var option3 = document.createElement("option");
+      option3.text = "Testing";
+      select.appendChild(option3);
+      var currentValue = cells[1].innerText;
+      arr[1] = cells[1].innerText;
+      cells[1].innerText = '';
+      cells[1].appendChild(select);
+
+
+      const dateCell = row.querySelector('.date-cell');
+      const originalDate = dateCell.innerText;
+
+      // Create input type text for date picker
+      const input2 = document.createElement('input');
+      input2.type = 'text';
+      input2.value = originalDate;
+      input2.style.width = '100px';
+      $(input2).datepicker();
+
+      const setDateButton = document.createElement('button');
+      setDateButton.innerText = 'Set Date';
+      setDateButton.type = 'button';
+      setDateButton.onclick = () => $(input2).datepicker('show');
+
+      // Save the original date for later restoration
+      dateCell.setAttribute('data-original-date', originalDate);
+      dateCell.innerHTML = '';
+      dateCell.appendChild(input2);
+      dateCell.appendChild(setDateButton);
+
+
+
+      const saveBtn = row.querySelector(".save-btn");
+      saveBtn.onclick = function () { saveRow(this); };
+
+      const cnclbtn = row.querySelector(".cancel-btn");
+      cnclbtn.onclick = function () { cancelbtn(this, arr); };
+      currentRow = row;
+    }
+
+
+    function saveRow(btn) {
+      var row = btn.parentNode.parentNode;
+      var cells = row.getElementsByTagName("td");
+
+      /*
+      for (var i = 0; i < cells.length - 1; i++) {
+        cells[i].innerText = cells[i].getElementsByTagName("input")[0].value;
+      }*/
+      cells[0].innerText = cells[0].getElementsByTagName("input")[0].value;
+      cells[1].innerText = cells[1].getElementsByTagName("select")[0].value;
+      cells[2].innerText = cells[2].getElementsByTagName("input")[0].value;
+
+      const dateCell = row.querySelector('.date-cell');
+      const input = dateCell.querySelector('input[type="text"]');
+      const newDate = input.value;
+
+      // Set the new date in dd-mm-yyyy format
+      dateCell.innerHTML = newDate;
+
+    }
+
+    function cancelbtn(btn, arr) {
+      var row = btn.parentNode.parentNode;
+      var cells = row.getElementsByTagName("td");
+      var datebutton = row.querySelectorAll(".date-container");
+      /*
+      for (var i = 0; i < cells.length - 1; i++) {
+        cells[i].innerText = cells[i].getElementsByTagName("input")[0].value;
+        cells[i].innerText = arr[i];
+      }
+      */
+      cells[0].innerText = cells[0].getElementsByTagName("input")[0].value;
+      cells[0].innerText = arr[0];
+
+      cells[1].innerText = cells[1].getElementsByTagName("select")[0].value;
+      cells[1].innerText = arr[1];
+
+      const dateCell = row.querySelector('.date-cell');
+      const originalDate = dateCell.getAttribute('data-original-date');
+
+      // Restore the original date
+      dateCell.innerHTML = originalDate;
+
+      currentRow = null;
+    }
+
+  </script>
+
+</body>
+
+</html>-->
+
+
+<!-- adjust width of html element-->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Set Input Width from TD</title>
+</head>
+<body>
+  <style>
+    #sourceInput{
+      width: 200px;
+    }
+  </style>
+
+<table border="5">
+  
+    <tr>
+        <td>
+            <input type="text" id="targetInput" placeholder="Input 1">
+            <input type="text" id="sourceInput" placeholder="Input 2">
+        </td>
+    </tr>
+</table>
+
+<script>
+  
+var sourceInput = document.getElementById('sourceInput');
+var sourceWidth = sourceInput.offsetWidth;
+
+// Set the width to the target input element
+var targetInput = document.getElementById('targetInput');
+targetInput.style.width = sourceWidth * 2 + 'px';
+alert(sourceWidth);
+</script>
+
+</body>
+</html>
+-->
+
+
+<!-- button hover title-->
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Styled Tooltip</title>
+<style>
+    /* Style for the tooltip message */
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        /* Add your desired styling properties */
+        color: #ffffff;
+        background-color: #333333;
+        border-radius: 4px;
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+    /* Style for the tooltip message arrow */
+    .tooltip::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #333333 transparent transparent transparent;
+    }
+</style>
+</head>
+<body>
+
+<div class="tooltip" title="This is a tooltip message">Hover over me</div>
+
+</body>
+</html>-->
+
+
+<!-- Serach Names using list-->
+<!--<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+  <style>
+    #myInput {
+      background-image: url('/css/searchicon.png');
+      /* Add a search icon to input */
+      background-position: 10px 12px;
+      /* Position the search icon */
+      background-repeat: no-repeat;
+      /* Do not repeat the icon image */
+      width: 100%;
+      /* Full-width */
+      font-size: 16px;
+      /* Increase font-size */
+      padding: 12px 20px 12px 40px;
+      /* Add some padding */
+      border: 1px solid #ddd;
+      /* Add a grey border */
+      margin-bottom: 12px;
+      /* Add some space below the input */
+    }
+
+    #myUL {
+      /* Remove default list styling */
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #myUL li a {
+      border: 1px solid #ddd;
+      /* Add a border to all links */
+      margin-top: -1px;
+      /* Prevent double borders */
+      background-color: #f6f6f6;
+      /* Grey background color */
+      padding: 12px;
+      /* Add some padding */
+      text-decoration: none;
+      /* Remove default text underline */
+      font-size: 18px;
+      /* Increase the font-size */
+      color: black;
+      /* Add a black text color */
+      display: block;
+      /* Make it into a block element to fill the whole list */
+    }
+
+    #myUL li a:hover:not(.header) {
+      background-color: #eee;
+      /* Add a hover effect to all links, except for headers */
+    }
+  </style>
+  <script>
+    function myFunction() {
+      // Declare variables
+      var input, filter, ul, li, a, i, txtValue;
+      input = document.getElementById('myInput');
+      filter = input.value.toUpperCase();
+      ul = document.getElementById("myUL");
+      li = ul.getElementsByTagName('li');
+
+      // Loop through all list items, and hide those who don't match the search query
+      for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          li[i].style.display = "";
+        } else {
+          li[i].style.display = "none";
+        }
+      }
+    }
+  </script>
+
+  <ul id="myUL">
+    <li><a href="#">Adele</a></li>
+    <li><a href="#">Agnes</a></li>
+
+    <li><a href="#">Billy</a></li>
+    <li><a href="#">Bob</a></li>
+
+    <li><a href="#">Calvin</a></li>
+    <li><a href="#">Christina</a></li>
+    <li><a href="#">Cindy</a></li>
+  </ul>
+
+</body>
+
+</html>-->
+
+
+<!-- Code to hide table column -->
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hide Table Column</title>
+<style>
+    .hidden-column {
+        display: none;
+    }
+</style>
+</head>
+<body>
+
+<table border="1">
+    <tr>
+        <td>Column 1</td>
+        <td class="hidden-column">Column 2</td>
+        <td>Column 3</td>
+    </tr>
+    <tr>
+        <td>Content 1</td>
+        <td class="hidden-column">Content 2</td>
+        <td>Content 3</td>
+    </tr>
+</table>
+
+</body>
+</html>-->
+
+
+<!--<!DOCTYPE html>
+<html>
+<head>
+    <title>Hide Table Row Example</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<table id="myTable">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>John</td>
+            <td>30</td>
+            <td><button onclick="hideRow(this)">Hide</button></td>
+        </tr>
+        <tr>
+            <td>Jane</td>
+            <td>25</td>
+            <td><button onclick="hideRow(this)">Hide</button></td>
+        </tr>
+        
+    </tbody>
+</table>
+
+<script>
+function hideRow(button) {
+    // Find the parent <tr> of the clicked button
+    var row = button.parentNode.parentNode;
+    
+    // Hide the row
+    row.style.display = 'none';
+}
+</script>
+
+</body>
+</html>-->
+
+
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Popup Example</title>
+    <style>
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ccc;
+            z-index: 1000;
+        }
+        .popup button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+
+<div id="popupContainer" class="popup">
+    <h2>Delete Record?</h2>
+    <button onclick="performAction('delete')">Delete</button>
+    <button onclick="closePopup()">Cancel</button>
+</div>
+
+<div id="popupContainer2" class="popup">
+    <h2>Record Deleted</h2>
+    <button onclick="closePopup2()">OK</button>
+</div>
+
+<button onclick="openPopup()">Open Popup</button>
+
+<script>
+    function openPopup() {
+        var popup = document.getElementById('popupContainer');
+        popup.style.display = 'block';
+    }
+
+    function closePopup() {
+        var popup = document.getElementById('popupContainer');
+        popup.style.display = 'none';
+    }
+
+    function closePopup2() {
+        var popup = document.getElementById('popupContainer2');
+        popup.style.display = 'none';
+    }
+
+    function performAction(action) {
+        if (action === 'delete') {
+            // Code to delete record in Excel file
+            closePopup();
+            openPopup2();
+        }
+    }
+
+    function openPopup2() {
+        var popup = document.getElementById('popupContainer2');
+        popup.style.display = 'block';
+    }
+</script>
+
+</body>
+</html>-->
+
+<!-- Clear values after each column-->
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clear Input Values</title>
+<script src="script.js" defer></script>
+</head>
+<body>
+
+<table id="myTable" border="1">
+  <thead>
+    <tr>
+      <th><button onclick="clearColumn(0)">Clear Column 1</button></th>
+      <th><button class = "makeblankbtn" onclick="clearColumn(1)">Clear Column 2</button></th>
+      <th><button onclick="clearColumn(2)">Clear Column 3</button></th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="text" value="Row 1, Col 1"></td>
+      <td><input type="text" value="Row 1, Col 2"></td>
+      <td><input type="text" value="Row 1, Col 3"></td>
+    </tr>
+    <tr>
+      <td><input type="text" value="Row 2, Col 1"></td>
+      <td><input type="text" value="Row 2, Col 2"></td>
+      <td><input type="text" value="Row 2, Col 3"></td>
+    </tr>
+   
+  </tbody>
+</table>
+<script>
+  function clearColumn(colIndex) {
+  var table = document.getElementById('myTable');
+  var rows = table.getElementsByTagName('tr');
+  
+  for (var i = 0; i < rows.length; i++) {
+    var cells = rows[i].getElementsByTagName('td');
+    if (cells.length > colIndex) {
+      var input = cells[colIndex].querySelector('input[type="text"]');
+      if (input) {
+        input.value = '';
+      }
+    }
+  }
+}
+
+</script>
+
+</body>
+</html>-->
+
+<!--<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Table Row</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <table id="myTable" border="1">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr id="row1">
+        <td>John Doe</td>
+        <td>john@example.com</td>
+        <td><button onclick="confirmDelete(this)">Delete</button></td>
+      </tr>
+      <tr id="row2">
+        <td>Jane Doe</td>
+        <td>jane@example.com</td>
+        <td><button onclick="confirmDelete(this)">Delete</button></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+
+  <div id="confirmationModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p id = "popupMessage">Are you sure you want to delete this row?</p>
+      <button class="popupbtn" onclick="deleteRow()">Yes</button>
+      <button class="cancel popupbtn" onclick="closeModal()">No</button>
+    </div>
+  </div>
+
+  <div id="successModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p >Row deleted successfully!</p>
+      <button class="popupbtn" onclick="closeModal()">OK</button>
+    </div>
+  </div>
+  <style>
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .popupbtn {
+      font-weight: bold;
+      font-size: medium;
+      margin-left: 10px;
+      margin-right: 10px;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+  </style>
+
+
+  <script>
+    // Get the modal elements
+    var confirmationModal = document.getElementById('confirmationModal');
+    var successModal = document.getElementById('successModal');
+
+    // Open confirmation modal
+    function confirmDelete(button) {
+      confirmationModal.style.display = 'block';
+      // Store the parent table row in a variable
+      var row = button.parentElement.parentElement;
+      // Store the row to be deleted in a data attribute
+      confirmationModal.setAttribute('data-row', row.id);
+    }
+
+    // Close modal
+    function closeModal() {
+      confirmationModal.style.display = 'none';
+      successModal.style.display = 'none';
+    }
+
+    // Delete row and show success modal
+    function deleteRow() {
+      // Get the row to be deleted from the data attribute
+      var rowId = confirmationModal.getAttribute('data-row');
+      var row = document.getElementById(rowId);
+      // Remove the row from the DOM
+      row.remove();
+      closeModal();
+      // Show success modal
+      successModal.style.display = 'block';
+    }
+
+    // Close modals when clicking on close buttons
+    var closeButtons = document.getElementsByClassName('close');
+    for (var i = 0; i < closeButtons.length; i++) {
+      closeButtons[i].onclick = function () {
+        closeModal();
+      }
+    }
+
+  </script>
+</body>
+
+</html>-->
+
+<!--<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Hidden TD Text</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <table id="myTable" border="1">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Action</th>
+        <th id="hiddenColumn" style="display: none;">Hidden Column</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John Doe</td>
+        <td>john@example.com</td>
+        <td><button onclick="getHiddenText(this)">Get Hidden TD Text</button></td>
+        <td style="display: none;" class="hid">Hidden Data 1</td>
+      </tr>
+      <tr>
+        <td>Jane Doe</td>
+        <td>jane@example.com</td>
+        <td><button onclick="getHiddenText(this)">Get Hidden TD Text</button></td>
+        <td style="display: none;" class="hid">Hidden Data 2</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <script>
+    function getHiddenText(button) {
+      var hiddenData = button.parentElement.parentElement.querySelector(".hid").innerText;
+      alert(hiddenData);
+    }
+  </script>
+</body>
+
+</html>-->
+
+<!--<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetch Input Values from Table Row</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body>
+
+  <table id="myTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input type="text" name="name" placeholder="Enter name"></td>
+        <td><input type="text" name="email" placeholder="Enter email"></td>
+        <td><button class="retrieveData" onclick="fetchInputValues(event)">Get Data</button></td>
+      </tr>
+      <tr>
+        <td><input type="text" name="name" placeholder="Enter name"></td>
+        <td><input type="text" name="email" placeholder="Enter email"></td>
+        <td><button class="retrieveData" onclick="fetchInputValues(event)">Get Data</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    function fetchInputValues(event) {
+      // Prevent the default form submission behavior
+      event.preventDefault();
+
+      // Get the parent row of the clicked button
+      var row = event.target.closest('tr');
+
+      // Initialize an object to store the data
+      var rowData = [];
+      index = 0;
+      // Iterate over each input element in the row and get their values
+      var inputs = row.querySelectorAll('input');
+      inputs.forEach(function (input) {
+        var value = input.value;
+        rowData[index] = value;
+        index += 1;
+      });
+
+      // Display the retrieved data (You can also use this data in any other way)
+      alert(rowData);
+    }
+  </script>
+
+</body>
+
+</html>-->
+
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable Table with Custom Date Picker</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+        .edit-container {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <table border="1" id="myTable">
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+        <tr>
+            <td>John Doe</td>
+            <td class="date-cell">01-01-2023</td>
+            <td>
+                <button onclick="editRow(this)">Edit</button>
+                <button class="save-btn hidden" onclick="saveRow(this)">Save</button>
+                <button class="cancel-btn hidden" onclick="cancelEdit(this)">Cancel</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Jane Smith</td>
+            <td class="date-cell">01-02-2023</td>
+            <td>
+                <button onclick="editRow(this)">Edit</button>
+                <button class="save-btn hidden" onclick="saveRow(this)">Save</button>
+                <button class="cancel-btn hidden" onclick="cancelEdit(this)">Cancel</button>
+            </td>
+        </tr>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.datepicker.setDefaults({
+                dateFormat: 'dd-mm-yy'
+            });
+        });
+
+        function formatDateToDisplay(date) {
+            const d = new Date(date.split('-').reverse().join('-'));
+            const day = String(d.getDate()).padStart(2, '0');
+            const month = String(d.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+            const year = d.getFullYear();
+            return `${day}-${month}-${year}`;
+        }
+
+        function editRow(button) {
+            const row = button.closest('tr');
+            const dateCell = row.querySelector('.date-cell');
+            const originalDate = dateCell.innerText;
+
+            // Create a container div with input type text for date picker
+            const editContainer = document.createElement('div');
+            editContainer.className = 'edit-container';
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = originalDate;
+            input.style.width = '150px';
+            $(input).datepicker();
+
+            editContainer.appendChild(input);
+
+            // Save the original date for later restoration
+            dateCell.setAttribute('data-original-date', originalDate);
+            dateCell.innerHTML = '';
+            dateCell.appendChild(editContainer);
+
+            // Hide edit button and show save and cancel buttons
+            button.classList.add('hidden');
+            row.querySelector('.save-btn').classList.remove('hidden');
+            row.querySelector('.cancel-btn').classList.remove('hidden');
+        }
+
+        function saveRow(button) {
+            const row = button.closest('tr');
+            const dateCell = row.querySelector('.date-cell');
+            const input = dateCell.querySelector('input[type="text"]');
+            const newDate = input.value;
+
+            // Set the new date in dd-mm-yyyy format
+            dateCell.innerHTML = newDate;
+
+            // Hide save and cancel buttons, show edit button
+            button.classList.add('hidden');
+            row.querySelector('.cancel-btn').classList.add('hidden');
+            row.querySelector('button:not(.save-btn, .cancel-btn)').classList.remove('hidden');
+        }
+
+        function cancelEdit(button) {
+            const row = button.closest('tr');
+            const dateCell = row.querySelector('.date-cell');
+            const originalDate = dateCell.getAttribute('data-original-date');
+
+            // Restore the original date
+            dateCell.innerHTML = originalDate;
+
+            // Hide cancel button and save button, show edit button
+            button.classList.add('hidden');
+            row.querySelector('.save-btn').classList.add('hidden');
+            row.querySelector('button:not(.save-btn, .cancel-btn)').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>-->
+
+<!--
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive District Map</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #map-container {
+      position: relative;
+      width: 80%;
+      margin: auto;
+    }
+
+    .district {
+      fill: #ccc;
+      stroke: #333;
+      cursor: pointer;
+    }
+
+    .district:hover {
+      fill: #ffcc00;
+    }
+
+    #tooltip {
+      position: absolute;
+      background: #fff;
+      padding: 10px;
+      border: 1px solid #333;
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+      transform: translate3d(0, 0, 20px);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+
+</head>
+
+<body>
+  <div id="map-container">
+
+    <svg id="india-map" xmlns="http://www.w3.org/2000/svg">
+
+      <path id="district1" class="district" d="M150 0 L75 200 L225 200 Z"></path>
+
+    </svg>
+  </div>
+  <div id="tooltip" class="hidden">
+    <h3 id="district-name"></h3>
+    <p id="district-news"></p>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const districts = document.querySelectorAll('.district');
+      const tooltip = document.getElementById('tooltip');
+      const districtNameElem = document.getElementById('district-name');
+      const districtNewsElem = document.getElementById('district-news');
+
+      districts.forEach(district => {
+        district.addEventListener('mouseover', (event) => {
+          const districtId = event.target.id;
+          const districtName = getDistrictName(districtId);  // Replace with your function to get district name
+          const districtNews = getDistrictNews(districtId);  // Replace with your function to get district news
+
+          districtNameElem.textContent = districtName;
+          districtNewsElem.textContent = districtNews;
+
+          tooltip.style.left = `${event.pageX + 10}px`;
+          tooltip.style.top = `${event.pageY + 10}px`;
+          tooltip.classList.remove('hidden');
+        });
+
+        district.addEventListener('mousemove', (event) => {
+          tooltip.style.left = `${event.pageX + 10}px`;
+          tooltip.style.top = `${event.pageY + 10}px`;
+        });
+
+        district.addEventListener('mouseout', () => {
+          tooltip.classList.add('hidden');
+        });
+      });
+    });
+
+    function getDistrictName(districtId) {
+      // Replace with your logic to get the district name
+      return `District ${districtId}`;
+    }
+
+    function getDistrictNews(districtId) {
+      // Replace with your logic to fetch or return district news
+      return `News for district ${districtId}`;
+    }
+
+  </script>
+</body>
+
+</html>
+
+-->
+
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tile Sliding Game</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        #controls {
+            margin-bottom: 20px;
+        }
+
+        #game-board {
+            display: grid;
+            gap: 5px;
+        }
+
+        .tile {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .empty {
+            background-color: transparent;
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <label for="width-input">Width:</label>
+        <input type="number" id="width-input" min="2" max="10" value="4">
+        <label for="height-input">Height:</label>
+        <input type="number" id="height-input" min="2" max="10" value="4">
+        <button id="set-dimension">Set Dimension</button>
+        <button id="start-solving">Start Solving</button>
+    </div>
+    <div id="game-board"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const gameBoard = document.getElementById('game-board');
+            const widthInput = document.getElementById('width-input');
+            const heightInput = document.getElementById('height-input');
+            const setDimensionButton = document.getElementById('set-dimension');
+            const startSolvingButton = document.getElementById('start-solving');
+            let boardWidth = parseInt(widthInput.value);
+            let boardHeight = parseInt(heightInput.value);
+            let tiles = [];
+            let solvingInterval;
+
+            setDimensionButton.addEventListener('click', () => {
+                boardWidth = parseInt(widthInput.value);
+                boardHeight = parseInt(heightInput.value);
+                initBoard();
+            });
+
+            startSolvingButton.addEventListener('click', () => {
+                if (solvingInterval) {
+                    clearInterval(solvingInterval);
+                }
+                startSolving();
+            });
+
+            function initBoard() {
+                if (solvingInterval) {
+                    clearInterval(solvingInterval);
+                }
+                tiles = [];
+                for (let i = 0; i < boardWidth * boardHeight - 1; i++) {
+                    tiles.push(i + 1);
+                }
+                tiles.push(null); // The empty tile
+
+                // Shuffle the tiles
+                shuffle(tiles);
+
+                // Render the board
+                renderBoard();
+            }
+
+            function shuffle(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+
+            function renderBoard() {
+                gameBoard.innerHTML = '';
+                gameBoard.style.gridTemplateColumns = `repeat(${boardWidth}, 100px)`;
+                gameBoard.style.gridTemplateRows = `repeat(${boardHeight}, 100px)`;
+
+                tiles.forEach((tile, index) => {
+                    const tileElement = document.createElement('div');
+                    tileElement.classList.add('tile');
+                    if (tile === null) {
+                        tileElement.classList.add('empty');
+                    } else {
+                        tileElement.textContent = tile;
+                        tileElement.addEventListener('click', () => moveTile(index));
+                    }
+                    gameBoard.appendChild(tileElement);
+                });
+            }
+
+            function moveTile(index) {
+                const emptyIndex = tiles.indexOf(null);
+                const validMoves = [
+                    emptyIndex - 1, emptyIndex + 1, 
+                    emptyIndex - boardWidth, emptyIndex + boardWidth
+                ];
+
+                if (validMoves.includes(index)) {
+                    [tiles[emptyIndex], tiles[index]] = [tiles[index], tiles[emptyIndex]];
+                    renderBoard();
+                }
+            }
+
+            function startSolving() {
+                const initialBoard = tiles.slice();
+                const solution = solvePuzzle(initialBoard);
+                if (solution) {
+                    let step = 0;
+                    solvingInterval = setInterval(() => {
+                        if (step < solution.length) {
+                            const move = solution[step];
+                            moveTile(move);
+                            step++;
+                        } else {
+                            clearInterval(solvingInterval);
+                        }
+                    }, 2000);
+                }
+            }
+
+            function solvePuzzle(board) {
+                const goalBoard = [...Array(board.length - 1).keys()].map(x => x + 1).concat(null);
+                const visited = new Set();
+                const queue = [{ board, path: [] }];
+
+                while (queue.length > 0) {
+                    const { board, path } = queue.shift();
+                    if (isGoal(board, goalBoard)) {
+                        return path;
+                    }
+                    const emptyIndex = board.indexOf(null);
+                    const validMoves = [
+                        emptyIndex - 1, emptyIndex + 1, 
+                        emptyIndex - boardWidth, emptyIndex + boardWidth
+                    ].filter(move => move >= 0 && move < board.length && board[move] !== undefined);
+
+                    for (const move of validMoves) {
+                        const newBoard = board.slice();
+                        [newBoard[emptyIndex], newBoard[move]] = [newBoard[move], newBoard[emptyIndex]];
+                        const boardString = newBoard.join(',');
+                        if (!visited.has(boardString)) {
+                            visited.add(boardString);
+                            queue.push({ board: newBoard, path: path.concat(move) });
+                        }
+                    }
+                }
+                return null;
+            }
+
+            function isGoal(board, goalBoard) {
+                return board.every((tile, index) => tile === goalBoard[index]);
+            }
+
+            initBoard();
+        });
+    </script>
+</body>
+</html>
+-->
+
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Size Input in Table Cell</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0; /* Remove padding to make the input fill the entire cell */
+        }
+
+        td input {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box; /* Ensure padding and borders are included in the element's total width and height */
+            border: none; /* Optional: remove the input's border if you don't want it */
+            padding: 8px; /* Add padding to the input for better appearance */
+            margin: 0; /* Remove margin to make the input fill the entire cell */
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Header 1</th>
+                <th>Header 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="text" value="Full width input"></td>
+                <td><input type="text" value="Another full width input"></td>
+            </tr>
+            <tr>
+                <td><input type="text" value="Yet another input"></td>
+                <td><input type="text" value="And another one"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alert with Cancel Button Example</title>
+</head>
+<body>
+    <h1>Alert with Cancel Button Example</h1>
+    <button onclick="showConfirm()">Click me</button>
+
+    <script>
+        function showConfirm() {
+            if (confirm("Do you want to proceed?")) {
+                // Code to execute if the user clicks OK
+                alert("You pressed OK! Continuing execution...");
+                // Place further code here
+            } else {
+                // Code to execute if the user clicks Cancel
+                alert("You pressed Cancel! Stopping execution.");
+                return; // Exit the function to stop further execution
+            }
+
+            // Further code to execute only if the user pressed OK
+            alert("This will only run if OK was pressed.");
+        }
+        showConfirm();
+    </script>
+</body>
+</html>
+
+
+
+

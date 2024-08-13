@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>add two number</title>
+
+
+  <script>
+    // Function to show the popup
+    function showPopup() {
+        var popup = document.getElementById('popup');
+        popup.style.display = 'block';
+        setTimeout(function() {
+            hidePopup();
+        }, 3000);  // Set the time in milliseconds for the popup to disappear (3 seconds in this example)
+    }
+
+    // Function to hide the popup
+    function hidePopup() {
+        var popup = document.getElementById('popup');
+        popup.style.display = 'none';
+    }
+
+  </script>
+
+  <style>
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      z-index: 1000;
+    }
+
+    a {
+      background-color: black;
+      color: aliceblue;
+      padding: 4px 4px 4px 4px;
+      text-decoration: none;
+    }
+
+    a:hover {
+      background-color: rgb(226, 222, 229);
+      color: rgb(60, 3, 3);
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="http://127.0.0.1:8000/">Home</a>
+  <br>
+  <form action="add">
+    Num 1 : <input type="text" name='num1' placeholder="enter num 1"><br>
+    Num 1 : <input type="text" name='num2' placeholder="enter num 2">
+    <input type="submit" onclick="showPopup()">
+  </form>
+  <!-- Popup content -->
+  <div id="popup" class="popup">
+    <p>Sum of {{num1}} and {{num2}} is {{result}}.</p>
+    <button onclick="hidePopup()">Okay</button>
+  </div>
+
+
+</body>
+
+</html>
