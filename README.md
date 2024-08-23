@@ -1,2 +1,3 @@
 python manage.py runserver
-pip install SpeechRecognition
+pip install -r requirements.txt
+
