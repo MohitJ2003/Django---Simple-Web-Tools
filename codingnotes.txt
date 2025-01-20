@@ -1,0 +1,39 @@
+/*
+    $(document).ready(function () {
+        $("#savedatesbtn").click(function () {
+            servletCall();
+        });
+
+    });
+    function servletCall() {
+        $.post(
+            "./WorkOrdDrlDownFeedgetdetail",
+            { datesdata: jsonData }, //meaasge you want to send
+            function (result) {
+                $('#somediv').html('<strong>' + result + '</strong>'); //message you want to show
+            });
+    };
+    */
+
+    /*
+            cells[1].innerText = cells[1].getElementsByTagName("select")[0].value;
+            cells[1].innerText = arr[1];
+
+            cells[2].innerText = cells[2].getElementsByTagName("input")[0].value;
+            cells[2].innerText = arr[2];
+
+            cells[4].innerText = cells[4].getElementsByTagName("select")[0].value;
+            cells[4].innerText = arr[4];
+            */
+            /*
+            cells[5].innerText = cells[5].getElementsByTagName("select")[5].value;
+            cells[5].innerText = arr[5];
+
+
+            const dateCell = row.querySelector('.date-cell');
+            const originalDate = dateCell.getAttribute('data-original-date');
+
+            // Restore the original date
+            dateCell.innerHTML = originalDate;
+            */
+
