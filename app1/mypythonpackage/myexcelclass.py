@@ -7,10 +7,20 @@ import datetime, time
 import xlsxwriter
 from openpyxl.reader.excel import load_workbook
 import pandas as pd
+import re
+import numpy
+import pytesseract
+from PIL import Image
+import pytesseract
+import re
+from datetime import datetime
+
+
+# https://github.com/UB-Mannheim/tesseract/wiki
 
 base_path = os.path.dirname(os.path.abspath(__file__)).split("project1")[0].replace("\\","/")
 
-year = datetime.datetime.today().year
+year = datetime.today().year
 year_list = [year - 2, year - 1, year, year + 1, year + 2]
 
 month_dict = {
@@ -27,18 +37,18 @@ month_dict = {
     11: 'November',
     12: 'December',
 }
-month_ = month_dict[datetime.datetime.today().month]
+month_ = month_dict[datetime.today().month]
 listofmonths = [month_dict[a] for a in range(1, 13)]
 
 
 def get_value_from_web(commodity, filename):
     # month = commodity['commodity_1'][2]
-    month = datetime.datetime.today().month
+    month = datetime.today().month
 
     if filename == "":
         print("coming till here file empty")
         return "File name cannot be empty"
-    path = base_path + 'project1/app/Excelfiles/'
+    path = base_path + 'project1/app1/Excelfiles/'
     filename = path + filename
     
     """
@@ -129,7 +139,7 @@ def verify_unique_id(file_path):
 
 
 def crtnewbillfile(filename):
-    path = base_path + 'project1/app/Excelfiles/'
+    path = base_path + 'project1/app1/Excelfiles/'
     full_file_loca = path + filename + '.xlsx'
     # print(full_file_loca)
     # print(not os.path.isfile(full_file_loca), os.path.isfile(full_file_loca))
@@ -185,7 +195,7 @@ def edit_record(file, record_id, new_values):
 
     try :
 
-        file_path = base_path + 'project1/app/Excelfiles/' + file
+        file_path = base_path + 'project1/app1/Excelfiles/' + file
         workbook = openpyxl.load_workbook(file_path)
 
         sheet = workbook.active
@@ -202,7 +212,7 @@ def edit_record(file, record_id, new_values):
 
 def delete_record(file, record_id):
     try:
-        file_path = base_path + 'project1/app/Excelfiles/' + file
+        file_path = base_path + 'project1/app1/Excelfiles/' + file
         wb = openpyxl.load_workbook(file_path)
         sheet = wb.active
         for row in sheet.iter_rows(min_row=2, max_row=sheet.max_row):
@@ -214,5 +224,30 @@ def delete_record(file, record_id):
         return "Record Deleted Successfully"
     except Exception as e:
         return "Something is Wrong with Data Formats"
+
+
+"""
+def extrcrdsfrmimg():
+    img = Image.open('D:\Projects\PycharmProjects\pythonProject1\
+                     MLprojects\getPaytmPaymentRecords\paymentImages\IMG-20241005-WA0041.jpg')
+    data = pytesseract.image_to_string(img)
+
+    pattern = re.compile(r'(.*?)-\s*([\d,.]+)\s*\nPaid on\s*(\d{1,2} \w{3}),\s*(\d{1,2}:\d{2} (?:AM|PM))')
+    for i, match in enumerate(matches, 1):
+        matches = pattern.findall(data)
+
+        merchant, amount, date_str, time_str = match
+        datetime_str = f"{date_str} {time_str} 2024"
+        
+        date_obj = datetime.strptime(datetime_str, '%d %b %I:%M %p %Y')
+        formatted_date = date_obj.strftime('%d-%b-%Y %I:%M %p')
+        
+        print(f"Record {i}:")
+        print(f"Merchant: {merchant.strip()}")
+        print(f"Amount: ₹{amount}")
+        print(f"Date-Time: {formatted_date}")
+        print("-" * 30)
+"""
+
 
 

@@ -1,0 +1,10 @@
+#carimage{
+    width: 25%;
+    height: 25%;
+}
+
+.heading{
+    padding: 10px;
+    text-shadow: aqua;
+    text-decoration: underline;
+}

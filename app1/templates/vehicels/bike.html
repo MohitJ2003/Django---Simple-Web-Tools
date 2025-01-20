@@ -1,0 +1,20 @@
+{% extends "homefortools.html" %}
+{% load static %}
+
+{% block title %}
+Home - My Website
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/car.css' %}">
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<h3 class="heading">Bike</h3>
+<img src="https://www.advrider.com/wp-content/uploads/2021/09/unnamed-2.jpg" id="carimage">
+{% endblock %}

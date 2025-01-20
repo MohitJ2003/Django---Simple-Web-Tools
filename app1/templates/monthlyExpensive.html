@@ -1,0 +1,1368 @@
+{% load static %}
+
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' 
+    content='IE=edge'> 
+    
+<title>Monthly Expenses</title> 
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+
+
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+
+<!--For calender-->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .MainBox {
+        margin: 10px 10px 10px 10px;
+        padding: 10px 10px 10px 10px;
+        border: 4px solid black;
+        border-radius: 10px;
+        width: fit-content;
+    }
+
+    fieldset {
+        width: fit-content;
+        margin: 10px 10px 10px 10px;
+        padding: 10px 10px 10px 10px;
+        border: 5px solid black;
+        border-radius: 10px;
+    }
+
+    legend {
+        font-weight: bold;
+        padding: 0 10px;
+    }
+
+    .firstBlock {
+        display: flex;
+        width: min-content;
+    }
+
+    .createfilebox {
+        margin: 10px 10px 10px 10px;
+        width: 45%;
+        text-align: center;
+    }
+
+    .orDiv {
+        margin: 10px 10px 10px 10px;
+        width: 50%;
+        text-align: center;
+        font-weight: 600;
+    }
+
+
+    .selectfliebox {
+        margin: 10px 10px 10px 10px;
+        width: 45%;
+        text-align: center;
+    }
+
+    .TwodivHrztl,
+    .FivehrzntlDiv {
+        display: flex;
+    }
+
+    .TwodivHrztl>.input,
+    select {
+        margin: 10px 10px 10px 10px;
+        margin-top: 0px;
+    }
+
+    .TwodivHrztl> input{
+        width: 150px;
+    }
+
+    .TwodivHrztl>.btn {
+        width: fit-content;
+        margin: 10px 10px 10px 10px;
+        width: 100px;
+        font-weight: 600;
+    }
+
+    .createfilebox>.btn {
+        width: fit-content;
+        margin: 10px 10px 10px 10px;
+        width: 100px;
+        font-weight: 600;
+    }
+
+    .FivehrzntlDiv>.input,
+    select {
+        margin: 10px 10px 10px 10px;
+    }
+
+
+    .EnterRecordManual {
+        margin: 10px 10px 10px 10px;
+    }
+
+    input[type="text"],
+    button {
+        border: 3px solid black;
+        border-radius: 5px;
+        height: 20px;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+    }
+
+    select {
+        border: 3px solid black;
+        border-radius: 5px;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+    }
+
+    button {
+        border: 3px solid black;
+        border-radius: 5px;
+        height: max-content;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        font-family: monospace;
+        padding: 5px 5px 5px 5px;
+        background-color: blue;
+        color: white;
+    }
+
+
+    /*Image Upload Styles*/
+
+    .container {
+        width: 80%;
+        max-width: 1000px;
+        /* text-align: center;
+        */
+    }
+
+    .upload-section {
+        margin-bottom: 20px;
+    }
+
+    #fileInput {
+        display: none;
+    }
+
+    .upload-btn {
+        padding: 10px 20px;
+        background-color: #ffffff;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .image-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        /*
+        justify-content: center;*/
+    }
+
+    .image-container {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        border-radius: 10px;
+        background-size: cover;
+        background-position: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .image-buttons {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        z-index: 10;
+        display: flex;
+        gap: 5px;
+    }
+
+    .image-buttons button {
+        padding: 5px;
+        font-size: 12px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .image-buttons button:hover {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .slider-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .overlay img {
+        width: 50%;
+        height: 50%;
+    }
+
+    .slider-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 30px;
+        color: white;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .prev-btn {
+        left: 10px;
+    }
+
+    .next-btn {
+        right: 10px;
+    }
+
+    .overlay-buttons {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+    }
+
+    .overlay-buttons button {
+        padding: 10px 20px;
+        font-size: 14px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .overlay-buttons button:hover {
+        background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    /* till here */
+
+
+
+    /*Other css styles*/
+
+    td {
+        padding-left: 10px;
+    }
+</style>
+
+<!-- css styles from old template-->
+<style>
+    .center-table,
+    .center-table_2 {
+        margin: 0 auto;
+        /* Set left and right margins to "auto" */
+        border: solid 5px rgb(255, 255, 255);
+        border-collapse: collapse;
+    }
+
+    .center_me {
+        text-align: center;
+    }
+
+    #myTable,
+    #myTable_2 {
+        border: 3px solid black;
+        border-collapse: collapse;
+        background-image: url("{% static '/images/dark.jpeg' %}");
+        background-size: cover;
+        font-size: large;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background-repeat: repeat;
+        background-position: center;
+        background-color: rgb(255, 255, 255);
+        color: rgb(255, 255, 255);
+        width: 400px;
+        text-shadow: 0 0 10px #000000, 0 0 20px #000000, 0 0 30px #e0f900;
+    }
+
+
+    .center_divblock {
+        background-image: "gf";
+        margin: 5px 5px 5px 5px;
+    }
+
+    #createfilebtn {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .error-message {
+        color: red;
+        font: weight 500px;
+        display: none;
+        margin: 12px 20px 12px 40px;
+        font-size: large;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        text-shadow: white;
+    }
+
+    #message,
+    #message_2 {
+        color: rgb(255, 255, 255);
+        font: weight 500px;
+        margin: 12px 20px 12px 40px;
+        font-size: large;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        text-shadow: none;
+        width: 80%;
+    }
+
+    #createfilebtn:disabled:hover+.error-message {
+        display: block;
+    }
+
+    .datepickerBtn {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        background: none;
+    }
+
+
+    .datepickerBtn img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    #excelDataTable input[type='text'] {
+        width: 100%;
+        margin: 0px 0px 0px 0px;
+    }
+
+    .center-table_2,
+    #excelDataTable th {
+        background-color: rgb(0, 124, 25);
+        font-family: sans-serif;
+        font-size: medium;
+        font-weight: bold;
+        color: #ffffff;
+        width: 100px;
+    }
+
+    #excelDataTable img,
+    #popupMessage img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .trtbl2:hover {
+        border: 5px solid rgb(255, 255, 255);
+        padding: 5px 5px 5px 5px;
+        background-color: rgb(238, 238, 238);
+        color: rgb(0, 124, 25);
+
+    }
+
+    .logo-image {
+        height: 40px;
+        width: 70px;
+        margin: 10px 10px 10px 10px;
+    }
+
+    .popup-container {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+    }
+
+    .popup-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    #popupMessage {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        color: red;
+        text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #e0f900;
+    }
+
+    #popupMessage2 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #e0f900;
+    }
+
+    .popupbtn {
+        font-weight: bold;
+        font-size: medium;
+        margin-left: 10px;
+        margin-right: 10px;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    .saveButton {
+        background-image: url("{% static '\images\savelogobtn.png' %}");
+        background-size: cover;
+        border: none;
+        cursor: pointer;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .hidden-column {
+        display: none;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .edit-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .edit-container input {
+        margin-right: 5px;
+    }
+</style>
+
+</head> <body>
+
+    <div style="margin-top: 12px; margin-bottom: 12px; display: flex;">
+        <div>
+            <a href="http://127.0.0.1:8001/project1/" style="background-color: black;
+                margin: 10px 10px 10px 10px;
+                color: white;
+                font-weight: 700;
+                border-radius: 7px; 
+                border: #ccc 1px solid;
+                padding: 5px 10px 5px 10px;               
+                text-decoration: none;">
+                Home</a>
+        </div>
+        <div>
+            <a href="http://127.0.0.1:8000/project1/monthlybillform/" style="background-color: black;
+            margin: 10px 10px 10px 10px;
+            color: white;
+            font-weight: 700;
+            border-radius: 7px; 
+            border: #ccc 1px solid;
+            padding: 5px 10px 5px 10px;               
+            text-decoration: none;">
+    
+                Old Monthly Expensive Form</a>
+        </div>
+    
+    </div>
+    
+    <div class="MainBox">
+        <div class="firstBlock">
+            <div class="createfilebox">
+                <div>
+                    <fieldset class="MainBox ">
+                        <legend>Create File</legend>
+    
+                        <div class="TwodivHrztl">
+                            <div><p>Month</p></div>
+                            <div>
+                                <select name="billmonth" id="month">
+                                    <option></option>
+                                    <option>{{ current_month }}</option>
+                                    {% for month_1 in months %}
+                                    <option>{{ month_1 }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                            <div><p>Year</p></div>
+                            <div>
+                                <select name="year" id="year">
+                                    <option></option>
+                                    {% for year in yearslist %}
+                                    <option>{{ year }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+    
+                        <div 
+                        style="margin: 10px 10px 10px 10px;
+                            text-align: center;
+                            font-weight: 600;">
+                            <p>OR</p>
+                        </div>
+                        <div class="TwodivHrztl">
+                        <div class="input"><input placeholder="Enter Customr Name for File" type="text"></div>
+                        </div>
+                        <div class="btn"><button 
+                            id = "createfilebtn"
+                            style="width: fit-content;
+                                margin: 10px 10px 10px 10px;
+                                width: 100px;
+                                font-weight: 600;"
+                            class="btn">
+                                Create File</button></div>
+    
+    
+                    </fieldset>
+                </div>
+            </div>
+    
+            <div class="orDiv">
+                <p>And</p>
+            </div>
+    
+            <div class="selectfliebox">
+                <fieldset class="MainBox">
+                    <legend>Select File</legend>
+                    <div>
+                        <div class="input" style="margin : 10px;">
+                            <input type="text" id="searchInput" placeholder="Search File">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input">
+                            <select style="width: 205px; height: 30px;" id="file">
+                                <option>File will list here</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="TwodivHrztl">
+                        <div class="input"><input type="text"></div>
+                        <div class="btn"><button class="btn">Select File</button></div>
+                    </div>
+                    -->
+                </fieldset>
+            </div>
+        </div>
+    
+    
+        <div class="secondblock">
+            <div class="EnterRecordManual">
+                <fieldset class="MainBox">
+                    <legend>Enter the Record Mannualy</legend>
+                    <div class="FivehrzntlDiv">
+                        <div class="input"><input type="text" placeholder="Receipent name"></div>
+                        <div class="input"><input type="text" placeholder="Amount"></div>
+                        <div class="input"><input type="text" placeholder="Date and Time"></div>
+    
+                        <div class="input"><input type="text" placeholder="Commodity Name"></div>
+                        <div class="input"><input type="text" placeholder="Category"></div>
+                        <div class="input"><input type="text" placeholder="Place"></div>
+                    </div>
+                    <div style="margin: 10px 10px 10px 10px;"><button>Insert this Record</button></div>
+                </fieldset>
+            </div>
+        </div>
+    
+        <div class="thirdblock">
+            <div class="EnterRecordManual">
+                <fieldset class="MainBox">
+                    <legend>Upload Screenshot Images of Payemts
+                    </legend>
+                    <div class="container" style="margin-left: 10px;">
+                        <div class="upload-section">
+                            <input type="file" id="fileInput" accept="image/*" multiple>
+                            <button class="upload-btn" id="uploadBtn" style="border: dashed black 4px;"><img
+                                    style=" width:100px; height: 100px;" src='{% static "\images\plus_sign.png" %}'>
+                            </button>
+                        </div>
+                        <div class="image-gallery" id="imageGallery"></div>
+                    </div>
+    
+                    <!-- Image Slider Overlay -->
+                    <div id="overlay" class="overlay">
+                        <div class="slider-container">
+                            <button class="slider-btn prev-btn" id="prevBtn">&#10094;</button>
+                            <img id="sliderImage" src="">
+                            <button class="slider-btn next-btn" id="nextBtn">&#10095;</button>
+                        </div>
+                        <div class="overlay-buttons">
+                            <button id="editBtn">Edit</button>
+                            <button id="removeBtn">Remove</button>
+                        </div>
+                    </div>
+    
+    
+                    <button style="width: 150px;
+                                   height: fit-content;
+                                   justify-content: space-between;
+                                   margin-left: 10px;
+                                   margin-top: 10px;">
+                        Extract Records From these images and save to &lt;filename&gt;</button>
+                </fieldset>
+            </div>
+        </div>
+    
+    
+        <div class="fourthblock">
+            <div class="EnterRecordManual">
+                <fieldset class="MainBox">
+                    <legend>View File &lt;filename&gt; Records
+                    </legend>
+                    <div>
+                        <table border="3">
+                            <tr>
+                                <th>No.</th>
+                                <th>Receipent name</th>
+                                <th>Amount</th>
+                                <th>Date & time</th>
+                                <th>Commodity Name</th>
+                                <th>Category</th>
+                                <th>Place</th>
+                                <th>Actions</th>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <th><input type="text" placeholder="Serach"></th>
+                                <th><input type="text" placeholder="Serach"></th>
+                                <th><input type="text" placeholder="Serach"></th>
+                                <th><input type="text" placeholder="Serach"></th>
+                                <th><input type="text" placeholder="Serach"></th>
+                                <th><input type="text" placeholder="Serach"></th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Chand Mohammad bin athu quasim ul jaludin</td>
+                                <td>₹220</td>
+                                <td>16-Aug-2024 10:34 PM</td>
+                                <td>Aloo & Pyaaz</td>
+                                <td>Vegetables</td>
+                                <td>Friday Market</td>
+                                <td class="actiontdcontainers">
+                                    <style>
+                                        .actiontdcontainers>button {
+                                            all: unset;
+                                        }
+    
+                                        img {
+                                            width: 30px;
+                                            height: 30px;
+                                        }
+                                    </style>
+                                    <button onclick="editRow(this)" class="edit-btn"><img class="editbutton"
+                                            src='{% static "\images\editbtnlogo.png" %}'></button>
+                                    <button class="save-btn hidden"><img
+                                            src='{% static "\images\savelogobtn.png" %}'></button>
+                                    <button class="cancel-btn hidden"><img
+                                            src='{% static "\images\Button_cancel.png" %}'></button>
+                                    <button class="delete-btn"><img
+                                            src='{% static "\images\Delete-button.png" %}'></button>
+                                </td>
+                            </tr>
+    
+                            <tr>
+                                <td></td>
+                                <td>Total</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    
+    
+    <script>
+    
+        /* For image uploading */
+        const uploadBtn = document.getElementById('uploadBtn');
+        const fileInput = document.getElementById('fileInput');
+        const imageGallery = document.getElementById('imageGallery');
+        const overlay = document.getElementById('overlay');
+        const sliderImage = document.getElementById('sliderImage');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const editBtn = document.getElementById('editBtn');
+        const removeBtn = document.getElementById('removeBtn');
+    
+        let imageList = [];
+        let currentImageIndex = -1;
+    
+        // Handle the image upload
+        uploadBtn.addEventListener('click', () => fileInput.click());
+    
+        fileInput.addEventListener('change', (e) => {
+            const files = e.target.files;
+            for (let i = 0; i < files.length; i++) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const imageSrc = event.target.result;
+                    imageList.push(imageSrc);
+                    createImageContainer(imageSrc, imageList.length - 1);  // Pass the image index
+                };
+                reader.readAsDataURL(files[i]);
+            }
+        });
+    
+        // Create image container and add to gallery
+        function createImageContainer(imageSrc, index) {
+            const container = document.createElement('div');
+            container.classList.add('image-container');
+            container.style.backgroundImage = `url(${imageSrc})`;
+    
+            const buttons = document.createElement('div');
+            buttons.classList.add('image-buttons');
+    
+            const editBtn = document.createElement('button');
+            editBtn.textContent = 'See';
+            editBtn.onclick = () => showOverlay(index);
+            buttons.appendChild(editBtn);
+    
+            const removeBtn = document.createElement('button');
+            removeBtn.textContent = 'Remove';
+            removeBtn.onclick = () => removeImage(index, container);
+            buttons.appendChild(removeBtn);
+    
+            container.appendChild(buttons);
+            imageGallery.appendChild(container);
+        }
+    
+        // Remove image from gallery
+        function removeImage(index, container) {
+            imageList.splice(index, 1);
+            imageGallery.removeChild(container);
+        }
+    
+        // Show the overlay slider
+        function showOverlay(index) {
+            currentImageIndex = index;
+            sliderImage.src = imageList[currentImageIndex];
+            overlay.style.display = 'flex';
+        }
+    
+        // Close overlay when clicked outside the image
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                overlay.style.display = 'none';
+            }
+        });
+    
+        // Navigate through images in the overlay
+        prevBtn.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + imageList.length) % imageList.length;
+            sliderImage.src = imageList[currentImageIndex];
+        });
+    
+        nextBtn.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % imageList.length;
+            sliderImage.src = imageList[currentImageIndex];
+        });
+    
+        // Edit button in the overlay (For now, it just alerts)
+        editBtn.addEventListener('click', () => {
+            alert('Edit functionality will be implemented later.');
+        });
+    
+        // Remove button in the overlay
+        removeBtn.addEventListener('click', () => {
+            imageList.splice(currentImageIndex, 1);
+            imageGallery.innerHTML = '';
+            imageList.forEach((imageSrc, index) => createImageContainer(imageSrc, index));
+            overlay.style.display = 'none';
+        });
+        /* till here for image uploading*/
+    
+    
+    
+        // JavaScript from old template
+        // JavaScript from old template
+        // JavaScript from old template
+        // JavaScript from old template
+        function formatDate(input) {
+            var date = new Date(input.value);
+            if (!isNaN(date.getTime())) {
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear();
+    
+                if (day < 10) {
+                    day = '0' + day;
+                }
+                if (month < 10) {
+                    month = '0' + month;
+                }
+    
+                input.value = day + '-' + month + '-' + year;
+            }
+        }
+    
+        // Get form and input elementss
+        const myForm = document.getElementById('createfileform');
+        const price_var = document.getElementById('billprice2');
+        const custname_var = document.getElementById('customname');
+        const createfilebtnvar = document.getElementById('createfilebtn');
+        const errorMessage = document.getElementById('errorMessage');
+    
+        const year = document.getElementById('year');
+        const billmonth = document.getElementById('month');
+    
+        var file = document.getElementById('file');
+        var commnm = document.getElementById('commnm');
+        var comdprice = document.getElementById('comdprice');
+        var dateofpymnt = document.getElementById('dateofpymnt');
+    
+        var plcoftranopt = document.getElementById('plcoftranopt');
+        var category = document.getElementById('category');
+        var message_2 = document.getElementById('message_2');
+        var tabledata = document.getElementById('tabledata');
+    
+    
+        // Function to check form validity
+        function checkFormValidity() {
+        alert("fdsfs");
+            if (price_var.value && custname_var.value) {
+                // Both fields are filled
+                createfilebtnvar.disabled = true;
+                createfilebtnvar.style.backgroundColor = "rgb(212, 190, 174)";
+                errorMessage.textContent = 'Both fields cannot be filled';
+            } else if (!price_var.value && !custname_var.value) {
+                // Neither field is filled
+                createfilebtnvar.disabled = true;
+                createfilebtnvar.style.backgroundColor = "rgb(212, 190, 174)";
+                errorMessage.textContent = 'One of the fields needs to be filled';
+            } else {
+                // Form is valid
+                createfilebtnvar.style.backgroundColor = "rgb(84, 60, 0)";
+                createfilebtnvar.disabled = false;
+                errorMessage.textContent = '';
+            }
+        }
+    
+        // Add event listeners to input fields
+        price_var.addEventListener('input', checkFormValidity);
+        custname_var.addEventListener('input', checkFormValidity);
+    
+    
+        // Prevent form submission if the button is disabled
+        document.getElementById('createfilebtn').addEventListener('click', function (event) {
+            if (createfilebtnvar.disabled) {
+                event.preventDefault();
+            }
+        });
+        /*
+        $('.btn34').click(function () {
+            alert("My Message");
+        })
+        */
+    
+    
+        $(document).ready(function () {
+            $('#createfilebtn').click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'GET',
+                    url: '{% url "my_function" %}',
+                    data: {
+                        'totbillprice2': price_var.value,
+                        'custname_var': custname_var.value,
+                        'year2': year.value,
+                        'billmonth2': billmonth.value,
+                    },
+                    success: function (response) {
+                        $('#message').text(response.result);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            });
+    
+    
+            $('#addrecord').click(function (e) {
+                e.preventDefault();
+                $.post({
+                    type: 'GET',
+                    url: '{% url "get_commodity_details" %}',
+                    data: {
+                        'file': file.value,
+                        'commnm': commnm.value,
+                        'comdprice': comdprice.value,
+                        'dateofpymnt': dateofpymnt.value,
+                        'plcoftranopt': plcoftranopt.value,
+                        'category': category.value,
+                    },
+                    success: function (response) {
+                        message_2.textContent = response.result_1;
+    
+                        commnm.value = "";
+                        comdprice.value = "";
+                        dateofpymnt.value = "";
+                        plcoftranopt.value = "";
+                        category.value = "";
+    
+    
+                        var data = response.filedata2;
+    
+                        var tableBody = $('#excelDataTable tbody');
+                        tableBody.empty();
+                        var row = $('<tr>'); // for adding table heading's tr
+                        row.append($('<th>').text('S no.'));
+                        for (var j = 0; j < data[0].length; j++) {
+                            if (j == 5) { row.append($('<th class = "hidden-column">')); }
+                            else { row.append($('<th>').text(data[0][j])); }
+                        }
+                        row.append($('<th>').text('Actions'));
+                        tableBody.append(row);
+    
+                        var sum_of_price = 0;
+                        for (var i = 1; i < data.length; i++) {
+                            var row = $('<tr class = "trtbl2" id="row' + i + '">');
+                            row.append($('<td>').text(i));
+                            // alert(data[i][1]);
+                            sum_of_price += Number(data[i][1]);
+                            for (var j = 0; j < data[i].length; j++) {
+                                if (j == 2) { row.append($('<td class = "date-cell">').text(data[i][j])) }
+                                else if (j == 5) { row.append($('<td class = "hidden-column">').text(data[i][j])) }
+    
+                                else { row.append($('<td>').text(data[i][j])); }
+                            }
+                            row.append($('<td>'
+                                + '<button onclick="editRow(this)" class="edit-btn" ><img class = "editbutton" src = "{% static "\images\editbtnlogo.png" %}" ></button>'
+                                + '<button class="save-btn hidden"><img src = "{% static "\images\savelogobtn.png" %}" ></button>'
+                                + '<button class = "cancel-btn hidden"><img src = "{% static "\images\Button_cancel.png" %}" ></button>'
+                                + '<button class = "delete-btn"><img src = "{% static "\images\Delete-button.png" %}" ></button>'
+                            ))
+    
+                            tableBody.append(row);
+                        }
+    
+                        var row = $('<tr>'); // for adding total values tr row
+                        for (var j = 0; j < data[0].length; j++) {
+                            if (j == 1) { row.append($('<th>').text('Total')); }
+                            if (j == 1) { row.append($('<td>').text(sum_of_price)); }
+                            if (j == 5) { row.append($('<td class = "hidden-column">').text('')); }
+                            else (row.append($('<td>').text('')));
+                        }
+                        // row.append($('<td>').text(''));
+                        tableBody.append(row);
+    
+    
+                        const tableRows2 = document.querySelectorAll("#excelDataTable .trtbl2");
+                        // alert("341")
+                        tableRows2.forEach(row => {
+                            // alert("342");
+                            const editBtn = row.querySelector(".edit-btn");
+                            const saveBtn = row.querySelector(".save-btn");
+                            const cancelBtn = row.querySelector(".cancel-btn");
+                            const deleteBtn = row.querySelector(".delete-btn");
+    
+                            editBtn.addEventListener("click", () => {
+                                editBtn.classList.add("hidden");
+                                deleteBtn.classList.add("hidden");
+    
+                                saveBtn.classList.remove("hidden");
+                                cancelBtn.classList.remove("hidden");
+                            });
+    
+                            cancelBtn.addEventListener("click", () => {
+                                saveBtn.classList.add("hidden");
+                                cancelBtn.classList.add("hidden");
+                                editBtn.classList.remove("hidden");
+                                deleteBtn.classList.remove("hidden");
+                            });
+    
+                            saveBtn.addEventListener("click", () => {
+                                saveBtn.classList.add("hidden");
+                                cancelBtn.classList.add("hidden");
+                                editBtn.classList.remove("hidden");
+                                deleteBtn.classList.remove("hidden");
+                            });
+    
+                        });
+    
+    
+                        $('.delete-btn').click(function () {
+                            confirmationModal.style.display = 'block';
+                            confirmDelete(this);
+                        });
+    
+                        function confirmDelete(button) {
+    
+                            var row = button.parentElement.parentElement;
+                            confirmationModal.setAttribute('data-row', row.id);
+                            var choice = document.getElementById("choice").innerText;
+                            var hiddenData = button.parentElement.parentElement.querySelector(".hidden-column").innerText;
+                            var hidden_btn = button.parentElement.parentElement.querySelector(".delete-btn");
+    
+    
+    
+                            if (confirm("Do you really want to Delete")) {
+                                alert("You pressed OK! Continuing execution...");
+                            } else {
+                                alert("You pressed Cancel! Stopping execution.");
+                            }
+                            alert("Record Deleted Succesfully !! ");
+    
+                            $.ajax({
+                                type: 'GET',
+                                url: 'delete_record',
+                                data: {
+                                    "hiddenData": hiddenData,
+                                    "filename": file.value,
+                                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                                },
+                                success: function (response) {
+                                    alert(response.result3);
+                                },
+                                error: function (xhr, status, error) {
+                                    alert('Error sending data!');
+                                }
+                            });
+    
+    
+                        }
+    
+                        $('.save-btn').click(function () {
+                            save_edited_record(this);
+                        });
+    
+                        function save_edited_record(btn) {
+                            var row = btn.parentNode.parentNode;
+                            var rowData = [];
+                            var values = "";
+                            index = 0;
+                            var inputs = row.querySelectorAll('input');
+    
+                            inputs.forEach(function (input) {
+                                var value = input.value;
+                                rowData[index] = value;
+                                values += value + ",";
+                                index += 1;
+                            });
+    
+                            var uniqueID = btn.parentElement.parentElement.querySelector(".hidden-column").innerText;
+                            $.ajax({
+                                type: 'GET',
+                                url: 'save_edited_record',
+                                data: {
+                                    "uniqueId": uniqueID,
+                                    "filenamefor_ser": file.value,
+                                    "editedvalues": values,
+                                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                                },
+                                success: function (response) {
+                                    alert(response.result4);
+                                },
+                                error: function (xhr, status, error,) {
+                                    alert('Error sending data!');
+                                }
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            });
+    
+            $('#searchInput').on('input', function () {
+                alert("searching");
+                var search_text = $(this).val();
+                $.ajax({
+                    type: 'GET',
+                    url: '{% url "search_files" %}',
+                    data: { 'search_text': search_text },
+                    success: function (response) {
+                        $('#file').empty();
+                        response.files.forEach(function (file) {
+                            $('#file').append('<option>' + file + '</option>');
+                        });
+                    },
+                    error: function (xhr, errmsg, err) {
+                        console.log(xhr.status + ': ' + xhr.responseText);
+                        $('#file').append('<li>Error occurred, please try again.</li>');
+                    }
+                });
+            });
+    
+        });
+    
+        $(document).ready(function () {
+            $(".datepickerBtn").click(function () {
+                $(this).prev('.datepicker').datepicker("show"); // Show the datepicker associated with the input before this button
+            });
+    
+            $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' }); // Initialize the datepicker with the desired date format
+        });
+    
+        $(document).ready(function () {
+            $.datepicker.setDefaults({
+                dateFormat: 'dd-mm-yy'
+            });
+        });
+    
+        function editRow(btn) {
+    
+            var min_width = 15;
+            var row = btn.parentNode.parentNode;
+            var cells = row.getElementsByTagName("td");
+            var arr = [];
+    
+    
+            for (var i = 1; i < cells.length - 2; i++) {
+                var input = document.createElement("input");
+                input.type = "text";
+                input.value = cells[i].innerText;
+                input.style.width = cells[i].offsetWidth - min_width + "px";
+                input.style.padding = "5px 5px 5px 5px";
+                arr[i] = input.value; // for cancel values change to orginals
+    
+                cells[i].innerText = '';
+                cells[i].appendChild(input);
+                min_width += 7;
+            }
+    
+    
+            /*
+            // commodity name
+            var input_2 = document.createElement("input");
+            input_2.type = "text";
+            input_2.value = cells[1].innerText;
+            arr[1] = input_2.value;
+            cells[1].innerText = '';
+            cells[1].appendChild(input_2);
+            input_2.style.width = cells[1].offsetWidth - cut7 + "px";
+    
+            // price input
+            var input = document.createElement("input");
+            input.type = "text";
+            input.value = cells[2].innerText;
+            arr[2] = input.value;
+            cells[2].innerText = '';
+            cells[2].appendChild(input);
+    
+            // date input 
+            const dateCell = row.querySelector('.date-cell');
+            const originalDate = dateCell.innerText;
+            const input2 = document.createElement('input');
+            input2.type = 'text';
+            input2.value = originalDate;
+            input2.style.width = '100px';
+            $(input2).datepicker();
+            dateCell.style.width = dateCell.offsetWidth - cut7 + "px";
+            const setDateButton = document.createElement('button');
+            setDateButton.innerText = 'Set Date';
+            setDateButton.type = 'button';
+            setDateButton.onclick = () => $(input2).datepicker('show');
+            dateCell.setAttribute('data-original-date', originalDate);
+            dateCell.innerHTML = '';
+            dateCell.appendChild(input2);
+            dateCell.appendChild(setDateButton);
+    
+            // Place input
+            var place_input = document.createElement("input");
+            place_input.type = "text";
+            place_input.value = cells[3].innerText;
+            arr[3] = place_input.value;
+            cells[4].innerText = '';
+            cells[4].appendChild(place_input);
+            
+    
+            // Category input
+            var select = document.createElement("select");
+            var option = document.createElement("option");
+            option.text = cells[5].innerText;
+            select.appendChild(option);
+            var option1 = document.createElement("option");
+            option1.text = "Devlopment";
+            select.appendChild(option1);
+            var option2 = document.createElement("option");
+            option2.text = "HR";
+            select.appendChild(option2);
+            var option3 = document.createElement("option");
+            option3.text = "Testing";
+            select.appendChild(option3);
+            var currentValue = cells[4].innerText;
+            arr[4] = cells[5].innerText;
+            cells[5].innerText = '';
+            cells[5].appendChild(select);
+            */
+    
+            const saveBtn = row.querySelector(".save-btn");
+            saveBtn.onclick = function () { saveRow(this); };
+            // btn.parentNode.replaceChild(saveBtn, btn);
+    
+            const cnclbtn = row.querySelector(".cancel-btn");
+            cnclbtn.onclick = function () { cancelbtn(this, arr); };
+            currentRow = row;
+        }
+    
+    
+        function saveRow(btn) {
+            var row = btn.parentNode.parentNode;
+            var cells = row.getElementsByTagName("td");
+    
+    
+            for (var i = 1; i < cells.length - 2; i++) {
+                cells[i].innerText = cells[i].getElementsByTagName("input")[0].value;
+            }
+            /*
+            cells[5].innerText = cells[1].getElementsByTagName("select")[0].value;
+    
+            const dateCell = row.querySelector('.date-cell');
+            const input = dateCell.querySelector('input[type="text"]');
+            const newDate = input.value;
+    
+            // Set the new date in dd-mm-yyyy format
+            dateCell.innerHTML = newDate;
+            */
+    
+            currentRow = null;
+    
+        }
+    
+        function cancelbtn(btn, arr) {
+            var row = btn.parentNode.parentNode;
+            var cells = row.getElementsByTagName("td");
+    
+            var datebutton = row.querySelectorAll(".date-container");
+    
+            for (var i = 1; i < cells.length - 2; i++) {
+                cells[i].innerText = cells[i].getElementsByTagName("input")[0].value;
+                cells[i].innerText = arr[i];
+            }
+    
+    
+    
+            entRow = null;
+        }
+    
+        function hide_deletedrow(button) {
+            var row = button.parentNode.parentNode;
+            row.style.display = 'none';
+        }
+    
+    
+        // Get the modal elements
+        var confirmationModal = document.getElementById('confirmationModal');
+        var successModal = document.getElementById('successModal');
+    
+    
+        // Open confirmation modal
+    
+        // Close modal
+        function closeModal() {
+            document.getElementById("choice").innerText = "Yes";
+            confirmationModal.style.display = 'none';
+            successModal.style.display = 'none';
+        }
+    
+        // Delete row and show success modal
+        function deleteRow() {
+            document.getElementById("choice").innerText = "No";
+            var rowId = confirmationModal.getAttribute('data-row');
+            var row = document.getElementById(rowId);
+            deleteRow
+            row.remove();
+            closeModal();
+            successModal.style.display = 'block';
+    
+            confirmDelete(this);
+        }
+    
+        // Close modals when clicking on close buttons
+        var closeButtons = document.getElementsByClassName('close');
+        for (var i = 0; i < closeButtons.length; i++) {
+            closeButtons[i].onclick = function () {
+                closeModal();
+            }
+        }
+    
+    
+    </script>
+
+
+</body></html>

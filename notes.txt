@@ -31,4 +31,3 @@ python -m venv audiotrnas
 python manage.py startapp project1
 
 
-pip install --upgrade --upgrade-strategy eager -r requirements.txt

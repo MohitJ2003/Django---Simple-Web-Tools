@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Developer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(45deg, #6b5b95, #d5a6bd);
+            color: white;
+            padding: 1.5em 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 0.5em;
+        }
+
+        header p {
+            font-size: 1.2em;
+        }
+
+        nav {
+            background: #6b5b95;
+            display: flex;
+            justify-content: center;
+            padding: 0.8em 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1em;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #d5a6bd;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 2em auto;
+            padding: 0 1em;
+        }
+
+        .skills, .projects {
+            margin: 2em 0;
+        }
+
+        .section-title {
+            font-size: 2em;
+            margin-bottom: 1em;
+            text-align: center;
+        }
+
+        .skills ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .skills li {
+            background: #6b5b95;
+            color: white;
+            margin: 0.5em;
+            padding: 0.8em 1.5em;
+            border-radius: 20px;
+            font-size: 1em;
+            transition: transform 0.3s;
+        }
+
+        .skills li:hover {
+            transform: scale(1.1);
+            background: #d5a6bd;
+        }
+
+        .projects .project {
+            margin-bottom: 2em;
+            display: flex;
+            align-items: center;
+            gap: 2em;
+        }
+
+        .projects img {
+            width: 300px;
+            border-radius: 10px;
+        }
+
+        .projects .project-info {
+            flex: 1;
+        }
+
+        .projects .project-info h3 {
+            font-size: 1.5em;
+            color: #6b5b95;
+        }
+
+        .projects .project-info p {
+            margin: 0.5em 0;
+        }
+
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            margin-top: 2em;
+        }
+
+        .footer p {
+            font-size: 0.9em;
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>John Doe</h1>
+        <p>Software Developer | Frontend Specialist | JavaScript Enthusiast</p>
+    </header>
+
+    <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="container">
+        <section id="about" class="fade-in">
+            <h2 class="section-title">About Me</h2>
+            <p>I am a passionate software developer with expertise in frontend development and creating scalable, responsive web applications. With a strong foundation in HTML, CSS, and JavaScript, I thrive on crafting user-friendly interfaces and dynamic user experiences.</p>
+        </section>
+
+        <section id="skills" class="skills fade-in">
+            <h2 class="section-title">Skills</h2>
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>React.js</li>
+                <li>Node.js</li>
+                <li>TypeScript</li>
+                <li>Git</li>
+                <li>REST APIs</li>
+                <li>Webpack</li>
+                <li>Unit Testing</li>
+            </ul>
+        </section>
+
+        <section id="projects" class="projects fade-in">
+            <h2 class="section-title">Projects</h2>
+            <div class="project">
+                <img src="project1.jpg" alt="Project Screenshot">
+                <div class="project-info">
+                    <h3>Portfolio Website</h3>
+                    <p>A fully responsive portfolio website built with HTML, CSS, and JavaScript. It showcases my skills, projects, and experience.</p>
+                    <a href="#" target="_blank">View Project</a>
+                </div>
+            </div>
+
+            <div class="project">
+                <img src="project2.jpg" alt="Project Screenshot">
+                <div class="project-info">
+                    <h3>Task Management App</h3>
+                    <p>A task management tool developed with React.js and Node.js. It helps users organize their daily activities efficiently.</p>
+                    <a href="#" target="_blank">View Project</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 John Doe. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

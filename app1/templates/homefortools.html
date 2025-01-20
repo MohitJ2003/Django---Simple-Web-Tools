@@ -1,0 +1,150 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Web Tools 😎😎</title>
+    <!--
+    <link rel="icon" href="{% static 'images/homegif.gif' %}" type="image/x-icon">
+    -->
+    <link rel="icon"
+        href="https://th.bing.com/th/id/OIP.qSOK1136S79h-aH_vxuLggEsCK?w=343&h=161&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+        type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/homefortools.css' %}">
+
+</head>
+
+<body>
+    <div class="nav">
+        <div>
+            <a href="http://127.0.0.1:8001/project1">Home | </a>
+            <a href="#about"> About |</a>
+            <a href="#services">Services |</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div>
+            <a href="./signup/">Sign up |</a>
+            <a href="/project1/login/">Login</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="list">
+            <h1>Tools List</h1>
+            <div class="tool">
+                <a href="audiototext">1. Get Hindi Text from YouTube Video</a>
+                <button id="audiototext" onclick="showImage(this.id)"> > </button>
+            </div>
+            <div class="tool">
+                <a href="monthlybillform/">2. Monthly Expense Tool</a>
+                <button id="monthlybillform" onclick="showImage(this.id)"> > </button>
+            </div>
+            <div class="tool">
+                <a href="addtwonum/">3. Tool for Adding Two Numbers</a>
+                <button id="addtwonum" onclick="showImage(this.id)"> > </button>
+            </div>
+            <div class="tool">
+                <a href="app1/">4. Write Messages Using Terminal</a>
+                <button id="app1" onclick="showImage(this.id)"> > </button>
+            </div>
+            <div class="tool">
+                <a href="lion_image/">5. Load Image</a>
+                <button id="lion_image" onclick="showImage(this.id)"> > </button>
+            </div>
+            <div class="tool">
+                <a href="loadajaxhtml/">6. Load Ajax HTML</a>
+                <button id="loadajaxhtml" onclick="showImage(this.id)"> > </button>
+            </div>
+            <div class="tool">
+                <a href="monthlybillform2" id="">7. Monthly Expense Tool (2)</a>
+                <button id="monthlybillform2" onclick="showImage(this.id)"> > </button>
+            </div>
+
+            <div class="tool">
+                <a href="audvidtxt" id="">8. Audio,Video,get hindi text</a>
+                <button id="audvidtxt" onclick="showImage(this.id)"> > </button>
+            </div>
+
+            <div class="tool">
+                <a href="car" id="">9. Car</a>
+                <button id="car" onclick="showImage(this.id)"> > </button>
+            </div>
+
+            <div class="tool">
+                <a href="joker" id="">10. test django</a>
+                <button id="djangoauth" onclick="showImage(this.id)"> > </button>
+            </div>
+
+        </div>
+
+        <div class="toolsviewer" id="toolsviewer">
+
+            <!-- Main Content Section -->
+            <main>
+                {% block content %}
+                {% endblock %}
+            </main>
+
+
+        </div>
+
+        <div class="sidebar">
+            <p>Advertisement - Today's Offer ->
+                Enjoy and Use All tools @ of ₹220/Monthly</p>
+        </div>
+    </div>
+
+    <footer>
+        <h1>@Simple--Web Tools</h1>
+    </footer>
+
+    <script>
+
+        function showImage(buttonId) {
+            const viewer = document.getElementById('toolsviewer');
+            let imageFile = '';
+            viewer.innerHTML = '';
+            switch (buttonId) {
+                case 'audiototext':
+                    imageFile = "{% static 'images/yakshiniaudiototext.png' %}";
+                    break;
+                case 'monthlybillform':
+                    imageFile = "{% static 'images/mothlybill.png' %}";
+                    break;
+                case 'addtwonum':
+                    imageFile = "{% static 'images/add2num.png' %}";
+                    break;
+
+                case 'apprew1':
+                    imageFile = "{% static 'images/add2657567m.png' %}";
+                    break;
+
+                case 'lion_image':
+                    imageFile = "{% static 'images/showimages.png' %}";
+                    break;
+
+                case 'monthlybillform2':
+                    imageFile = "{% static 'images/monthlybill2.png' %}";
+                    break;
+
+                default:
+                    imageFile = "{% static 'images/not-available.jpg' %}";
+                    break;
+            }
+
+            const img = document.createElement('img');
+            img.src = imageFile;
+            img.alt = "Tool Preview Image";
+            img.style.width = "90%";
+            img.style.height = "90%";
+            img.style.objectFit = "contain";
+
+            viewer.appendChild(img);
+        }
+
+    </script>
+</body>
+
+</html>

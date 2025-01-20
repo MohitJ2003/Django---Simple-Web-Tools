@@ -16,8 +16,12 @@ import tkinter as tk
 from tkinter import ttk
 import time
 from tqdm import tqdm
-
+import re
 import yt_dlp
+
+
+# Ctrl+ Shift + O list all the functions in one sublist.
+# press Shift+f12 on any element 
 
 base_path = os.path.dirname(os.path.abspath(__file__)).split("djangoProjects")[0].replace("\\","/")+"djangoProjects/"
 
@@ -83,25 +87,29 @@ def extarctaudio(video_file_path, audio_file_path, nameofaudiofile):
 
 
 def createfilename(link, shortfilename="yakshinipktfm"):
-    num = ""
-    numlist = []
     yt = YouTube(link)
     orgvidnm = yt.title
-    orgvidnm = removespace(word=orgvidnm)
     video_length = yt.length
-
+    """
+    num = ""
+    numlist = []
+    n = 2
     for a in orgvidnm:
         if a.isnumeric():
-            if len(num) < 3:
+            if len(num) < n:
                 num += a
-                if len(num) == 3:
-                    numlist.append(num)
+                if len(num) == n:
+                    numlist.append(int(num))
                     num = ""
-
+    """
+    numlist = [int(s) for s in re.findall(r'\b\d+\b', orgvidnm)]
+    print(orgvidnm + "   ",numlist)
     epnumlist = sorted(list(set(numlist)))
-    for num in range(int(epnumlist[0]) + 1, int(epnumlist[-1]) + 1):
-        epnumlist.append(str(num))
 
+    for num in range(int(epnumlist[0]), int(epnumlist[-1]) + 1):
+        epnumlist.append(num)
+
+    print(epnumlist)
     nofepinvideo = (video_length // 810) + 1
     createdfilename = shortfilename
     epnumlist = sorted(list(set(epnumlist)))
@@ -109,12 +117,12 @@ def createfilename(link, shortfilename="yakshinipktfm"):
     try:
         if video_length < 810 * nofepinvideo:
             for epind in range(nofepinvideo):
-                createdfilename += '_' + epnumlist[epind]
+                createdfilename += '_' + str(epnumlist[epind])
             return createdfilename
     except Exception as e:
         createdfilename = shortfilename
         for epnum in epnumlist:
-            createdfilename += '_' + epnum
+            createdfilename += '_' + str(epnum)
         return createdfilename
 
 
@@ -153,6 +161,7 @@ def audiototextbyparts(directory, file_name):
     filename = file_name
     single_line = ''
     c = 0
+    co = 0
     for a in tqdm(new_lst):
         hindi_line = audio_to_text(directory + a)
         if hindi_line == "Speech recognition could not understand the audio":
@@ -161,10 +170,11 @@ def audiototextbyparts(directory, file_name):
         # print(hindi_line)
         else:
             single_line += hindi_line + ' '
+            co += 1
         time.sleep(0.1)
-    print(filename)
+    single_line += f"\n\n Note : {co} lines are transcribed and {c} are left" 
     pdfmaker_3(file_name, single_line)
-    print(f"{c} lines are not transcribed")
+    print(f"{co} lines are transcribed and {c} are left")
     print('next Paragraph ')
 
 
@@ -190,16 +200,34 @@ def get_allepnum_of3digit(pdf_path):
     numlist = []
     num = ""
     # print(list1)
+
+    n = 2
     for a in list1:
         for b in a:
             if b.isnumeric():
-                if len(num) < 3:
+                if len(num) < n:
                     num += b
-                    if len(num) == 3:
-                        numlist.append(num)
+                    if len(num) == n:
+                        numlist.append(int(num))
                         num = ""
-    epnumlist = sorted(list(set(numlist)))
+    n = 3
+    for a in list1:
+        for b in a:
+            if b.isnumeric():
+                if len(num) < n:
+                    num += b
+                    if len(num) == n:
+                        numlist.append(int(num))
+                        num = ""
 
+    
+    epnumlist = sorted(list(set(numlist)))
+    """
+    print("/n/n/n Available Episodes List",
+        epnumlist
+        ,"/n/n/n"
+    )
+    """
     return epnumlist
 
 
@@ -212,12 +240,12 @@ def youtubehindi_link2text(link):
     listofeppdf = os.listdir(listofeppdfdirec)
 
     listofep = os.listdir(outputdirect_aud)
+
     print("\n\nYes Here !!\n\n")
-    # filename = "yakshinipktfm_" + str(episodes_num)
-    """if episodes_num == 0:
-        filename = createfilename(link)
-        setlink_and_epname_in_txtfile(link, filename)"""
+
     filename = createfilename(link)
+
+    print("flag 1")
     newvideoname = filename + '.mp4'
     newwavfilename = filename + ".wav"
     newpdffilename = filename + ".pdf"
@@ -252,10 +280,13 @@ def youtubehindi_link2text(link):
         print(f"------------------------Working on {filename}.wav.../----------------------")
 
         audiototextbyparts(output_dir, newpdffilename)
+        msg = f"{filename}.pdf created successfully"
     else:
+        msg = f"{filename}.pdf created already"
         print(f"{filename}.pdf created already")
 
     print('----------------- All done--------------------')
+    return msg
 
 
 def extract_audio_mp3(input_video, output_audio):
@@ -279,32 +310,47 @@ def getting_nd_beautifying_ep_namelist_2(ep_num_list):
     ep_name_list = []
     epnamefile = open(
         base_path + "project1/app1/mytextfiles/yakeplist.txt", "r")
+    """
     for fileline in epnamefile:
         for a in ep_num_list:
             if a in fileline:
-                if 'â€¦' in a or 'â€"' in a:
+                if 'â€¦' in a or 'â€"' in a or "â€“" in a:
                     new_string = a.replace('â€¦', '...')
                     new_string = new_string.replace('â€“', '-')
                     ep_name_list.append(new_string)
                 else:
                     ep_name_list.append(fileline)
+    """
+    for a in ep_num_list:
+        for fileline in epnamefile:
+            if str(a) in fileline:
+                if 'â€¦' in fileline or 'â€"' in fileline or "â€“" in fileline:
+                    new_string = fileline.replace('â€¦', '...')
+                    new_string = new_string.replace('â€“', '-')
+                    ep_name_list.append(new_string)
+                else:
+                    ep_name_list.append(fileline)
+                break
+
     epnamefile.close()
+
+
 
     return ep_name_list
 
+def get_epnums_in_filename(pdfname):
+    pdfname = pdfname.replace(".pdf","")
+    for a in pdfname:
+        if a.isalpha():
+            pdfname = pdfname.replace(a,"")
+            pdfname = pdfname.replace(".","")
+    listnum = [int(num) for num in pdfname.split("_") if num != ""]
+
+    return listnum
 
 def get_ep_nums(file_name="default_name"):
-    numlist = []
-    num = ""
-    for a in file_name:
-        if a.isnumeric():
-            if len(num) < 3:
-                num += a
-                if len(num) == 3:
-                    numlist.append(num)
-                    num = ""
-
-    epnumlist = sorted(list(set(numlist)))
+    
+    epnumlist = get_epnums_in_filename(file_name)
     return epnumlist
 
 
@@ -356,8 +402,7 @@ def pdfmaker_3(filename, paragraph_towritten):
 def dowload_video_andextractaudio(link):
     outputdirect = base_path + "project1/app1/videosdirect/"
     outputdirect_aud = base_path + "project1/app1/audiofiles/"
-    outputdirect_aud_mp3 = base_path + "project1/app1/static" \
-                           "/audiofiles/"
+    outputdirect_aud_mp3 = base_path + "project1/app1/static/audiofiles/"
 
     filename = createfilename(link)
     setlink_and_epname_in_txtfile(link, filename)
@@ -366,7 +411,7 @@ def dowload_video_andextractaudio(link):
     newmp3filename = filename + ".mp3"
 
     videopath = outputdirect + newvideoname
-    download_video_from_youtube(link, outputdirect, newvideoname)
+    download_video_yt_dlp(link, outputdirect, newvideoname)
 
     print("Checking the episode titles printing to pdf")
     ep_numslist = get_ep_nums(filename)
@@ -376,6 +421,7 @@ def dowload_video_andextractaudio(link):
 
     # print(os.path.isfile(outputdirect_aud + newwavfilename), os.path.isfile(outputdirect_aud_mp3 + newmp3filename))
     if os.path.isfile(outputdirect_aud + newwavfilename) and os.path.isfile(outputdirect_aud_mp3 + newmp3filename):
+        msg = f"{newwavfilename} is already present !!"
         print(f"{newwavfilename} is already present !!")
     else:
         print(f"{newwavfilename} is being extracting .....")
@@ -385,6 +431,7 @@ def dowload_video_andextractaudio(link):
         print(f"{newmp3filename} is being extracting .....")
         extract_audio_mp3(videopath, outputdirect_aud_mp3 + filename + ".mp3")
         print(f"{newmp3filename} is extracted successfully !!")
+        msg = f"{newmp3filename} is extracted successfully !!"
 
 
 def sort_vd_and_link_names():
@@ -433,6 +480,9 @@ def setlink_and_epname_in_txtfile(link, file_name):
 
 def youtubehindi_link2text_listwise(listoflinks):
     # print(listoflinks)
+    loop_nmbr = 0
+    msg = ""
+    print(listoflinks)
     for link in listoflinks:
         outputdirect = base_path + "project1/app1/videosdirect/"
         outputdirect_aud = base_path + "project1/app1/audiofiles/"
@@ -442,6 +492,7 @@ def youtubehindi_link2text_listwise(listoflinks):
         listofeppdf = os.listdir(listofeppdfdirec)
         listofep = os.listdir(outputdirect_aud)
 
+        link = link.strip()
         filename = createfilename(link)
         setlink_and_epname_in_txtfile(link, filename)
         newvideoname = filename + '.mp4'
@@ -449,7 +500,7 @@ def youtubehindi_link2text_listwise(listoflinks):
         newpdffilename = filename + ".pdf"
         newmp3filename = filename + ".mp3"
         videopath = outputdirect + newvideoname
-        download_video_from_youtube(link,outputdirect,newvideoname)
+        download_video_yt_dlp(link,outputdirect,newvideoname)
 
         print("Checking the episode titles printing to pdf")
         ep_numslist = get_ep_nums(filename)
@@ -475,16 +526,29 @@ def youtubehindi_link2text_listwise(listoflinks):
             audiofilepath = outputdirect_aud + newwavfilename
             split_wav(audiofilepath, output_dir, part_size)
             print("Audio file split into parts successfully")
-            print(f"------------------------Working on {filename}.wav.../----------------------")
+            print(f"------------------------Working on {filename}.wav......{loop_nmbr}/----------------------")
 
             audiototextbyparts(output_dir, newpdffilename)
         else:
+            msg += f"{filename}.pdf created already" + "\n"
             print(f"{filename}.pdf created already")
 
+        loop_nmbr += 1
+
     print('----------------- All done--------------------')
+    return msg
 
 
 def get_list_ofavalbland_notavalbl():
+
+    def get_epnums_inpdf(pdfname):
+        pdfname = pdfname.replace(".pdf","")
+        for a in pdfname:
+            if a.isalpha():
+                pdfname = pdfname.replace(a,"")
+        listnum = [int(num) for num in pdfname.split("_") if num != ""]
+        return listnum
+
     pdf_path = base_path + "project1/app1/static/mypdffiles/"
     pdf_list = os.listdir(pdf_path)
 
@@ -492,22 +556,26 @@ def get_list_ofavalbland_notavalbl():
     available_eplist_sernums = get_allepnum_of3digit(pdf_path)
     # total_numofep_lst = [i for i in range(len(new_list))]
     available_eplist = [toteplist[a - 1] for a in range(len(toteplist)) if a in available_eplist_sernums]
-
+    
     list1 = [[0, 1, 2] for a in range(len(toteplist))]
+    # list1 = [[0, 1, 2]] * len(toteplist)
     for a_1 in range(len(toteplist)):
         # print(toteplist[a])
         for b in pdf_list:
-            if str(a_1 + 1) in b and a_1 > 98:  # get_allepnum_of3digit() only work for 3 digit num epidode
+            # if str(a_1 + 1) in b and a_1 > 98:  # get_allepnum_of3digit() only work for 3 digit num epidode
+            if a_1 + 1 in get_epnums_inpdf(b):
                 # print(a + 1)
                 list1[a_1][0] = toteplist[a_1]
                 list1[a_1][1] = b
                 list1[a_1][2] = a_1
+
 
     for a_2, b, c in zip(list1, toteplist, range(len(list1) + 1)):
         if list1[c][0] == 0:
             list1[c][0] = toteplist[c]
             list1[c][1] = "NO pdf available"
             list1[c][2] = c
+
 
     return list1
 
@@ -632,7 +700,7 @@ def getting_nd_beautifying_ep_namelist():
     ep_names_list = open(
         base_path + "project1/app1/mytextfiles/yakeplist.txt",
         "r")
-
+    
     my_list = [ep_name for ep_name in ep_names_list]
     new_list = []
 
@@ -653,8 +721,6 @@ def read_html():
     file.close()
 
 
-# youtubehindi_link2text("https://youtu.be/bAARxYXOtSY?si=HhygVtFUQx92_lu9")
-# dowload_video_andextractaudio("https://youtu.be/bAARxYXOtSY?si=HhygVtFUQx92_lu9")
 def mk():
     # Assuming the file is UTF-8 encoded
     file_path = (base_path + "project1/app1/mytextfiles"
@@ -776,10 +842,18 @@ def download_video_yt_dlp(link, folder_path,video_name):
             'outtmpl': folder_path + video_name ,
         }
         print(ydl_opts['outtmpl'])
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([link])
-        print(f"Download completed! Video saved to {folder_path}")
+
+        video_name = folder_path + video_name
+        if video_name in os.listdir(folder_path):
+            print(f"{video_name} video is already downloaded !! ")
+
+        else: 
+            print(f"{video_name} video is downloading....")
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                ydl.download([link])
+            print(f"{video_name} video is download successfully !! Video saved to {folder_path} with yt_dlp")
     except Exception as e:
         print("An error occurred:", e)
+
 
 

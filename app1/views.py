@@ -11,10 +11,13 @@ from openpyxl.reader.excel import load_workbook
 from .mypythonpackage import audiototext as a2t_copy
 from .mypythonpackage import myexcelclass as myexlcls
 from .forms import MyForm, CreateNewBillFile
+import pycountry
+base_path = os.path.dirname(os.path.abspath(__file__))
+print("Base Path - " + base_path)
 
 
 def home(request):
-    template = loader.get_template('homfortools.html')
+    template = loader.get_template('homefortools.html')
     return HttpResponse(template.render())
 
 
@@ -119,8 +122,8 @@ def getTextfromlink(request):
      try:
         # num = int(input("Enter the episode num - "))
         # a2t_copy.youtubehindi_link2text(new_link, num)
-        a2t_copy.youtubehindi_link2text(new_link)
-        return HttpResponse("audio from link is transcribed !!")
+        msg = a2t_copy.youtubehindi_link2text(new_link)
+        return HttpResponse("audio from link is transcribed !! "+ msg)
      except Exception as e:
         return HttpResponse(f"check the Url {e}")
 
@@ -129,8 +132,8 @@ def getTextfromlink_listwise(request):
     new_linklist = request.GET['linklist_ytYak']
     new_linklist = new_linklist.split(',')
     try:
-        a2t_copy.youtubehindi_link2text_listwise(new_linklist)
-        return HttpResponse("audio from link is transcribed !!")
+        msg = a2t_copy.youtubehindi_link2text_listwise(new_linklist)
+        return HttpResponse("audio from link is transcribed !!" + msg)
     except Exception as e:
         return HttpResponse(f"check the Url {e}")
 
@@ -140,8 +143,8 @@ def downlvid_extrud_fun(request):
     try:
         # num = int(input("Enter the episode num - "))
         # a2t_copy.dowload_video_andextractaudio(new_link,num)
-        a2t_copy.dowload_video_andextractaudio(new_link)
-        return HttpResponse("audio & video from link is download !!")
+        msg = a2t_copy.dowload_video_andextractaudio(new_link)
+        return HttpResponse("audio & video from link is download !!" + msg)
 
 
     except Exception as e:
@@ -225,7 +228,7 @@ def search_files(request):
     if request.method == 'GET':
         search_text = request.GET.get('search_text', '')
 
-        directory = "C:/Users/dell pc/PycharmProjects/djangoProjects/project1/app1/Excelfiles/"
+        directory = base_path + "/Excelfiles/"
         files = [f for f in os.listdir(directory) if
                  os.path.isfile(os.path.join(directory, f)) and search_text.lower() in f.lower()]
         return JsonResponse({'files': files})
@@ -273,3 +276,44 @@ def save_edited_record(request):
     return JsonResponse({'status': 'success', 'result4': result})
 
     # return JsonResponse({'status': 'error'})
+
+
+
+
+
+
+def monthlybillform2(request):
+    return render(request, 'monthlyExpensive.html', {'getlistofexlfiles': myexlcls.getlistofexlfiles(),
+                                                      'months': myexlcls.listofmonths,
+                                                      'yearslist': myexlcls.year_list,
+                                                      'current_month': myexlcls.month_,
+                                                      'current_year': myexlcls.year,
+                                                      })
+
+
+
+def audvidtxt(request):
+    return render(request,'audvidndtextools.html')
+
+
+def car(request):
+    return render(request,'vehicels/car.html')
+
+
+def test_django(request):
+    return render(request,'vehicels/bike.html')
+
+def fetch_countries(request):
+    query = request.GET.get('query', '')
+    if query:
+        countries = [country.name for country in pycountry.countries if query.lower() in country.name.lower()]
+    else:
+        countries = []
+    return JsonResponse(countries, safe=False)
+
+
+def joker(request):
+    return render(request,'user/joker.html')
+
+
+

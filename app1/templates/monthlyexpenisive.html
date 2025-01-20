@@ -315,7 +315,7 @@
 
 
 <body>
-    <a class="home" href="http://127.0.0.1:8000/project1/">
+    <a class="home" href="http://127.0.0.1:8001/project1/">
         <img class="logo-image" src="{% static '/images/homegif.gif' %}">
     </a>
     <h1 class="center_me" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -386,7 +386,6 @@
     <div class="center_divblock">
         <table id="myTable" class="center-table" style="background-color: rgb(255, 255, 255);">
             <tr>
-
                 <td>
                     <label style="padding: 12px 10px 12px 40px; color: rgb(255, 255, 255);">Serach For Files here
                         :</label>
@@ -942,27 +941,7 @@
             }
 
 
-            /*
-            cells[1].innerText = cells[1].getElementsByTagName("select")[0].value;
-            cells[1].innerText = arr[1];
 
-            cells[2].innerText = cells[2].getElementsByTagName("input")[0].value;
-            cells[2].innerText = arr[2];
-
-            cells[4].innerText = cells[4].getElementsByTagName("select")[0].value;
-            cells[4].innerText = arr[4];
-            */
-            /*
-            cells[5].innerText = cells[5].getElementsByTagName("select")[5].value;
-            cells[5].innerText = arr[5];
-
-
-            const dateCell = row.querySelector('.date-cell');
-            const originalDate = dateCell.getAttribute('data-original-date');
-
-            // Restore the original date
-            dateCell.innerHTML = originalDate;
-            */
             entRow = null;
         }
 
@@ -986,7 +965,6 @@
             successModal.style.display = 'none';
         }
 
-        // Delete row and show success modal
         function deleteRow() {
             document.getElementById("choice").innerText = "No";
             var rowId = confirmationModal.getAttribute('data-row');
@@ -1007,22 +985,6 @@
             }
         }
 
-        /*
-        $(document).ready(function () {
-            $("#savedatesbtn").click(function () {
-                servletCall();
-            });
- 
-        });
-        function servletCall() {
-            $.post(
-                "./WorkOrdDrlDownFeedgetdetail",
-                { datesdata: jsonData }, //meaasge you want to send
-                function (result) {
-                    $('#somediv').html('<strong>' + result + '</strong>'); //message you want to show
-                });
-        };
-        */
 
     </script>
 

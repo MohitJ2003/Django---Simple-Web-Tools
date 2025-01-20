@@ -1,0 +1,22 @@
+{% extends "homefortools.html" %}
+{% load static %}
+
+{% block title %}
+Home - My Website
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/car.css' %}">
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<h3 class="heading">Car</h3>
+<img src="{% static 'images/secondstorage/car.webp' %}" id="carimage">
+<a href="/project1/test_django">Bike</a>
+
+{% endblock %}
