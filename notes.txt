@@ -32,4 +32,6 @@ python manage.py startapp project1
 
 github command to activate enviroment
 source  ./audiotrnas/Scripts/activate
+source  ./webtoolenv/bin/activate
+
 
