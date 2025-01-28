@@ -9546,3 +9546,514 @@ table>tr*5>td*5
 
 </html>-->
 
+<%@page contentType="text/html"%>
+<%@ page import="java.util.*"%>
+<%@ page import="javax.swing.*"%>
+<%@ page import="java.sql.Connection"%>
+<%@page import="reports.objects.Process"%>
+<%@page import="reports.objects.Karigar"%>
+<%@page import="reports.objects.*"%>
+<jsp:useBean id="dbc" scope="page" class="reports.objects.ListHandler" />
+<jsp:useBean id="common" scope="page" class="reports.objects.Common" />
+<%
+String sessionId = new String();
+if ((!common.validateSession(request))
+		|| (((reports.objects.User) session.getAttribute("user")).canOpenKarigarProductionStatus() == false)) {
+%>
+</head>
+<body>
+	<p align=center>You are not authorized to view this page / Session
+		Expired</p>
+</body>
+</html>
+<%
+return;
+}
+sessionId = ((String) request.getSession().getValue("session_id")).trim();
+//----- Changes made by sukhvir on 06/03/2004--------------------
+User user = (User) request.getSession().getAttribute("user");
+//--------------------- till here -------------------------------
+Connection conn = (Connection) request.getSession().getAttribute("conn");
+request.getSession().setAttribute("KarigarProductionHelper", new reports.helpers.KarigarProductionHelper());
+%>
+
+<%
+reports.helpers.KarigarProductionHelper helper = new reports.helpers.KarigarProductionHelper();
+helper.startUp(request, response);
+%>
+
+<script language="JavaScript" src="/MetalReports/reports/calendar1.js"
+	type="text/javascript"></script>
+</head>
+
+
+<SCRIPT language='JavaScript'>
+var dtCh= "/";
+var minYear=1900;
+var maxYear=2100;
+// Changed by sukhver on 2nd June against Issue No 423
+<%=dbc.createJavaScriptString(conn, user)%>
+switch_select1();
+//------------------------date validation---------------
+/**
+ * DHTML date validation script. Courtesy of SmartWebby.com (http://www.smartwebby.com/dhtml/)
+ */
+// Declaring valid date character, minimum year and maximum year
+//alert("hello world on load");
+
+function fillProcessHandler() {
+//var storecd = document.form_1.select_3.options.value;
+var storecd = document.form_1.select_3.value;
+window.open("/MetalReports/reports/FillProcessOutzoneList.jsp?select_3="+storecd,"Process","height=240,width=270");
+}
+
+function fillKarigarHandler() {
+
+//var process = document.form_1.select_4.options.value;
+var process = document.form_1.select_4.value;
+window.open("/MetalReports/reports/FillKarigarListByProcess.jsp?select_4="+process,"Karigar","height=240,width=270");
+}
+
+function isInteger(s){
+	var i;
+    for (i = 0; i < s.length; i++){
+        // Check that current character is number.
+        var c = s.charAt(i);
+        if (((c < "0") || (c > "9"))) return false;
+    }
+    // All characters are numbers.
+    return true;
+}
+
+function stripCharsInBag(s, bag){
+	var i;
+    var returnString = "";
+    // Search through string's characters one by one.
+    // If character is not in bag, append to returnString.
+    for (i = 0; i < s.length; i++){
+        var c = s.charAt(i);
+        if (bag.indexOf(c) == -1) returnString += c;
+    }
+    return returnString;
+}
+
+function daysInFebruary (year){
+	// February has 29 days in any year evenly divisible by four,
+    // EXCEPT for centurial years which are not also divisible by 400.
+    return (((year % 4 == 0) && ( (!(year % 100 == 0)) || (year % 400 == 0))) ? 29 : 28 );
+}
+function DaysArray(n) {
+	for (var i = 1; i <= n; i++) {
+		this[i] = 31;
+		if (i==4 || i==6 || i==9 || i==11) {this[i] = 30;}
+		if (i==2) {this[i] = 29;}
+   }
+   return this;
+}
+
+function isDate(dtStr){
+	var daysInMonth = DaysArray(12);
+	var pos1=dtStr.indexOf(dtCh);
+	var pos2=dtStr.indexOf(dtCh,pos1+1);
+//alert(pos1+" positions " +pos2);
+	//var strMonth=dtStr.substring(0,pos1);
+	//var strDay=dtStr.substring(pos1+1,pos2);
+        var strDay=dtStr.substring(0,pos1);
+	var strMonth=dtStr.substring(pos1+1,pos2);
+	var strYear=dtStr.substring(pos2+1);
+	strYr=strYear;
+	if (strDay.charAt(0)=="0" && strDay.length>1) strDay=strDay.substring(1);
+	if (strMonth.charAt(0)=="0" && strMonth.length>1) strMonth=strMonth.substring(1);
+	for (var i = 1; i <= 3; i++) {
+		if (strYr.charAt(0)=="0" && strYr.length>1) strYr=strYr.substring(1);
+	}
+	month=parseInt(strMonth);
+	day=parseInt(strDay);
+	year=parseInt(strYr);
+	if (pos1==-1 || pos2==-1){
+		alert("The date format should be : dd/mm/yyyy");
+		return false;
+	}
+	if (strMonth.length<1 || month<1 || month>12){
+		alert("Please enter a valid month");
+		return false;
+	}
+	if (strDay.length<1 || day<1 || day>31 || (month==2 && day>daysInFebruary(year)) || day > daysInMonth[month]){
+		alert("Please enter a valid day");
+		return false;
+	}
+	if (strYear.length != 4 || year==0 || year < minYear || year>maxYear){
+		alert("Please enter a valid 4 digit year between "+minYear+" and "+maxYear);
+		return false;
+	}
+	if (dtStr.indexOf(dtCh,pos2+1)!=-1 || isInteger(stripCharsInBag(dtStr, dtCh))==false){
+		alert("Please enter a valid date");
+		return false;
+	}
+return true;
+}
+
+function compareDates (value1, value2) {
+   var date1, date2;
+   var month1, month2;
+   var year1, year2;
+   date1 = value1.substring (0, value1.indexOf ("/"));
+   month1 = value1.substring (value1.indexOf ("/")+1, value1.lastIndexOf ("/"));
+   year1 = value1.substring (value1.lastIndexOf ("/")+1, value1.length);
+    //alert("Month1 "+month1+" Date1 "+date1+" Year1 "+year1)
+   date2 = value2.substring (0, value2.indexOf ("/"));
+   month2 = value2.substring (value2.indexOf ("/")+1, value2.lastIndexOf ("/"));
+   year2 = value2.substring (value2.lastIndexOf ("/")+1, value2.length);
+
+   if (parseFloat(year1) < parseFloat(year2)) return 1;
+   else if (parseFloat(year1) > parseFloat(year2))   return -1;
+   else if (parseFloat(month1) < parseFloat(month2)) return 1;
+   else if (parseFloat(month1) > parseFloat(month2))return -1;
+   else if (parseFloat(date1) < parseFloat(date2)) return 1;
+   else if (parseFloat(date1) > parseFloat(date2)) return -1;
+   else return 0;
+}
+
+function ValidateForm() {
+
+	var dt1=document.form_1.fromdate;
+	if (isDate(dt1.value) == false){
+		dt1.focus();
+		return false;
+	}
+        var dt2=document.form_1.todate;
+	if (isDate(dt2.value)==false){
+		dt2.focus();
+		return false;
+	}
+        if(compareDates(dt1.value, dt2.value) < 0) {
+           alert("Please fill To Date greater than From Date ");
+           return false;
+        }
+    return true;
+ }
+
+//----------------- end date validation-------------------
+
+function checkDivision(){
+if(document.form_1.divisionCheck.checked){
+    document.form_1.divisionCheck.value="true";
+       document.form_1.storeCheck.checked=false;
+       document.form_1.storeCheck.value="false";
+    } else {
+       document.form_1.divisionCheck.value="false";
+    }
+}
+function checkStore(){
+if(document.form_1.storeCheck.checked){
+    document.form_1.storeCheck.value="true";
+       document.form_1.divisionCheck.checked=false;
+       document.form_1.divisionCheck.value="false";
+    } else {
+        document.form_1.storeCheck.value="false";
+    }
+}
+
+function submitReport(){
+    if(document.form_1.cdsCheck[1].checked){
+        if(document.form_1.select_2.value == "" || document.form_1.select_2.value == "--") {
+            alert("select a division for report");
+            return;
+        }
+    }
+    if(document.form_1.cdsCheck[2].checked){
+        if(document.form_1.select_2.value == "" || document.form_1.select_2.value == "--") {
+            alert("select a division for report");
+            return;
+        }
+        if(document.form_1.select_3.value == "" || document.form_1.select_3.value == "--") {
+            alert("select a store for report");
+            return;
+        }
+}
+        if(document.form_1.cdsCheck[3].checked){
+        if(document.form_1.select_2.value == "" || document.form_1.select_2.value == "--") {
+            alert("select a division for report");
+            return;
+        }
+        if(document.form_1.select_3.value == "" || document.form_1.select_3.value == "--") {
+            alert("select a store for report");
+            return;
+        }
+        if(document.form_1.select_4.value == "" || document.form_1.select_4.value == "--") {
+            alert("select a process for report");
+            return;
+        }
+}
+        if(document.form_1.cdsCheck[4].checked){
+        if(document.form_1.select_2.value == "" || document.form_1.select_2.value == "--") {
+            alert("select a division for report");
+            return;
+        }
+        if(document.form_1.select_3.value == "" || document.form_1.select_3.value == "--") {
+            alert("select a store for report");
+            return;
+        }
+
+        if(document.form_1.select_4.value == "" || document.form_1.select_4.value == "--") {
+            alert("select a process for report");
+            return;
+        }
+        if(document.form_1.select_5.value == "" || document.form_1.select_5.value == "--") {
+            alert("select a karigar for report");
+            return;
+        }
+    }
+
+    if(document.form_1.cdsCheck[5].checked){
+        if(document.form_1.select_2.value == "" || document.form_1.select_2.value == "--") {
+            alert("select a division for report");
+            return;
+        }
+        if(document.form_1.select_3.value == "" || document.form_1.select_3.value == "--") {
+            alert("select a store for report");
+            return;
+        }
+
+        if(document.form_1.select_6.value == "" || document.form_1.select_6.value == "--") {
+            alert("select a Outzone for report");
+            return;
+        }
+    }
+
+    if(ValidateForm()){
+        document.form_1.method="post";
+        document.form_1.action="/MetalReports/servlet/reports.servlets.KarigarProductionServlet?session_id=<%=sessionId%>";
+        document.form_1.submit();
+    } else {
+        return;
+    }
+}
+</SCRIPT>
+
+
+
+
+<title>JSP Page</title>
+
+
+
+<style>
+/* General page styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #DAE9FC;
+    margin: 0;
+    padding: 20px;
+    font-size: medium;
+    font-weight: 500;
+}
+
+/* Heading styling */
+h2 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form container styling */
+.form-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    margin: 0 auto;
+	align-items: center;
+}
+
+/* Input group styling for each form section */
+.input-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+/* Input field styling */
+.input-group div {
+    margin-right: 10px;
+}
+
+/* Label styling */
+label {
+    font-size: 16px;
+    color: #050000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+/* Input types styling */
+input[type="text"],
+input[type="date"],
+input[type="radio"] {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width:30%;
+    box-sizing: border-box;
+}
+
+/* Specific styling for different input types */
+input[type="text"] {
+    width: 200%;
+    /* Make company input twice the size */
+}
+
+input[type="date"] {
+    width: 40%;
+    /* Make date inputs smaller */
+}
+
+input[type="radio"] {
+    width: auto;
+}
+
+/* Button styling */
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 6px 12px;
+    font-size: 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    display: inline-block;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Styling for the radio buttons */
+.radio-btn-group {
+    display: inline-block;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #007bff;
+    margin-bottom: 15px;
+}
+
+/* Styling for the radio button labels */
+.radio-btn-group label {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+/* Styling for the radio buttons */
+input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background-color: aqua;
+    accent-color: black;
+}
+
+/* Section styling for select inputs */
+.select-section {
+    width: 25%;
+}
+
+/* Special input width for the company input */
+.company-input {
+    width: 75%;
+}
+
+/* Center alignment for buttons */
+.center-align {
+    text-align: center;
+}
+
+/* Optional additional styling for select inputs to adjust their appearance */
+select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+</style>
+
+
+
+</head>
+<body bgcolor="#DAE9FC">
+	<p align="center">
+		<b><h2>Karigar Wise Jobcard Details</h2></b>
+	</p>
+	<hr>
+
+	<form name="form_1" action="./StoreWiseReportDec2024Serv">
+		<p>
+			Company <select name=select_1 onFocus="assignValue(form_1.select_1)"
+				onBlur="switch_select1()" onChange="switch_select1()">
+				<%
+				for (int i = 0; i < dbc.getSize(); i++) {
+				%>
+				<option value=<%=dbc.getCode()%>>
+					<%=dbc.getName()%></option>
+				<%
+				dbc.goNext();
+				}
+				%>
+			</select>
+			<%-- }--%>
+		<p>
+			Division <select name=select_2 onFocus="assignValue(form_1.select_2)"
+				onBlur="switch_select2()" onChange="switch_select2()">
+				<option>--</option>
+			</select>
+		<p>
+		<p>Store <select
+				name='select_3' onchange='fillProcessHandler()'
+				onblur='fillProcessHandler()'>
+				<option>--</option>
+			</select>
+		<p> Process
+			<select name=select_4 onchange='fillKarigarHandler()'>
+				<option>--</option>
+			</select>
+	
+		<p align="left">
+			<input name="RadioGroup3" type="radio" value='Planned Date' checked>Planned
+			Date <br>From Date :<input name='fromdate' size=12> <a
+				href='javascript:void(0);'
+				onClick=CALbind(document.forms[0].fromdate,event,
+				'dd/mm/yyyy',2020,2022)> <img border=0
+				src='/MetalReports/reports/cal.gif'></a> To Date :<input
+				name='todate' size=12> <a href='javascript:void(0);'
+				onClick=CALbind(document.forms[0].todate,event,
+				'dd/mm/yyyy',2020,2022)> <img border=0
+				src='/MetalReports/reports/cal.gif'></a> <br> <input
+				name="RadioGroup3" type="radio" value='Received Date'>Received
+			Date
+
+
+		</p>
+		
+                <div><button>Report</button></div>
+		
+	</form>
+	
+</body>
+
+
+<script language='JavaScript'>
+//Changed by sukhvir on 1st June against Issue No 423
+switch_select1();
+</SCRIPT>
+
+
+</html>
+

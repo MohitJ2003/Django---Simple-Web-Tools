@@ -23,13 +23,13 @@ import yt_dlp
 # Ctrl+ Shift + O list all the functions in one sublist.
 # press Shift+f12 on any element 
 
-base_path = os.path.dirname(os.path.abspath(__file__)).split("djangoProjects")[0].replace("\\","/")+"djangoProjects/"
+base_path = os.path.dirname(os.path.abspath(__file__)).split("app1")[0]
 
 def extractepname(
-        filename=base_path + "project1/app1/mytextfiles/yakepsname1to814.txt"):
+        filename=base_path + "/app1/mytextfiles/yakepsname1to814.txt"):
     epdetailfile = open(filename, "r")
     epnamefile = open(
-        base_path + "project1/app1/mytextfiles/yakeplist.txt", "w")
+        base_path + "/app1/mytextfiles/yakeplist.txt", "w")
     for fileline in epdetailfile:
         if fileline[:2] == "Ep":
             epnamefile.write(fileline)
@@ -232,11 +232,11 @@ def get_allepnum_of3digit(pdf_path):
 
 
 def youtubehindi_link2text(link):
-    outputdirect = base_path + "project1/app1/videosdirect/"
-    outputdirect_aud = base_path + "project1/app1/audiofiles/"
-    listofeppdfdirec = base_path + "project1/app1/static/mypdffiles/"
-    audioinpartsdirect = base_path + "project1/app1/audioinparts/"
-    outputdirect_aud_mp3 = base_path + "project1/app1/static/audiofiles/"
+    outputdirect = base_path + "/app1/videosdirect/"
+    outputdirect_aud = base_path + "/app1/audiofiles/"
+    listofeppdfdirec = base_path + "/app1/static/mypdffiles/"
+    audioinpartsdirect = base_path + "/app1/audioinparts/"
+    outputdirect_aud_mp3 = base_path + "/app1/static/audiofiles/"
     listofeppdf = os.listdir(listofeppdfdirec)
 
     listofep = os.listdir(outputdirect_aud)
@@ -309,7 +309,7 @@ def extract_audio_mp3(input_video, output_audio):
 def getting_nd_beautifying_ep_namelist_2(ep_num_list):
     ep_name_list = []
     epnamefile = open(
-        base_path + "project1/app1/mytextfiles/yakeplist.txt", "r")
+        base_path + "/app1/mytextfiles/yakeplist.txt", "r")
     """
     for fileline in epnamefile:
         for a in ep_num_list:
@@ -395,14 +395,14 @@ def pdfmaker_3(filename, paragraph_towritten):
 
     # Save updated PDF
     document.save(
-        base_path + 'project1/app1/static/mypdffiles/' + filename)
+        base_path + '/app1/static/mypdffiles/' + filename)
     print('------------------------------------Pdf Created Successfully------------------------------------')
 
 
 def dowload_video_andextractaudio(link):
-    outputdirect = base_path + "project1/app1/videosdirect/"
-    outputdirect_aud = base_path + "project1/app1/audiofiles/"
-    outputdirect_aud_mp3 = base_path + "project1/app1/static/audiofiles/"
+    outputdirect = base_path + "/app1/videosdirect/"
+    outputdirect_aud = base_path + "/app1/audiofiles/"
+    outputdirect_aud_mp3 = base_path + "/app1/static/audiofiles/"
 
     filename = createfilename(link)
     setlink_and_epname_in_txtfile(link, filename)
@@ -435,7 +435,7 @@ def dowload_video_andextractaudio(link):
 
 
 def sort_vd_and_link_names():
-    a = base_path + "project1/app1/mytextfiles/linklisttext.txt"
+    a = base_path + "/app1/mytextfiles/linklisttext.txt"
 
     fileob = open(a, 'r', encoding="utf-8")
     l1 = []
@@ -456,7 +456,7 @@ def sort_vd_and_link_names():
 def setlink_and_epname_in_txtfile(link, file_name):
     # sort_vd_and_link_names()
 
-    path = base_path + "project1/app1/mytextfiles/linklisttext.txt"
+    path = base_path + "/app1/mytextfiles/linklisttext.txt"
 
     linkfile = open(path, 'r', encoding="utf-8")
     line = f"Video Youtube Name - {str(file_name)}     Link - {link}"
@@ -484,11 +484,11 @@ def youtubehindi_link2text_listwise(listoflinks):
     msg = ""
     print(listoflinks)
     for link in listoflinks:
-        outputdirect = base_path + "project1/app1/videosdirect/"
-        outputdirect_aud = base_path + "project1/app1/audiofiles/"
-        listofeppdfdirec = base_path + "project1/app1/static/mypdffiles/"
-        audioinpartsdirect = base_path + "project1/app1/audioinparts/"
-        outputdirect_aud_mp3 = base_path + "project1/app1/static/audiofiles/"
+        outputdirect = base_path + "/app1/videosdirect/"
+        outputdirect_aud = base_path + "/app1/audiofiles/"
+        listofeppdfdirec = base_path + "/app1/static/mypdffiles/"
+        audioinpartsdirect = base_path + "/app1/audioinparts/"
+        outputdirect_aud_mp3 = base_path + "/app1/static/audiofiles/"
         listofeppdf = os.listdir(listofeppdfdirec)
         listofep = os.listdir(outputdirect_aud)
 
@@ -549,7 +549,7 @@ def get_list_ofavalbland_notavalbl():
         listnum = [int(num) for num in pdfname.split("_") if num != ""]
         return listnum
 
-    pdf_path = base_path + "project1/app1/static/mypdffiles/"
+    pdf_path = base_path + "/app1/static/mypdffiles/"
     pdf_list = os.listdir(pdf_path)
 
     toteplist = getting_nd_beautifying_ep_namelist()
@@ -668,7 +668,7 @@ def readhtmlpart2(filepath):
 def get_list_ofavalbland_notavalbl_2and_writing_and_savinghtml():
     listofaeps = get_list_ofavalbland_notavalbl()
     # print(listofaeps)
-    path_to_audiohtml = base_path + "project1/app1/templates/gettextfromaudio.html"
+    path_to_audiohtml = base_path + "/app1/templates/gettextfromaudio.html"
 
     part_1 = readhtmlpart1(path_to_audiohtml)
     part_2 = readhtmlpart2(path_to_audiohtml)
@@ -687,7 +687,7 @@ def get_list_ofavalbland_notavalbl_2and_writing_and_savinghtml():
 
     # Save or print the generated HTML code
     with open(
-            base_path + 'project1/app1/templates/gettextfromaudio.html',
+            base_path + '/app1/templates/gettextfromaudio.html',
             'w', encoding='utf-8') as file:
         file.write(html_code)
 
@@ -698,7 +698,7 @@ def get_list_ofavalbland_notavalbl_2and_writing_and_savinghtml():
 
 def getting_nd_beautifying_ep_namelist():
     ep_names_list = open(
-        base_path + "project1/app1/mytextfiles/yakeplist.txt",
+        base_path + "/app1/mytextfiles/yakeplist.txt",
         "r")
     
     my_list = [ep_name for ep_name in ep_names_list]
@@ -713,7 +713,7 @@ def getting_nd_beautifying_ep_namelist():
 
 
 def read_html():
-    file = open(base_path + "project1/app1/templates/"
+    file = open(base_path + "/app1/templates/"
                 "gettextfromaudio.html", 'r', encoding='utf-8')
     for a in file:
         print(a.replace("\n", ""))
@@ -723,7 +723,7 @@ def read_html():
 
 def mk():
     # Assuming the file is UTF-8 encoded
-    file_path = (base_path + "project1/app1/mytextfiles"
+    file_path = (base_path + "/app1/mytextfiles"
                  "/yakshincharacters.txt")
     my_list = []
 
@@ -748,7 +748,7 @@ def getting_hineng_nameofchrs():
     list_2 = []
     list_3 = []
     file = open(
-        base_path + "project1/app1/mytextfiles/yakshincharacters.txt",
+        base_path + "/app1/mytextfiles/yakshincharacters.txt",
         "r", encoding='utf-8')
     c = 1
     numofchrs_2 = range(1, nofchrs + 1)
@@ -793,7 +793,7 @@ def getting_hineng_nameofchrs():
         print(p2)
 
     file = open(
-        base_path + "project1/app1/mytextfiles"
+        base_path + "/app1/mytextfiles"
         "/yakshincharacters.txt",
         "r", encoding='utf-8')
     c = 0
@@ -807,7 +807,7 @@ def getting_hineng_nameofchrs():
 
 def load_immagelinkhtml():
     image_nameslist = os.listdir(
-        base_path + "project1/app1/static/images")
+        base_path + "/app1/static/images")
     part1 = '<img class ="image" src="{% static \'/images/'
     part2 = '\' %}" alt="My Image" >'
     images_linklist = [part1 + a + part2 for a in image_nameslist]  # list comprehension
@@ -815,11 +815,11 @@ def load_immagelinkhtml():
 
 
 def imageLoaderHtml():
-    path = base_path + "project1/app1/templates/lionimageloader.html"
+    path = base_path + "/app1/templates/lionimageloader.html"
     part_12 = readhtmlpart1(path)
     part_23 = readhtmlpart2(path)
     list2pathofimgs = os.listdir(
-        base_path + "project1/app1/static/images")
+        base_path + "/app1/static/images")
 
     imagefile = open(path, 'w', encoding='utf-8')
     htmlcode = ""

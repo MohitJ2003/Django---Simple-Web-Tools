@@ -18,8 +18,8 @@ from datetime import datetime
 
 # https://github.com/UB-Mannheim/tesseract/wiki
 
-base_path = os.path.dirname(os.path.abspath(__file__)).split("project1")[0].replace("\\","/")
-
+base_path = os.path.dirname(os.path.abspath(__file__)).split("app1")[0]
+print(base_path)
 year = datetime.today().year
 year_list = [year - 2, year - 1, year, year + 1, year + 2]
 
@@ -48,7 +48,7 @@ def get_value_from_web(commodity, filename):
     if filename == "":
         print("coming till here file empty")
         return "File name cannot be empty"
-    path = base_path + 'project1/app1/Excelfiles/'
+    path = base_path + '/app1/Excelfiles/'
     filename = path + filename
     
     """
@@ -139,7 +139,7 @@ def verify_unique_id(file_path):
 
 
 def crtnewbillfile(filename):
-    path = base_path + 'project1/app1/Excelfiles/'
+    path = base_path + '/app1/Excelfiles/'
     full_file_loca = path + filename + '.xlsx'
     # print(full_file_loca)
     # print(not os.path.isfile(full_file_loca), os.path.isfile(full_file_loca))
@@ -163,9 +163,8 @@ def crtnewbillfile(filename):
     else:
         return f"{filename}.xlsx file already exist"
 
-
 def getlistofexlfiles():
-    folder_path = base_path + 'project1/app1/Excelfiles'
+    folder_path = base_path + '/app1/Excelfiles'
     files = os.listdir(folder_path)
     file_creation_times = [(file, os.path.getctime(os.path.join(folder_path, file))) for file in files]
     sorted_files = sorted(file_creation_times, key=lambda x: x[1])
@@ -177,7 +176,7 @@ def getlistofexlfiles():
 
 
 def load_filedata_to_templeate(file):
-    path = base_path + 'project1/app1/Excelfiles/' + file
+    path = base_path + '/app1/Excelfiles/' + file
     workbook = load_workbook(path)
     worksheet = workbook.active
     filedata = []
@@ -195,7 +194,7 @@ def edit_record(file, record_id, new_values):
 
     try :
 
-        file_path = base_path + 'project1/app1/Excelfiles/' + file
+        file_path = base_path + '/app1/Excelfiles/' + file
         workbook = openpyxl.load_workbook(file_path)
 
         sheet = workbook.active
@@ -212,7 +211,7 @@ def edit_record(file, record_id, new_values):
 
 def delete_record(file, record_id):
     try:
-        file_path = base_path + 'project1/app1/Excelfiles/' + file
+        file_path = base_path + '/app1/Excelfiles/' + file
         wb = openpyxl.load_workbook(file_path)
         sheet = wb.active
         for row in sheet.iter_rows(min_row=2, max_row=sheet.max_row):
@@ -228,7 +227,7 @@ def delete_record(file, record_id):
 
 """
 def extrcrdsfrmimg():
-    img = Image.open('D:\Projects\PycharmProjects\pythonProject1\
+    img = Image.open('D:\Projects\PycharmProjects\python\
                      MLprojects\getPaytmPaymentRecords\paymentImages\IMG-20241005-WA0041.jpg')
     data = pytesseract.image_to_string(img)
 
