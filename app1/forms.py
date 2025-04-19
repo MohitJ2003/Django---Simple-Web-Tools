@@ -11,3 +11,13 @@ class MyForm(forms.Form):
 class CreateNewBillFile(forms.Form):
     billprice = forms.NumberInput()
     custbillfilenm = forms.CharField(label='Email')
+
+
+class PaymentHistoryFilterForm(forms.Form):
+    transaction_id = forms.CharField(required=False, label="Transaction ID")
+    account_name = forms.CharField(required=False, label="Account Name")
+    payment_mode = forms.CharField(required=False, label="Payment Mode")
+    from_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+    to_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+
+    

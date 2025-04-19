@@ -19,7 +19,7 @@ from datetime import datetime
 # https://github.com/UB-Mannheim/tesseract/wiki
 
 base_path = os.path.dirname(os.path.abspath(__file__)).split("app1")[0]
-print(base_path)
+# print(base_path)
 year = datetime.today().year
 year_list = [year - 2, year - 1, year, year + 1, year + 2]
 
@@ -46,7 +46,7 @@ def get_value_from_web(commodity, filename):
     month = datetime.today().month
 
     if filename == "":
-        print("coming till here file empty")
+        # print("coming till here file empty")
         return "File name cannot be empty"
     path = base_path + '/app1/Excelfiles/'
     filename = path + filename
@@ -207,7 +207,7 @@ def edit_record(file, record_id, new_values):
         return "Record Edited and Saved successfully"
 
     except Exception as e:
-        return "Something is Wrong with Data Formats"
+        return f"Something is Wrong with Data {str(e)}"
 
 def delete_record(file, record_id):
     try:
@@ -222,7 +222,7 @@ def delete_record(file, record_id):
 
         return "Record Deleted Successfully"
     except Exception as e:
-        return "Something is Wrong with Data Formats"
+        return f"Something is Wrong with Data Formats {str(e)}"
 
 
 """

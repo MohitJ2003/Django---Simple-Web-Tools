@@ -1,134 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "homefortools.html" %}
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Video Tools</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
-    <script src="main.js"></script>
-    <style>
-        body {
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-        }
+{% load static %}
 
-        .tool-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            max-width: 1000px;
-        }
+{% block title %}
+Audio Video Tools
+{% endblock %}
 
-        .tooldivbox {
-            background-color: #ccc;
-            border: 3px solid black;
-            border-radius: 10px;
-            padding: 20px;
-            width: 300px;
-            box-sizing: border-box;
-        }
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/audioVideoTools.css' %}">
+{% endblock %}
 
-        h3 {
-            text-align: center;
-            font-size: 18px;
-        }
 
-        input[type="text"],
-        input[type="file"] {
-            width: 100%;
-            margin: 10px 0;
-            padding: 8px;
-            border: 3px solid black;
-            border-radius: 8px;
-            box-sizing: border-box;
-        }
+{% block extra_js %}
+<script src="{% static 'js/audioVideoTools.js' %}"></script>
+{% endblock %}
 
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #555;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-        }
+{% block content %}
 
-        button:hover {
-            background-color: #333;
-        }
-
-        .tooldivbox p {
-            text-align: center;
-            margin: 10px 0;
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="tool-container">
-        <div class="tooldivbox">
-            <h3>Download YouTube Video</h3>
-            <input type="text" id="videoUrl" placeholder="Enter Video URL">
-            <button onclick="downloadVideo()">Download Video</button>
-        </div>
-
-        <div class="tooldivbox">
-            <h3>Extract Audio as .wav</h3>
-            <input type="text" placeholder="Enter Video URL">
-            <p>OR</p>
-            <input type="file">
-            <button onclick="saveAsFile('wav')">Save as .wav</button>
-        </div>
-
-        <div class="tooldivbox">
-            <h3>Extract Audio as .mp3</h3>
-            <input type="text" placeholder="Enter Video URL">
-            <p>OR</p>
-            <input type="file">
-            <button onclick="saveAsFile('mp3')">Save as .mp3</button>
-        </div>
-
-        <div class="tooldivbox">
-            <h3>Get hindi text from audio</h3>
-            <input type="text" placeholder="Enter Video URL">
-            <p>OR</p><br>
-            <p>Select audio/video</video></p>
-            <input type="file">
-            <button onclick="saveAsFile('mp3')">Get text</button>
-        </div>
-        <div>
-            <p>Translated text will come here</p>
-        </div>
+<div class="tool-container">
+    <div class="tooldivbox">
+        <h3>Download YouTube Video</h3>
+        <input type="text" id="videoUrl" placeholder="Enter Video URL">
+        <button onclick="downloadVideo()">Download Video</button>
     </div>
 
-    <script>
-        function downloadVideo() {
-            const url = document.getElementById("videoUrl").value;
-            if (url) {
-                alert("Starting download for video: " + url);
-                // Add download logic here
-            } else {
-                alert("Please enter a video URL.");
-            }
-        }
+    <div class="tooldivbox">
+        <h3>Extract Audio as .wav</h3>
+        <input type="text" placeholder="Enter Video URL">
+        <p>OR</p>
+        <input type="file">
+        <button onclick="saveAsFile('wav')">Save as .wav</button>
+    </div>
 
-        function saveAsFile(format) {
-            const filePath = window.prompt(`Choose a location to save the .${format} file`, `audio.${format}`);
-            if (filePath) {
-                alert(`Audio will be saved as: ${filePath}`);
-                // Add file saving logic here
-            } else {
-                alert("File save location was not chosen.");
-            }
-        }
-    </script>
+    <div class="tooldivbox">
+        <h3>Extract Audio as .mp3</h3>
+        <input type="text" placeholder="Enter Video URL">
+        <p>OR</p>
+        <input type="file">
+        <button onclick="saveAsFile('mp3')">Save as .mp3</button>
+    </div>
 
-</body>
+    <div class="tooldivbox">
+        <h3>Get hindi text from audio</h3>
+        <input type="text" placeholder="Enter Video URL">
+        <p>OR</p><br>
+        <p>Select audio/video</video></p>
+        <input type="file">
+        <button onclick="saveAsFile('mp3')">Get text</button>
+    </div>
+    <div>
+        <p>Translated text will come here</p>
+    </div>
+</div>
 
-</html>
+{% endblock %}

@@ -13,44 +13,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
-    <script>
-        function formatDate(input) {
-            var date = new Date(input.value);
-            if (!isNaN(date.getTime())) {
-                var day = date.getDate();
-                var month = date.getMonth() + 1;
-                var year = date.getFullYear();
-
-                if (day < 10) {
-                    day = '0' + day;
-                }
-                if (month < 10) {
-                    month = '0' + month;
-                }
-
-                input.value = day + '-' + month + '-' + year;
-            }
-        }
-
-
-
-    </script>
-
-
+    <!--<script src="{% static 'js/OldmothlyBillForm.js' %}"></script>-->
+    <link rel="stylesheet" href="{% static 'css/OldmonthlyBillForm.css' %}">
 
     <style>
-        .center-table,
-        .center-table_2 {
-            margin: 0 auto;
-            /* Set left and right margins to "auto" */
-            border: solid 5px rgb(255, 255, 255);
-            border-collapse: collapse;
-        }
-
-        .center_me {
-            text-align: center;
-        }
-
         #myTable,
         #myTable_2 {
             border: 3px solid black;
@@ -67,247 +33,11 @@
             text-shadow: 0 0 10px #000000, 0 0 20px #000000, 0 0 30px #e0f900;
         }
 
-        select,
-        input,
-        #createfilebtn,
-        #addrecord {
-            background-repeat: no-repeat;
-            width: 60%;
-            font-size: 16px;
-            padding: 12px 20px 12px 40px;
-            margin: 12px 20px 12px 40px;
-            border: 1px solid #ddd;
-        }
-
-        /*
-        a {
-            background-color: black;
-            color: aliceblue;
-            padding: 4px 4px 4px 4px;
-            text-decoration: none;
-        }
-
-        a:hover {
-            background-color: rgb(116, 19, 19);
-            color: rgb(255, 255, 255);
-        }
-        */
-
-        input[type='submit'],
-        #createfilebtn,
-        #addrecord {
-            width: 80%;
-        }
-
-        .home {
-            padding: 4px 4px 4px 4px;
-        }
-
-        /*
-        .home:hover {
-            
-        }
-        */
-        .center_divblock {
-            background-image: "gf";
-            margin: 5px 5px 5px 5px;
-        }
-
-        #createfilebtn {
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        .error-message {
-            color: red;
-            font: weight 500px;
-            display: none;
-            margin: 12px 20px 12px 40px;
-            font-size: large;
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            text-shadow: white;
-        }
-
-        #message,
-        #message_2 {
-            color: rgb(255, 255, 255);
-            font: weight 500px;
-            margin: 12px 20px 12px 40px;
-            font-size: large;
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            text-shadow: none;
-            width: 80%;
-        }
-
-        #createfilebtn:disabled:hover+.error-message {
-            display: block;
-        }
-
-        .datepickerBtn {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            padding: 0;
-            background: none;
-        }
-
-
-        .datepickerBtn img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        #excelDataTable input[type='text'] {
-            width: 100%;
-            margin: 0px 0px 0px 0px;
-        }
-
-        .center-table_2,
-        #excelDataTable td,
-        th {
-            border: 3px solid rgb(255, 255, 255);
-            padding: 5px 5px 5px 5px;
-            background-color: rgb(244, 244, 244);
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-
-            font-size: 15px;
-            font-weight: bold;
-
-            font: hsl(0, 0%, 0%);
-
-        }
-
-        .center-table_2,
-        #excelDataTable th {
-            background-color: rgb(0, 124, 25);
-            font-family: sans-serif;
-            font-size: medium;
-            font-weight: bold;
-            color: #ffffff;
-            width: 100px;
-        }
-
-        #excelDataTable img,
-        #popupMessage img {
-            width: 30px;
-            height: 30px;
-        }
-
-        .trtbl2:hover {
-            border: 5px solid rgb(255, 255, 255);
-            padding: 5px 5px 5px 5px;
-            background-color: rgb(238, 238, 238);
-            color: rgb(0, 124, 25);
-
-        }
-
-        .logo-image {
-            height: 40px;
-            width: 70px;
-            margin: 10px 10px 10px 10px;
-        }
-
-        .popup-container {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 9999;
-        }
-
-        .popup-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            text-align: center;
-        }
-
-        #popupMessage {
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: bold;
-            color: red;
-            text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #e0f900;
-        }
-
-        #popupMessage2 {
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: bold;
-            text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #e0f900;
-        }
-
-        .popupbtn {
-            font-weight: bold;
-            font-size: medium;
-            margin-left: 10px;
-            margin-right: 10px;
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-        }
-
         .saveButton {
             background-image: url("{% static '\images\savelogobtn.png' %}");
             background-size: cover;
             border: none;
             cursor: pointer;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .hidden-column {
-            display: none;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .edit-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .edit-container input {
-            margin-right: 5px;
         }
     </style>
 
@@ -315,162 +45,126 @@
 
 
 <body>
-    <a class="home" href="http://127.0.0.1:8001/project1/">
-        <img class="logo-image" src="{% static '/images/homegif.gif' %}">
+    <a class="home" href="http://127.0.0.1:8001/project1/">Home
     </a>
     <h1 class="center_me" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
      text-shadow: 5px 5px 5px rgb(255, 190, 24);">Monthly Bill Tool</h1>
+    <div style="display: flex;">
+        <div class="center_divblock">
 
-    <div class="center_divblock">
-        <!--
-            <table id="myTable_2" class="center-table" style="background-color: rgb(255, 255, 255);">
-                <tr>
-                    <td>Bill For :<input type="text" name="totalprice" width="59%"></td>
-                </tr>
-                <tr>
-                    <td><input type="text"></td>
-                </tr>
-                <tr>
-                    <td colspan="3" style="text-align: center;">OR</td>
-                </tr>
-                <tr>
-                    <td colspan="3" >
-                        <select placeholder="Filename...." name="category">
-                            <option>November2023.xlsv</option>
-                            <option>Decemeber2023.xlsv</option>
-                            <option>Janurary2023.xlsv</option>
-                        </select>
-                    </td>
-                <tr>
-            </table>-->
-        <div id="myTable_2" class="center-table">
-            {% csrf_token %}
+            <div id="myTable_2" class="center-table">
+                {% csrf_token %}
 
-            <div><input type="text" placeholder="Enter Bill Price" id="billprice2"></div>
+                <div><input type="text" placeholder="Enter Bill Price" id="billprice2"></div>
 
-            <div>
-                <select name="billmonth" id="month">
-                    <option>{{ current_month }}</option>
-                    {% for month_1 in months %}
-                    <option>{{ month_1 }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+                <div>
+                    <select name="billmonth" id="month">
+                        <option>{{ current_month }}</option>
+                        {% for month_1 in months %}
+                        <option>{{ month_1 }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
 
-            <div>
-                <select name="year" id="year">
-                    <option>{{ current_year }}</option>
-                    {% for year in yearslist %}
-                    <option>{{ year }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+                <div>
+                    <select name="year" id="year">
+                        <option>{{ current_year }}</option>
+                        {% for year in yearslist %}
+                        <option>{{ year }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
 
-            <p class="center_me">OR</p>
+                <p class="center_me">OR</p>
 
-            <div><input type="text" placeholder="Give your Own bill name" id="customname" name="customname"></div>
+                <div><input type="text" placeholder="Give your Own bill name" id="customname" name="customname"></div>
 
-            <button id="createfilebtn" value="Create fileCreate file" disabled style="background-color: rgb(84, 60, 0) ;
+                <button id="createfilebtn" value="Create fileCreate file" disabled style="background-color: rgb(84, 60, 0) ;
                  color : rgb(255, 255, 255); font-size: 16px; font-family:'Lucida Sans',
                 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva,
                 Verdana, sans-serif">Create file</button>
 
-            <p class="error-message" id="errorMessage">One of the fields need to be filled either Bill Price Or
-                Custom Bill Name</p>
+                <p class="error-message" id="errorMessage">One of the fields need to be filled either Bill Price Or
+                    Custom Bill Name</p>
 
-            <div id="message"></div>
+                <div id="message"></div>
 
+            </div>
         </div>
-    </div>
 
-    <div class="center_divblock">
-        <table id="myTable" class="center-table" style="background-color: rgb(255, 255, 255);">
-            <tr>
-                <td>
-                    <label style="padding: 12px 10px 12px 40px; color: rgb(255, 255, 255);">Serach For Files here
-                        :</label>
-                    <input type="text" id="searchInput"><br>
-                    <label style="padding: 12px 10px 12px 40px; color: rgb(255, 255, 255);">Search file that match Your
-                        Search.</label>
-                    <select name="" id="file"></select>
-                </td>
-            </tr>
-            <!--
-            <tr>
-                <td>
-                    <label style="padding: 12px 10px 12px 40px; color: rgb(255, 255, 255);">Choose file
-                        :</label>
-                    <select id="file">
-                        <option></option>
-                        {% for filename in getlistofexlfiles %}
-                        <option>{{ filename }}</option>
-                        {% endfor %}
-                    </select>
-                </td>
-            </tr>-->
-            <tr>
-                <td><input type="text" placeholder="Enter Commodity name" name="commnm" id="commnm"></td>
-            </tr>
-            <tr>
-                <td><input type="text" placeholder="Enter Price." name="price" id="comdprice"></td>
-            </tr>
-            <tr>
-                <!--
-                <td>
-                    <label style="padding: 12px 10px 12px 40px; color: rgb(255, 255, 255);">Enter date of
-                        payment:</label>
-                    <input type="date" placeholder="Enter date of payment" name="dateofpymnt" id="dateofpymnt">
-                    <input type="date" id="calendar" name="calendar" onchange="formatDate(this)">
-                </td>-->
-                <td>
-                    <label style="padding: 12px 10px 12px 40px; color: rgb(255, 255, 255); ">Enter date of
-                        payment:</label>
-                    <input type="text" class="datepicker" id="dateofpymnt" placeholder="Enter date of payment" readonly>
-                    <button class="datepickerBtn"><img
-                            src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
-                </td>
-            </tr>
-            <tr>
-                <td><input type="text" placeholder="PLace Of traansaction." name="plcoftranopt" id="plcoftranopt"></td>
-            </tr>
-            <tr>
-                <td>
-                    <label style="padding: 12px 10px 12px 40px; color: rgb(255, 255, 255);">Choose Commodity
-                        Category:</label><br>
-                    <select placeholder="Choose Category" name="category" id="category">
-                        <option></option>
-                        <option>House Holds</option>
-                        <option>Kitchen Holds</option>
-                        <option>Vegetables</option>
-                        <option>Bathroom</option>
-                        <option>Ocassions</option>
-                        <option>Food from outside</option>
-                        <option>Friday Market</option>
-                        <option>Telecom.</option>
-                        <option>Travel</option>
-                        <option>Other's</option>
-                    </select>
-                    <button class="addbtn"><img width="25px" height="25px"
-                            src="https://w7.pngwing.com/pngs/415/49/png-transparent-grass-area-symbol-brand-sign-add-logo-grass-desktop-wallpaper.png"></button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <button id="addrecord" style="background-color: rgb(0, 136, 120) ;
+        <div class="center_divblock">
+            <table id="myTable" class="center-table" style="background-color: rgb(255, 255, 255);">
+                <tr>
+                    <td>
+                        <label style="padding: 12px 10px 12px 40px; color: rgb(255, 255, 255);">Serach For Files here
+                            :</label>
+                        <input type="text" id="searchInput"><br>
+                        <label style="padding: 12px 10px 12px 40px; color: rgb(255, 255, 255);">Search file that match
+                            Your
+                            Search.</label>
+                        <select name="" id="file"></select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><input type="text" placeholder="Enter Commodity name" name="commnm" id="commnm"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" placeholder="Enter Price." name="price" id="comdprice"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <label style="padding: 12px 10px 12px 40px; color: rgb(255, 255, 255); ">Enter date of
+                            payment:</label>
+                        <input type="text" class="datepicker" id="dateofpymnt" placeholder="Enter date of payment"
+                            readonly>
+                        <button class="datepickerBtn"><img
+                                src="https://cdn5.vectorstock.com/i/1000x1000/51/09/calendar-icon-vector-22895109.jpg"></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="text" placeholder="PLace Of traansaction." name="plcoftranopt" id="plcoftranopt">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label style="padding: 12px 10px 12px 40px; color: rgb(255, 255, 255);">Choose Commodity
+                            Category:</label><br>
+                        <select placeholder="Choose Category" name="category" id="category">
+                            <option></option>
+                            <option>House Holds</option>
+                            <option>Kitchen Holds</option>
+                            <option>Vegetables</option>
+                            <option>Bathroom</option>
+                            <option>Ocassions</option>
+                            <option>Food from outside</option>
+                            <option>Friday Market</option>
+                            <option>Telecom.</option>
+                            <option>Travel</option>
+                            <option>Other's</option>
+                        </select>
+                        <button class="addbtn"><img width="25px" height="25px"
+                                src="https://w7.pngwing.com/pngs/415/49/png-transparent-grass-area-symbol-brand-sign-add-logo-grass-desktop-wallpaper.png"></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button id="addrecord" style="background-color: rgb(0, 136, 120) ;
                             color : rgb(255, 255, 255); font-size: 16px;
                             font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
                             'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
                             font-weight: bold;;
                             ">Save this record & show Records</button>
-                </td>
-            <tr>
-                <td>
-                    <div id="message_2"></div>
-                </td>
-            </tr>
+                    </td>
+                <tr>
+                    <td>
+                        <div id="message_2"></div>
+                    </td>
+                </tr>
 
 
-        </table>
+            </table>
+        </div>
     </div>
 
     <div class="center_divblock">
@@ -494,7 +188,7 @@
         </div>
     </div>
 
-    <div id="successModal" class="modal">
+    <div id="successModal" class="modal" style="max-height: 70vh; overflow-y: auto;">
         <div class="modal-content">
             <span class="close">&times;</span>
             <p id="popupMessage2">Row deleted successfully!</p>
@@ -504,7 +198,29 @@
 
     <p id="choice" style="display: none;">Choice</p>
 
+
     <script>
+
+        function formatDate(input) {
+            var date = new Date(input.value);
+            if (!isNaN(date.getTime())) {
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear();
+
+                if (day < 10) {
+                    day = '0' + day;
+                }
+                if (month < 10) {
+                    month = '0' + month;
+                }
+
+                input.value = day + '-' + month + '-' + year;
+            }
+        }
+
+
+
 
         // Get form and input elementss
         const myForm = document.getElementById('createfileform');
@@ -696,40 +412,37 @@
                         });
 
                         function confirmDelete(button) {
-
                             var row = button.parentElement.parentElement;
-                            confirmationModal.setAttribute('data-row', row.id);
-                            var choice = document.getElementById("choice").innerText;
-                            var hiddenData = button.parentElement.parentElement.querySelector(".hidden-column").innerText;
-                            var hidden_btn = button.parentElement.parentElement.querySelector(".delete-btn");
+                            var hiddenData = row.querySelector(".hidden-column").innerText;
+                            var filename = document.getElementById("file").value;
 
-
-
-                            if (confirm("Do you really want to Delete")) {
-                                alert("You pressed OK! Continuing execution...");
-                            } else {
-                                alert("You pressed Cancel! Stopping execution.");
+                            // Confirmation before proceeding
+                            if (!confirm("Do you really want to delete this record?")) {
+                                alert("Deletion canceled.");
+                                return;
                             }
-                            alert("Record Deleted Succesfully !! ");
 
+                            alert("Record Deleted Successfully!");
+
+                            // Perform AJAX request to delete the record
                             $.ajax({
                                 type: 'GET',
                                 url: 'delete_record',
                                 data: {
                                     "hiddenData": hiddenData,
-                                    "filename": file.value,
+                                    "filename": filename,
                                     'csrfmiddlewaretoken': '{{ csrf_token }}'
                                 },
                                 success: function (response) {
                                     alert(response.result3);
+                                    row.remove(); // Optionally remove the row from the table if successful
                                 },
                                 error: function (xhr, status, error) {
-                                    alert('Error sending data!');
+                                    alert('Error deleting record: ' + error);
                                 }
                             });
-
-
                         }
+
 
                         $('.save-btn').click(function () {
                             save_edited_record(this);
@@ -840,7 +553,7 @@
             cells[1].innerText = '';
             cells[1].appendChild(input_2);
             input_2.style.width = cells[1].offsetWidth - cut7 + "px";
-
+        
             // price input
             var input = document.createElement("input");
             input.type = "text";
@@ -848,7 +561,7 @@
             arr[2] = input.value;
             cells[2].innerText = '';
             cells[2].appendChild(input);
-
+        
             // date input 
             const dateCell = row.querySelector('.date-cell');
             const originalDate = dateCell.innerText;
@@ -866,7 +579,7 @@
             dateCell.innerHTML = '';
             dateCell.appendChild(input2);
             dateCell.appendChild(setDateButton);
-
+        
             // Place input
             var place_input = document.createElement("input");
             place_input.type = "text";
@@ -875,7 +588,7 @@
             cells[4].innerText = '';
             cells[4].appendChild(place_input);
             
-
+        
             // Category input
             var select = document.createElement("select");
             var option = document.createElement("option");
@@ -916,11 +629,11 @@
             }
             /*
             cells[5].innerText = cells[1].getElementsByTagName("select")[0].value;
-
+        
             const dateCell = row.querySelector('.date-cell');
             const input = dateCell.querySelector('input[type="text"]');
             const newDate = input.value;
-
+        
             // Set the new date in dd-mm-yyyy format
             dateCell.innerHTML = newDate;
             */
@@ -986,7 +699,9 @@
         }
 
 
+
     </script>
+
 
 </body>
 

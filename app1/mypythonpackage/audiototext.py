@@ -2,16 +2,11 @@ import os
 import wave
 import traceback
 import speech_recognition as sr
-import assemblyai as aai
+# import assemblyai as aai
 from moviepy.video.io.VideoFileClip import VideoFileClip
-from pydub import AudioSegment
-from pydub.playback import play
 from pytube import YouTube
-
+import moviepy
 import aspose.pdf as ap
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
-import moviepy.editor
 import tkinter as tk
 from tkinter import ttk
 import time
@@ -251,6 +246,7 @@ def youtubehindi_link2text(link):
     newpdffilename = filename + ".pdf"
     newmp3filename = filename + ".mp3"
     videopath = outputdirect + newvideoname
+    print("link - ",link)
     download_video_yt_dlp(link,outputdirect, newvideoname)
 
     print("Checking the episode titles printing to pdf")

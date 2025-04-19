@@ -13,7 +13,7 @@ from .mypythonpackage import myexcelclass as myexlcls
 from .forms import MyForm, CreateNewBillFile
 import pycountry
 base_path = os.path.dirname(os.path.abspath(__file__))
-print("Base Path - " + base_path)
+# print("Base Path - " + base_path)
 
 
 def home(request):
@@ -28,6 +28,8 @@ def login(request):
 
     return HttpResponse(template.render())
 
+def home_redirect(request):
+    return redirect('/project1')
 
 """def monthlybillform(request):
     template = loader.get_template('monthlyexpenisive.html')
@@ -211,11 +213,11 @@ def get_commodity_details(request):
 
 
 def my_view(request):
-    print(request)
+    # print(request)
     if request.method == 'POST':
         form = MyForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data['name'], form.cleaned_data['email'])
+            # print(form.cleaned_data['name'], form.cleaned_data['email'])
             # form.save()  # Save the form data to the database
             success_message = f'Data {form.cleaned_data["name"]}  {form.cleaned_data["email"]} saved successfully!'
             return render(request, 'my_template.html', {'form': form, 'success_message': success_message})
@@ -255,7 +257,7 @@ def delete_record(request):
     if request.method == 'GET':
         file = request.GET['filename']
         unique_id = request.GET['hiddenData']
-        print(file + " and " + unique_id)
+        # print(file + " and " + unique_id)
         result = myexlcls.delete_record(file, unique_id)
         return JsonResponse({'status': 'success', 'result3': result})
 
@@ -269,7 +271,7 @@ def save_edited_record(request):
     edited_values = request.GET['editedvalues']
     
     edited_values = edited_values.split(',')
-    print(file + " and " + unique_id + ' and  ', edited_values[:5])
+    # print(file + " and " + unique_id + ' and  ', edited_values[:5])
 
     result = myexlcls.edit_record(file, unique_id, edited_values[:5])
 
@@ -283,7 +285,7 @@ def save_edited_record(request):
 
 
 def monthlybillform2(request):
-    return render(request, 'monthlyExpensive.html', {'getlistofexlfiles': myexlcls.getlistofexlfiles(),
+    return render(request, 'monthlyExpensive2.html', {'getlistofexlfiles': myexlcls.getlistofexlfiles(),
                                                       'months': myexlcls.listofmonths,
                                                       'yearslist': myexlcls.year_list,
                                                       'current_month': myexlcls.month_,

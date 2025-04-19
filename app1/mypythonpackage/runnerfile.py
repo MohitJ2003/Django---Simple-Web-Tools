@@ -1,24 +1,21 @@
-import os
-import time
+import requests
 
-from tqdm import tqdm
-
-import audiototext as att
-# import audiototext_2 as att2
-import tkinter as tk
-from tkinter import ttk
-import time
-
-listofeplinks = [
-    "https://youtu.be/LB__uUuSno8?si=UqqZgjtOfGY1_A a-",
-    "https://youtu.be/xF60iVrpIgY?si=vubN4ywzIfZ0cA0K"
-]
-
-"""att.youtubehindi_link2text_listwise(
-    listofeplinks
-)"""
-
-# att.youtubehindi_link2text("https://youtu.be/xF60iVrpIgY?si=vubN4ywzIfZ0cA0K")
-# Video Youtube Name - yakshinipktfm_924_925_926     Link - Link - https://www.youtube.com/watch?v=ymAzwb107kk
+def download_video(url, save_path):
+    """
+    Downloads a video from the given URL and saves it to the specified path.
+    
+    :param url: str - The URL of the video to download.
+    :param save_path: str - The path (including filename) where the video will be saved.
+    """
+    response = requests.get(url, stream=True)
+    
+    if response.status_code == 200:
+        with open(save_path, 'wb') as file:
+            for chunk in response.iter_content(chunk_size=1024):
+                file.write(chunk)
+        print(f"Download complete: {save_path}")
+    else:
+        print(f"Failed to download video. Status code: {response.status_code}")
 
 
+download_video("https://youtu.be/kDC4MxBlrIw?si=lXhaB78hPx-Hfa_o", "video.mp4")

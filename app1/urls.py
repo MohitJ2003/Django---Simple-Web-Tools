@@ -1,8 +1,10 @@
 from django.urls import path
 from . import views
-
+from .views import home_redirect
+from  .mypythonpackage import viewPaymentRecords, viewPaymentReocrdsUsingModel
 urlpatterns = [
-
+    
+    path('', home_redirect),  # Redirect base URL to login
     path('project1/login/', views.login, name="login"),
     path('project1/signup/', views.signup, name='signup'),
 
@@ -42,5 +44,7 @@ urlpatterns = [
     path('fetch-countries/', views.fetch_countries, name='fetch_countries'),
     path('project1/joker',views.joker,name='joker'),
 
-    
+    path('project1/viewPaymentReocrds',viewPaymentRecords.passbook_payment_history,name='wordcloud'),
+
+    path('project1/view-payment-records', viewPaymentReocrdsUsingModel.view_payment_records, name='view_payment_records'),
 ]
