@@ -1,0 +1,306 @@
+
+.center-table,
+.center-table_2 {
+    margin: 0 auto;
+    /* Set left and right margins to "auto" */
+    border: solid 5px rgb(255, 255, 255);
+    border-collapse: collapse;
+}
+
+.center_me {
+    text-align: center;
+}
+
+select,
+input,
+#createfilebtn,
+#addrecord {
+    background-repeat: no-repeat;
+    width: 60%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    margin: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+}
+
+/*
+a {
+    background-color: black;
+    color: aliceblue;
+    padding: 4px 4px 4px 4px;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: rgb(116, 19, 19);
+    color: rgb(255, 255, 255);
+}
+*/
+
+input[type='submit'],
+#createfilebtn,
+#addrecord {
+    width: 80%;
+}
+
+.home {
+    padding: 4px 4px 4px 4px;
+}
+
+/*
+.home:hover {
+    
+}
+*/
+.center_divblock {
+    background-image: "gf";
+    margin: 5px 5px 5px 5px;
+}
+
+#createfilebtn {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.error-message {
+    color: red;
+    font: weight 500px;
+    display: none;
+    margin: 12px 20px 12px 40px;
+    font-size: large;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-shadow: white;
+}
+
+#message,
+#message_2 {
+    color: rgb(255, 255, 255);
+    font: weight 500px;
+    margin: 12px 20px 12px 40px;
+    font-size: large;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-shadow: none;
+    width: 80%;
+}
+
+#createfilebtn:disabled:hover+.error-message {
+    display: block;
+}
+
+.datepickerBtn {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    background: none;
+}
+
+
+.datepickerBtn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+#excelDataTable {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+#excelDataTable input[type='text'] {
+    width: 100%;
+    margin: 0px 0px 0px 0px;
+}
+
+.center-table_2,
+#excelDataTable td,
+th {
+    border: 3px solid rgb(255, 255, 255);
+    padding: 5px 5px 5px 5px;
+    background-color: rgb(244, 244, 244);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    font: hsl(0, 0%, 0%);
+}
+
+.center-table_2,
+#excelDataTable th {
+    background-color: rgb(0, 124, 25);
+    font-family: sans-serif;
+    font-size: medium;
+    font-weight: bold;
+    color: #ffffff;
+    width: 100px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.overlay-buttons {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.overlay-buttons button {
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.overlay-buttons button:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+.container {
+    width: 80%;
+    max-width: 1000px;
+    /* text-align: center;
+        */
+}
+.slider-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#excelDataTable img,
+#popupMessage img {
+    width: 30px;
+    height: 30px;
+}
+
+.trtbl2:hover {
+    border: 5px solid rgb(255, 255, 255);
+    padding: 5px 5px 5px 5px;
+    background-color: rgb(238, 238, 238);
+    color: rgb(0, 124, 25);
+
+}
+
+.logo-image {
+    height: 40px;
+    width: 70px;
+    margin: 10px 10px 10px 10px;
+}
+
+.popup-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#popupMessage {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: red;
+    text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #e0f900;
+}
+
+#popupMessage2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #e0f900;
+}
+
+.popupbtn {
+    font-weight: bold;
+    font-size: medium;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.saveButton {
+    background-image: url("{% static '\images\savelogobtn.png' %}");
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.hidden-column {
+    display: none;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.edit-container {
+    display: flex;
+    align-items: center;
+}
+
+.edit-container input {
+    margin-right: 5px;
+}

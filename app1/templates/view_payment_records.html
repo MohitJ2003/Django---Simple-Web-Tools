@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Records</title>
+  <style>
+    /* You can copy nice CSS from earlier */
+  </style>
+</head>
+<body>
+
+<h1>Passbook Payment History</h1>
+
+<form method="get">
+  {{ form.as_p }}
+  <button type="submit">Search</button>
+</form>
+
+{% if records %}
+<table border="1">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Transaction ID</th>
+      <th>Account Name</th>
+      <th>Payment Mode</th>
+      <th>Amount</th>
+      <th>Remarks</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for record in records %}
+    <tr>
+      <td>{{ record.date }}</td>
+      <td>{{ record.transaction_id }}</td>
+      <td>{{ record.account_name }}</td>
+      <td>{{ record.payment_mode }}</td>
+      <td>{{ record.amount }}</td>
+      <td>{{ record.remarks }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No records found.</p>
+{% endif %}
+
+</body>
+</html>

@@ -1,0 +1,377 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+
+    <title>Monthly Expenses</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+
+    <!--For calender-->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'css/monthlyform2.css' %}">
+    <script src="{%static 'js/monthlyform2.js' %}"></script>
+</head>
+
+<body>
+
+    <div style="margin-top: 12px; margin-bottom: 12px; display: flex;">
+        <div>
+            <a href="http://127.0.0.1:8001/project1/" style="background-color: black;
+                margin: 10px 10px 10px 10px;
+                color: white;
+                font-weight: 700;
+                border-radius: 7px; 
+                border: #ccc 1px solid;
+                padding: 5px 10px 5px 10px;               
+                text-decoration: none;">
+                Home</a>
+        </div>
+        <div>
+            <a href="http://127.0.0.1:8000/project1/monthlybillform/" style="background-color: black;
+            margin: 10px 10px 10px 10px;
+            color: white;
+            font-weight: 700;
+            border-radius: 7px; 
+            border: #ccc 1px solid;
+            padding: 5px 10px 5px 10px;               
+            text-decoration: none;">
+
+                Old Monthly Expensive Form</a>
+        </div>
+
+    </div>
+
+    <div class="MainBox">
+        <div class="firstBlock">
+            <div class="createfilebox">
+                <div>
+                    <fieldset class="MainBox ">
+                        <legend>Create File</legend>
+
+                        <div class="TwodivHrztl">
+                            <div>
+                                <p>Month</p>
+                            </div>
+                            <div>
+                                <select name="billmonth" id="month">
+                                    <option></option>
+                                    <option>{{ current_month }}</option>
+                                    {% for month_1 in months %}
+                                    <option>{{ month_1 }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div>
+                                <p>Year</p>
+                            </div>
+                            <div>
+                                <select name="year" id="year">
+                                    <option></option>
+                                    {% for year in yearslist %}
+                                    <option>{{ year }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="margin: 10px 10px 10px 10px;
+                            text-align: center;
+                            font-weight: 600;">
+                            <p>OR</p>
+                        </div>
+                        <div class="TwodivHrztl">
+                            <div class="input"><input style="width: 100%;" placeholder="Enter Customr Name for File"
+                                    type="text"></div>
+                        </div>
+                        <div class="btn"><button id="createfilebtn" style="width: fit-content;
+                                margin: 10px 10px 10px 10px;
+                                width: 100px;
+                                font-weight: 600;" class="btn">
+                                Create File</button></div>
+
+
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="orDiv">
+                <p>And</p>
+            </div>
+
+            <div class="selectfliebox">
+                <fieldset class="MainBox">
+                    <legend>Select File</legend>
+                    <div>
+                        <div class="input" style="margin : 10px;">
+                            <input type="text" id="searchInput" placeholder="Search File">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input">
+                            <select style="width: 205px; height: 30px;" id="file">
+                                <option>File will list here</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="TwodivHrztl">
+                        <div class="input"><input type="text"></div>
+                        <div class="btn"><button class="btn">Select File</button></div>
+                    </div>
+                    -->
+                </fieldset>
+            </div>
+        </div>
+
+
+        <div class="secondblock">
+            <div class="EnterRecordManual">
+                <fieldset class="MainBox">
+                    <legend>Enter the Record Mannualy</legend>
+                    <div class="FivehrzntlDiv">
+                        <div class="input"><input type="text" placeholder="Receipent name"></div>
+                        <div class="input"><input type="text" placeholder="Amount"></div>
+                        <div class="input"><input type="text" placeholder="Date and Time"></div>
+
+                        <div class="input"><input type="text" placeholder="Commodity Name"></div>
+                        <div class="input"><input type="text" placeholder="Category"></div>
+                        <div class="input"><input type="text" placeholder="Place"></div>
+                    </div>
+                    <div style="margin: 10px 10px 10px 10px;"><button>Insert this Record</button></div>
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="thirdblock">
+            <div class="EnterRecordManual">
+                <fieldset class="MainBox">
+                    <legend>Upload Screenshot Images of Payemts
+                    </legend>
+                    <div class="container" style="margin-left: 10px;">
+                        <div class="upload-section">
+                            <input type="file" id="fileInput" accept="image/*" multiple>
+                            <button class="upload-btn" id="uploadBtn" style="border: dashed black 4px;"><img
+                                    style=" width:100px; height: 100px;" src='{% static "\images\plus_sign.png" %}'>
+                            </button>
+                        </div>
+                        <div class="image-gallery" id="imageGallery"></div>
+                    </div>
+
+                    <!-- Image Slider Overlay -->
+                    <div id="overlay" class="overlay">
+                        <div class="slider-container">
+                            <button class="slider-btn prev-btn" id="prevBtn">&#10094;</button>
+                            <img id="sliderImage" src="">
+                            <button class="slider-btn next-btn" id="nextBtn">&#10095;</button>
+                        </div>
+                        <div class="overlay-buttons">
+                            <button id="editBtn">Edit</button>
+                            <button id="removeBtn">Remove</button>
+                        </div>
+                    </div>
+
+
+                    <button style="width: 150px;
+                                   height: fit-content;
+                                   justify-content: space-between;
+                                   margin-left: 10px;
+                                   margin-top: 10px;">
+                        Extract Records From these images and save to &lt;filename&gt;</button>
+                </fieldset>
+            </div>
+        </div>
+
+
+        <div class="fourthblock">
+            <div class="EnterRecordManual">
+                <fieldset class="MainBox">
+                    <legend>View File &lt;filename&gt; Records
+                    </legend>
+                    <div>
+                        <table border="3">
+                            <tr>
+                                <th>No.</th>
+                                <th>Receipent name</th>
+                                <th>Amount</th>
+                                <th>Date & time</th>
+                                <th>Commodity Name</th>
+                                <th>Category</th>
+                                <th>Place</th>
+                                <th>Actions</th>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <th><input type="text" placeholder="Serach"></th>
+                                <th><input type="text" placeholder="Serach"></th>
+                                <th><input type="text" placeholder="Serach"></th>
+                                <th><input type="text" placeholder="Serach"></th>
+                                <th><input type="text" placeholder="Serach"></th>
+                                <th><input type="text" placeholder="Serach"></th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Chand Mohammad bin athu quasim ul jaludin</td>
+                                <td>₹220</td>
+                                <td>16-Aug-2024 10:34 PM</td>
+                                <td>Aloo & Pyaaz</td>
+                                <td>Vegetables</td>
+                                <td>Friday Market</td>
+                                <td class="actiontdcontainers">
+                                    <style>
+                                        .actiontdcontainers>button {
+                                            all: unset;
+                                        }
+
+                                        img {
+                                            width: 30px;
+                                            height: 30px;
+                                        }
+                                    </style>
+                                    <button onclick="editRow(this)" class="edit-btn"><img class="editbutton"
+                                            src='{% static "\images\editbtnlogo.png" %}'></button>
+                                    <button class="save-btn hidden"><img
+                                            src='{% static "\images\savelogobtn.png" %}'></button>
+                                    <button class="cancel-btn hidden"><img
+                                            src='{% static "\images\Button_cancel.png" %}'></button>
+                                    <button class="delete-btn"><img
+                                            src='{% static "\images\Delete-button.png" %}'></button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td>Total</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+        /* For image uploading */
+        const uploadBtn = document.getElementById('uploadBtn');
+        const fileInput = document.getElementById('fileInput');
+        const imageGallery = document.getElementById('imageGallery');
+        const overlay = document.getElementById('overlay');
+        const sliderImage = document.getElementById('sliderImage');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const editBtn = document.getElementById('editBtn');
+        const removeBtn = document.getElementById('removeBtn');
+
+        let imageList = [];
+        let currentImageIndex = -1;
+
+        // Handle the image upload
+        uploadBtn.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', (e) => {
+            const files = e.target.files;
+            for (let i = 0; i < files.length; i++) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const imageSrc = event.target.result;
+                    imageList.push(imageSrc);
+                    createImageContainer(imageSrc, imageList.length - 1);  // Pass the image index
+                };
+                reader.readAsDataURL(files[i]);
+            }
+        });
+
+        // Create image container and add to gallery
+        function createImageContainer(imageSrc, index) {
+            const container = document.createElement('div');
+            container.classList.add('image-container');
+            container.style.backgroundImage = `url(${imageSrc})`;
+
+            const buttons = document.createElement('div');
+            buttons.classList.add('image-buttons');
+
+            const editBtn = document.createElement('button');
+            editBtn.textContent = 'See';
+            editBtn.onclick = () => showOverlay(index);
+            buttons.appendChild(editBtn);
+
+            const removeBtn = document.createElement('button');
+            removeBtn.textContent = 'Remove';
+            removeBtn.onclick = () => removeImage(index, container);
+            buttons.appendChild(removeBtn);
+
+            container.appendChild(buttons);
+            imageGallery.appendChild(container);
+        }
+
+        // Remove image from gallery
+        function removeImage(index, container) {
+            imageList.splice(index, 1);
+            imageGallery.removeChild(container);
+        }
+
+        // Show the overlay slider
+        function showOverlay(index) {
+            currentImageIndex = index;
+            sliderImage.src = imageList[currentImageIndex];
+            overlay.style.display = 'flex';
+        }
+
+        // Close overlay when clicked outside the image
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                overlay.style.display = 'none';
+            }
+        });
+
+        // Navigate through images in the overlay
+        prevBtn.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + imageList.length) % imageList.length;
+            sliderImage.src = imageList[currentImageIndex];
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % imageList.length;
+            sliderImage.src = imageList[currentImageIndex];
+        });
+
+        // Edit button in the overlay (For now, it just alerts)
+        editBtn.addEventListener('click', () => {
+            alert('Edit functionality will be implemented later.');
+        });
+
+        // Remove button in the overlay
+        removeBtn.addEventListener('click', () => {
+            imageList.splice(currentImageIndex, 1);
+            imageGallery.innerHTML = '';
+            imageList.forEach((imageSrc, index) => createImageContainer(imageSrc, index));
+            overlay.style.display = 'none';
+        });
+        /* till here for image uploading*/
+
+
+    </script>
+
+
+</body>
+
+</html>

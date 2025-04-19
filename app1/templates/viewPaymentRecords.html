@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Passbook Payment History</title>
+  {% load static %}
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #eef1f5;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 22px;
+      color: #333;
+    }
+
+    .table-wrapper {
+      height: 70vh;
+      overflow-y: auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border: 1px solid #ccc;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 900px;
+    }
+
+    thead tr th {
+      position: sticky;
+      top: 0;
+      background: #4CAF50;
+      color: white;
+      padding: 8px;
+      font-size: 13px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #ccc;
+      z-index: 2;
+    }
+
+    thead tr.filter-row th {
+      top: 40px;
+      background: #d9f2d9;
+      z-index: 1;
+      border-bottom: 1px solid #bbb;
+    }
+
+    tfoot tr.total-row th {
+      position: sticky;
+      bottom: 0;
+      background: #333;
+      color: #fff;
+      font-weight: bold;
+      font-size: 14px;
+      z-index: 3;
+      text-align: left;
+    }
+
+    tbody tr td {
+      padding: 6px 8px;
+      font-size: 12px;
+      border-bottom: 1px solid #eee;
+    }
+
+    tbody tr:hover {
+      background-color: #f5f5f5;
+    }
+
+    input[type="text"], select {
+      width: 90%;
+      padding: 4px;
+      font-size: 11px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-top: 2px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Passbook Payment History</h1>
+
+{% if records %}
+<div class="table-wrapper">
+  <table id="paymentHistoryTable">
+    <thead>
+      <tr>
+        {% for key in records.0.keys %}
+          <th>{{ key }}</th>
+        {% endfor %}
+      </tr>
+      <tr class="filter-row">
+        {% for key in records.0.keys %}
+          <th>
+            {% if "date" in key|lower %}
+              <select class="filter-month" data-column="{{ forloop.counter0 }}">
+                <option value="">Month</option>
+                {% for month in months %}
+                  <option value="{{ month }}">{{ month }}</option>
+                {% endfor %}
+              </select>
+              <select class="filter-year" data-column="{{ forloop.counter0 }}">
+                <option value="">Year</option>
+                {% for year in years %}
+                  <option value="{{ year }}">{{ year }}</option>
+                {% endfor %}
+              </select>
+            {% else %}
+              <input type="text" class="filter-input" data-column="{{ forloop.counter0 }}" placeholder="Filter">
+            {% endif %}
+          </th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for record in records %}
+        <tr>
+          {% for value in record.values %}
+            <td>{{ value|default_if_none:"" }}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr class="total-row">
+        {% for key in records.0.keys %}
+          {% if "amount" in key|lower %}
+            <th id="totalAmount">Total: 0</th>
+          {% else %}
+            <th></th>
+          {% endif %}
+        {% endfor %}
+      </tr>
+    </tfoot>
+  </table>
+</div>
+{% else %}
+<p>No records found.</p>
+{% endif %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const table = document.getElementById('paymentHistoryTable');
+  const textFilters = table.querySelectorAll('.filter-input');
+  const monthFilters = table.querySelectorAll('.filter-month');
+  const yearFilters = table.querySelectorAll('.filter-year');
+  const rows = table.querySelectorAll('tbody tr');
+  const totalAmountCell = document.getElementById('totalAmount');
+  let amountColumnIndex = -1;
+
+  table.querySelectorAll('thead tr:first-child th').forEach((th, index) => {
+    if (th.textContent.toLowerCase().includes('amount')) {
+      amountColumnIndex = index;
+    }
+  });
+
+  function applyFilters() {
+    let total = 0;
+
+    rows.forEach(row => {
+      let show = true;
+
+      textFilters.forEach(input => {
+        const colIdx = input.dataset.column;
+        const filterVal = input.value.toLowerCase();
+        const cell = row.querySelectorAll('td')[colIdx];
+        if (cell && !cell.textContent.toLowerCase().includes(filterVal)) {
+          show = false;
+        }
+      });
+
+      monthFilters.forEach(select => {
+        const colIdx = select.dataset.column;
+        const selectedMonth = select.value;
+        const cell = row.querySelectorAll('td')[colIdx];
+        if (cell && selectedMonth) {
+          const parts = cell.textContent.split('/');
+          const month = parts.length > 1 ? parts[1] : "";
+          if (month !== selectedMonth) show = false;
+        }
+      });
+
+      yearFilters.forEach(select => {
+        const colIdx = select.dataset.column;
+        const selectedYear = select.value;
+        const cell = row.querySelectorAll('td')[colIdx];
+        if (cell && selectedYear) {
+          const parts = cell.textContent.split('/');
+          const year = parts.length > 2 ? parts[2] : "";
+          if (year !== selectedYear) show = false;
+        }
+      });
+
+      row.style.display = show ? '' : 'none';
+
+      if (show && amountColumnIndex !== -1) {
+        const amtCell = row.querySelectorAll('td')[amountColumnIndex];
+        const amt = parseFloat(amtCell.textContent.replace(/,/g, '')) || 0;
+        total += amt;
+      }
+    });
+
+    totalAmountCell.textContent = 'Total: ' + total.toFixed(2);
+  }
+
+  textFilters.forEach(input => input.addEventListener('input', applyFilters));
+  monthFilters.forEach(select => select.addEventListener('change', applyFilters));
+  yearFilters.forEach(select => select.addEventListener('change', applyFilters));
+
+  applyFilters(); // initial load
+});
+</script>
+
+</body>
+</html>
