@@ -34,4 +34,22 @@ github command to activate enviroment
 source  ./audiotrnas/Scripts/activate
 source  ./webtoolenv/bin/activate
 
+---Start App
+PS D:\Projects\Django---Simple-Web-Tools> ./audiotrnas/Scripts/activate
+(audiotrnas) PS D:\Projects\Django---Simple-Web-Tools> .\runproject1
+The system cannot find the path specified.
+Watching for file changes with StatReloader
+Performing system checks...
 
+D:\Projects\Django---Simple-Web-Tools\
+Base Path - D:\Projects\Django---Simple-Web-Tools\app1
+System check identified no issues (0 silenced).
+February 11, 2025 - 23:03:22
+Django version 5.0.8, using settings 'project1.settings'
+Starting development server at http://127.0.0.1:8001/
+Quit the server with CTRL-BREAK.
+---
+
+
+pip install aspose-pdf
+pip install SpeechRecognition - speech_recognition

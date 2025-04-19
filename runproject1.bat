@@ -1,11 +1,17 @@
 @echo off
-rem Navigate to your Django project directory
-cd "D:\Projects\PycharmProjects\pythonProject1\djangoProjects\project1"
+setlocal
 
-rem Activate virtual environment
-call "audiotrnas\Scripts\activate"
+:: Get the base directory where the script is located
+set "BASEDIR=%~dp0"
+:: echo Base Directory: %BASEDIR% - print base dir in terminal
 
-rem Confirm activation (optional)
+:: Activate virtual environment
+call "%BASEDIR%webtoolenv\Scripts\activate.bat"
+
+pip install yt_dlp
+
+
+:: Confirm activation (optional)
 if not defined VIRTUAL_ENV (
     echo Virtual environment activation failed. Exiting.
     exit /b
