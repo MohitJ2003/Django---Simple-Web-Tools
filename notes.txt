@@ -50,6 +50,18 @@ Starting development server at http://127.0.0.1:8001/
 Quit the server with CTRL-BREAK.
 ---
 
+python manage.py makemigrations
+python manage.py migrate
+python manage.py showmigrations
+
+
 
 pip install aspose-pdf
 pip install SpeechRecognition - speech_recognition
+pip install yt_dlp
+pip install aspose-pdf
+pip install pytube
+pip install moviepy
+pip install SpeechRecognition
+pip install openpyxl
+pip install pandas

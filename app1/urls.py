@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from .views import home_redirect
-from  .mypythonpackage import viewPaymentRecords, viewPaymentReocrdsUsingModel
+from  .mypythonpackage import viewPaymentRecords
 urlpatterns = [
     
     path('', home_redirect),  # Redirect base URL to login
@@ -46,5 +46,4 @@ urlpatterns = [
 
     path('project1/viewPaymentReocrds',viewPaymentRecords.passbook_payment_history,name='wordcloud'),
 
-    path('project1/view-payment-records', viewPaymentReocrdsUsingModel.view_payment_records, name='view_payment_records'),
 ]
